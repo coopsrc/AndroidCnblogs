@@ -16,10 +16,10 @@
         android:layout_width="240dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="#FF111111"
+        android:background="#FF555555"
         android:choiceMode="singleChoice"
         android:divider="@android:color/transparent"
-        android:dividerHeight="0dp" >
+        android:dividerHeight="3dp" >
     </ListView>
 
 </android.support.v4.widget.DrawerLayout>
