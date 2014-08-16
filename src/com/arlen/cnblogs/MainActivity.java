@@ -1,5 +1,8 @@
 package com.arlen.cnblogs;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+
 import com.arlen.cnblogs.fragment.BlogFragment;
 
 import android.app.Activity;
@@ -18,6 +21,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewConfiguration;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -31,13 +36,16 @@ public class MainActivity extends Activity {
 	private CharSequence drawerTitle;
 	private CharSequence actionBarTitle;
 	private String[] drawerListItem;
-	
+
 	private static boolean isExit;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		//unit menu style
+		setOverflowShowAlways();
 
 		actionBarTitle = drawerTitle = getTitle();
 		drawerListItem = getResources()
@@ -125,7 +133,6 @@ public class MainActivity extends Activity {
 		setTitle(drawerListItem[position]);
 		drawerLayout.closeDrawer(drawerList);
 	}
-	
 
 	public void exit() {
 		if (!isExit) {
@@ -147,6 +154,41 @@ public class MainActivity extends Activity {
 			super.handleMessage(msg);
 			isExit = false;
 		}
+	}
+
+	/**
+	 * 统一OverFlow样式
+	 */
+	private void setOverflowShowAlways() {
+		try {
+			ViewConfiguration viewConfiguration = ViewConfiguration.get(this);
+			Field field = ViewConfiguration.class
+					.getDeclaredField("sHasPermanentMenuKey");
+			field.setAccessible(true);
+			field.setBoolean(viewConfiguration, false);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * OverFlow显示图标
+	 */
+	@Override
+	public boolean onMenuOpened(int featureId, Menu menu) {
+		if (featureId == Window.FEATURE_ACTION_BAR && menu != null) {
+			if (menu.getClass().getSimpleName().equals("MenuBuilder")) {
+				try {
+					Method method = menu.getClass().getDeclaredMethod(
+							"setOptionalIconsVisible", Boolean.TYPE);
+					method.setAccessible(true);
+					method.invoke(menu, true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return super.onMenuOpened(featureId, menu);
 	}
 
 	/**
