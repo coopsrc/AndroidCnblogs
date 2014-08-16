@@ -12,5 +12,8 @@
     <string name="title_activity_main">博客园</string>
     <string name="text_version">Version 1.0</string>
     <string name="text_copyright">Copyright © Zhang Tingkuo</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="app_not_available">Sorry, there\'s no web browser available</string>
 
 </resources>
