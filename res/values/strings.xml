@@ -15,6 +15,8 @@
     <string name="title_activity_person">个人中心</string>
     <string name="title_activity_collection">收藏列表</string>
     <string name="title_activity_newblog">发表博客</string>
+    <string name="text_logo_cn">博客园</string>
+    <string name="text_logo_en">Cnblogs.com</string>
     <string name="text_version">Version 1.0</string>
     <string name="text_copyright">Copyright © Zhang Tingkuo</string>
     <string name="text_click_login">点击登录</string>
@@ -22,5 +24,11 @@
     <string name="text_reg_date">注册时间</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
+    <string name="text_blog_title_home">首页</string>
+    <string name="text_blog_title_recommend">推荐</string>
+    <string name="text_blog_title_reading">阅读</string>
+    <string name="text_news_title_latest">最新</string>
+    <string name="text_news_title_hot">热门</string>
+    <string name="text_news_title_recommend">推荐</string>
 
 </resources>
