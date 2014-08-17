@@ -3,6 +3,7 @@ package com.arlen.cnblogs;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -116,11 +117,23 @@ public class MainActivity extends Activity {
 		switch (item.getItemId()) {
 		case R.id.action_search:
 			return true;
+		case R.id.action_new:
+			return true;
+		case R.id.action_person:
+			return true;
+		case R.id.action_collect:
+			return true;
+		case R.id.action_settings:
+			return true;
+		case R.id.action_exit:
+			System.exit(0);
+			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
 	}
 
+	@SuppressLint("InflateParams")
 	private class DrawerListAdapter extends BaseAdapter {
 		private Context context;
 		private String[] contenct;
@@ -218,9 +231,6 @@ public class MainActivity extends Activity {
 		}
 	}
 
-	/**
-	 * 统一OverFlow样式
-	 */
 	private void setOverflowShowAlways() {
 		try {
 			ViewConfiguration viewConfiguration = ViewConfiguration.get(this);
@@ -233,9 +243,6 @@ public class MainActivity extends Activity {
 		}
 	}
 
-	/**
-	 * OverFlow显示图标
-	 */
 	@Override
 	public boolean onMenuOpened(int featureId, Menu menu) {
 		if (featureId == Window.FEATURE_ACTION_BAR && menu != null) {
@@ -253,9 +260,6 @@ public class MainActivity extends Activity {
 		return super.onMenuOpened(featureId, menu);
 	}
 
-	/**
-	 * 两次返回退出程序
-	 */
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
@@ -283,4 +287,5 @@ public class MainActivity extends Activity {
 		super.onConfigurationChanged(newConfig);
 		drawerToggle.onConfigurationChanged(newConfig);
 	}
+
 }
