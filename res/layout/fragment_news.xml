@@ -3,6 +3,84 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    
+
+    <LinearLayout
+        android:id="@+id/linearLayoutNewsTitle"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="#FFDDDDDD"
+        android:baselineAligned="false"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:id="@+id/linearLayoutNewsTitleLatest"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="0.5dp"
+            android:layout_weight="1"
+            android:background="#FFFFFFFF"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/textViewNewsLatest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_news_title_latest"
+                android:textColor="@color/title_text_color" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayoutNewsTitleHot"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="0.5dp"
+            android:layout_marginStart="0.5dp"
+            android:layout_weight="1"
+            android:background="#FFFFFFFF"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/textViewNewsHot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_news_title_hot"
+                android:textColor="@color/title_text_color" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayoutNewsTitleRecommend"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="0.5dp"
+            android:layout_weight="1"
+            android:background="#FFFFFFFF"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/textViewNewsRecommend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_news_title_recommend"
+                android:textColor="@color/title_text_color" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageViewGuildLine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/bg_guild_line" >
+    </ImageView>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPagerNews"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" >
+    </android.support.v4.view.ViewPager>
 
 </LinearLayout>

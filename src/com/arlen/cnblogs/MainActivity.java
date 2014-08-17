@@ -16,6 +16,7 @@ import android.os.Message;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -211,6 +212,7 @@ public class MainActivity extends Activity {
 
 	private void selectItem(int position) {
 
+		Log.i("MainActivity", "selectItem " + position);
 		Fragment fragment;
 
 		switch (position) {

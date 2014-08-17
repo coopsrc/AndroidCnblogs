@@ -17,7 +17,7 @@ public class UserFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.fragment_blog, container,
+		View rootView = inflater.inflate(R.layout.fragment_user, container,
 				false);
 		return rootView;
 	}
