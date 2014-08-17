@@ -10,6 +10,11 @@
     <string name="action_settings">设置</string>
     <string name="action_exit">退出</string>
     <string name="title_activity_main">博客园</string>
+    <string name="title_activity_settings">偏好设置</string>
+    <string name="title_activity_login">登录</string>
+    <string name="title_activity_person">个人中心</string>
+    <string name="title_activity_collection">收藏列表</string>
+    <string name="title_activity_newblog">发表博客</string>
     <string name="text_version">Version 1.0</string>
     <string name="text_copyright">Copyright © Zhang Tingkuo</string>
     <string name="text_click_login">点击登录</string>

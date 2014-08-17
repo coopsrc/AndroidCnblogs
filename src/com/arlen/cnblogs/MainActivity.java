@@ -49,6 +49,8 @@ public class MainActivity extends Activity {
 
 	private static boolean isExit;
 
+	private Intent intent;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -120,12 +122,20 @@ public class MainActivity extends Activity {
 		case R.id.action_search:
 			return true;
 		case R.id.action_new:
+			intent = new Intent(MainActivity.this, NewblogActivity.class);
+			startActivity(intent);
 			return true;
 		case R.id.action_person:
+			intent = new Intent(MainActivity.this, PersonActivity.class);
+			startActivity(intent);
 			return true;
 		case R.id.action_collect:
+			intent = new Intent(MainActivity.this, CollectionActivity.class);
+			startActivity(intent);
 			return true;
 		case R.id.action_settings:
+			intent = new Intent(MainActivity.this, SettingsActivity.class);
+			startActivity(intent);
 			return true;
 		case R.id.action_exit:
 			System.exit(0);
