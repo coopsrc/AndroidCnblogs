@@ -33,6 +33,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.arlen.cnblogs.fragment.BlogFragment;
+import com.arlen.cnblogs.fragment.NewsFragment;
+import com.arlen.cnblogs.fragment.UserFragment;
 
 public class MainActivity extends Activity {
 	private DrawerLayout drawerLayout;
@@ -198,7 +200,23 @@ public class MainActivity extends Activity {
 	}
 
 	private void selectItem(int position) {
-		Fragment fragment = new BlogFragment();
+
+		Fragment fragment;
+
+		switch (position) {
+		case 0:
+			fragment = new BlogFragment();
+			break;
+		case 1:
+			fragment = new NewsFragment();
+			break;
+		case 2:
+			fragment = new UserFragment();
+			break;
+		default:
+			fragment = new BlogFragment();
+			break;
+		}
 
 		FragmentManager fragmentManager = getFragmentManager();
 		fragmentManager.beginTransaction()
