@@ -4,9 +4,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -14,6 +11,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
@@ -37,7 +37,7 @@ import com.arlen.cnblogs.fragment.BlogFragment;
 import com.arlen.cnblogs.fragment.NewsFragment;
 import com.arlen.cnblogs.fragment.UserFragment;
 
-public class MainActivity extends Activity {
+public class MainActivity extends FragmentActivity {
 	private DrawerLayout drawerLayout;
 	private ListView drawerList;
 	private ActionBarDrawerToggle drawerToggle;
@@ -230,7 +230,7 @@ public class MainActivity extends Activity {
 			break;
 		}
 
-		FragmentManager fragmentManager = getFragmentManager();
+		FragmentManager fragmentManager = getSupportFragmentManager();
 		fragmentManager.beginTransaction()
 				.replace(R.id.content_frame, fragment).commit();
 

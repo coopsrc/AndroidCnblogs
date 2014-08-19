@@ -18,7 +18,7 @@
     <string name="text_logo_cn">博客园</string>
     <string name="text_logo_en">Cnblogs.com</string>
     <string name="text_version">Version 1.0</string>
-    <string name="text_copyright">Copyright © Zhang Tingkuo</string>
+    <string name="text_copyright">Copyright ©2014 Zhang Tingkuo</string>
     <string name="text_click_login">点击登录</string>
     <string name="text_person_name">用户名</string>
     <string name="text_reg_date">注册时间</string>
@@ -30,5 +30,6 @@
     <string name="text_news_title_latest">最新</string>
     <string name="text_news_title_hot">热门</string>
     <string name="text_news_title_recommend">推荐</string>
+    <string name="text_pub"> 发布于 </string>
 
 </resources>

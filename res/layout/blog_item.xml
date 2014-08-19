@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="3dp"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/textViewBlogItemTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:text="@string/app_name"
+        android:textColor="@color/title_text_color" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_list_item" >
+
+        <ImageView
+            android:id="@+id/imageViewBlogItemAvatar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_launcher" />
+
+        <TextView
+            android:id="@+id/textViewBlogItemSummary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="@string/app_name" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/textViewBlogItemAuthor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:text="@string/app_name"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/textViewBlogItemPub"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/textViewBlogItemAuthor"
+            android:text="@string/text_pub"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/textViewBlogItemPublisheddate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/textViewBlogItemPub"
+            android:text="@string/app_name"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/textViewBlogItemDiggs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:text="@string/app_name"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/textViewBlogItemView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toStartOf="@+id/textViewBlogItemDiggs"
+            android:text="@string/app_name"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/textViewBlogItemComment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toStartOf="@+id/textViewBlogItemView"
+            android:text="@string/app_name"
+            android:textSize="12sp" />
+    </RelativeLayout>
+
+</LinearLayout>
