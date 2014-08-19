@@ -30,6 +30,6 @@
     <string name="text_news_title_latest">最新</string>
     <string name="text_news_title_hot">热门</string>
     <string name="text_news_title_recommend">推荐</string>
-    <string name="text_pub"> 发布于 </string>
+    <string name="text_pub">\t发布于\t </string>
 
 </resources>

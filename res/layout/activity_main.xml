@@ -18,7 +18,7 @@
         android:layout_gravity="start"
         android:background="#FF222222"
         android:choiceMode="singleChoice"
-        android:divider="@color/title_text_color"
+        android:divider="#FF555555"
         android:dividerHeight="1dp" >
     </ListView>
 

@@ -5,5 +5,10 @@
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
+	<classpathentry kind="lib" path="libs/commons-lang-2.6.jar" sourcepath="libs/commons-lang-2.6-sources.jar"/>
+	<classpathentry kind="lib" path="libs/activation.jar"/>
+	<classpathentry kind="lib" path="libs/additionnal.jar"/>
+	<classpathentry kind="lib" path="libs/mail.jar"/>
+	<classpathentry kind="lib" path="libs/universal-image-loader-1.9.2.jar" sourcepath="libs/universal-image-loader-1.9.2-sources.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
