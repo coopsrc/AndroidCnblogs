@@ -1,0 +1,59 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:background="#FFCCCCCC" >
+
+        <ImageView
+            android:id="@+id/imageViewBlogAvatar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dip"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_launcher" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dip"
+            android:layout_marginTop="10dip"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/textViewBlogTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:text="@string/app_name"
+                android:textColor="@color/title_text_color" />
+
+            <TextView
+                android:id="@+id/textViewBlogComments"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:text="@string/app_name"
+                android:textColor="@color/splash_logo_en_color" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textViewBlogContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="3dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:layout_marginStart="3dp"
+        android:focusable="true"
+        android:scrollbars="vertical"
+        android:text="@string/text_loading"
+        android:textSize="14sp" >
+    </TextView>
+
+</LinearLayout>

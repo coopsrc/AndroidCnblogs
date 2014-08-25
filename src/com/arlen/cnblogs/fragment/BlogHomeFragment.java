@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.arlen.cnblogs.BlogActivity;
 import com.arlen.cnblogs.R;
 import com.arlen.cnblogs.adapter.BlogListAdapter;
 import com.arlen.cnblogs.entity.Blog;
@@ -32,6 +34,8 @@ public class BlogHomeFragment extends ListFragment {
 
 	private BlogListAdapter adapter;
 	private Handler handler = null;
+	
+	private Intent intent;
 
 	public BlogHomeFragment() {
 
@@ -47,16 +51,32 @@ public class BlogHomeFragment extends ListFragment {
 
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
-		// showBlogItem(blogList.get(position));
+		showBlogItem(blogList.get(position));
+	}
+
+	private void showBlogItem(Blog blogEntry) {
+		intent = new Intent(this.getActivity(), BlogActivity.class);
+		
+		intent.putExtra("avatar", blogEntry.getAuthorAvatar().toString());
+		intent.putExtra("title", blogEntry.getBlogTitle());
+		intent.putExtra("author", blogEntry.getAuthorName());
+		intent.putExtra("published",
+				AppUtils.parseDateToString(blogEntry.getPublishedDateDate()));
+		intent.putExtra("id", blogEntry.getBlogId());
+		intent.putExtra("link", blogEntry.getBlogTitle());
+
+		startActivity(intent);
 	}
 
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v,
 			ContextMenuInfo menuInfo) {
+		Log.i("onCreateContextMenu", "000000000");
 		super.onCreateContextMenu(menu, v, menuInfo);
 		MenuInflater inflater = this.getActivity().getMenuInflater();
 		inflater.inflate(R.menu.blog_list_context_menu, menu);
 		menu.setHeaderTitle(R.string.app_name);
+		Log.i("onCreateContextMenu", "1111111111");
 	}
 
 	@Override

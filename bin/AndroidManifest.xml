@@ -50,6 +50,10 @@
             android:name=".NewblogActivity"
             android:label="@string/title_activity_newblog" >
         </activity>
+        <activity
+            android:name=".BlogActivity"
+            android:label="@string/title_activity_blog" >
+        </activity>
     </application>
 
 </manifest>
