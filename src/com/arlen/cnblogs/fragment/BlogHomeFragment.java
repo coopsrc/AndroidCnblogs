@@ -9,7 +9,10 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
@@ -45,6 +48,15 @@ public class BlogHomeFragment extends ListFragment {
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		// showBlogItem(blogList.get(position));
+	}
+
+	@Override
+	public void onCreateContextMenu(ContextMenu menu, View v,
+			ContextMenuInfo menuInfo) {
+		super.onCreateContextMenu(menu, v, menuInfo);
+		MenuInflater inflater = this.getActivity().getMenuInflater();
+		inflater.inflate(R.menu.blog_list_context_menu, menu);
+		menu.setHeaderTitle(R.string.app_name);
 	}
 
 	@Override
