@@ -23,7 +23,7 @@ public class Config {
 	public static final int BLOG_PAGE_SIZE = 15;
 	// 48小时阅读排行
 	public static final String TOP_VIEW_POSTS_48_HOUR = "http://wcf.open.cnblogs.com/blog/48HoursTopViewPosts/{ITEMCOUNT}";
-	// 分页获取推荐博客列表
+	// 分页获取推荐博客列表(作者)
 	public static final String RECOMMEND_BLOGS_PAGED = "http://wcf.open.cnblogs.com/blog/bloggers/recommend/{PAGEINDEX}/{PAGESIZE}";
 	// 获取推荐博客总数
 	public static final String RECOMMEND_BLOGS_COUNT = "http://wcf.open.cnblogs.com/blog/bloggers/recommend/count";

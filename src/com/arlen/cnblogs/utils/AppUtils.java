@@ -266,7 +266,7 @@ public class AppUtils {
 	 */
 	public static String replaceXmlTag(String str) {
 //		str = str.replace("<p>", "\t\t");
-//		str = str.replace("</p>", "\r\n");
+		str = str.replace("</p>", "\r\n");
 		str = str.replace("<br />", "\n");
 		str = str.replace("<br/>", "\n");
 

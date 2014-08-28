@@ -34,7 +34,7 @@ public class BlogHomeFragment extends ListFragment {
 
 	private BlogListAdapter adapter;
 	private Handler handler = null;
-	
+
 	private Intent intent;
 
 	public BlogHomeFragment() {
@@ -56,8 +56,13 @@ public class BlogHomeFragment extends ListFragment {
 
 	private void showBlogItem(Blog blogEntry) {
 		intent = new Intent(this.getActivity(), BlogActivity.class);
-		
-		intent.putExtra("avatar", blogEntry.getAuthorAvatar().toString());
+
+		if (blogEntry.getAuthorAvatar() != null) {
+			intent.putExtra("avatar", blogEntry.getAuthorAvatar().toString());
+		} else {
+			intent.putExtra("avatar",
+					"http://pic.cnitblog.com/avatar/413207/20131211125235.png");
+		}
 		intent.putExtra("title", blogEntry.getBlogTitle());
 		intent.putExtra("author", blogEntry.getAuthorName());
 		intent.putExtra("published",

@@ -106,7 +106,7 @@ public class BlogListAdapter extends BaseAdapter {
 
 		cache.blogViews.setText("\t浏览:" + blog.getBlogViews());
 
-		cache.blogDiggs.setText("\t收藏:" + blog.getBlogDiggs());
+		cache.blogDiggs.setText("\t推荐:" + blog.getBlogDiggs());
 
 		Log.i("HomeListAdapter", "getView" + position + " 完成");
 		Log.i("HomeListAdapter", "==========================");
