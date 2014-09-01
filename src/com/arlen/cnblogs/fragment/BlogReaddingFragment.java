@@ -102,7 +102,7 @@ public class BlogReaddingFragment extends ListFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Log.i("HomeFragment", "onCreate");
+		Log.i("ReaddingFragment", "onCreate");
 
 		blogList = new ArrayList<Blog>();
 		Runnable runnable = new Runnable() {
@@ -145,10 +145,10 @@ public class BlogReaddingFragment extends ListFragment {
 		pageIndex = 1;
 		pageSize = Config.BLOG_PAGE_SIZE;
 		path = path.replace("{ITEMCOUNT}", "" + pageSize);
-		Log.i("HomeFragment", "首页博客列表地址：" + path);
-		Log.i("HomeFragment", "获取首页博客列表  --->  开始");
+		Log.i("ReaddingFragment", "首页博客列表地址：" + path);
+		Log.i("ReaddingFragment", "获取首页博客列表  --->  开始");
 		blogList = AppUtils.getBlogList(path);
-		Log.i("HomeFragment", "获取首页博客列表  --->  完成");
+		Log.i("ReaddingFragment", "获取首页博客列表  --->  完成");
 	}
 
 	private void BindListData(ArrayList<Blog> blogs) {

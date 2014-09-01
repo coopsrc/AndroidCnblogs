@@ -1,14 +1,39 @@
 package com.arlen.cnblogs.fragment;
 
-import com.arlen.cnblogs.R;
+import java.util.ArrayList;
+import java.util.List;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v4.app.ListFragment;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
-public class UserFragment extends Fragment {
+import com.arlen.cnblogs.R;
+import com.arlen.cnblogs.adapter.UserListAdapter;
+import com.arlen.cnblogs.entity.User;
+import com.arlen.cnblogs.utils.AppUtils;
+import com.arlen.cnblogs.utils.Config;
+
+public class UserFragment extends ListFragment {
+
+	private List<User> userList;
+	private String path;
+	private int pageIndex;
+	private int pageSize;
+
+	private UserListAdapter adapter;
+
+	private Handler handler = null;
+
+	private Intent intent;
 
 	public UserFragment() {
 
@@ -21,4 +46,84 @@ public class UserFragment extends Fragment {
 				false);
 		return rootView;
 	}
+
+	@Override
+	public void onListItemClick(ListView l, View v, int position, long id) {
+		super.onListItemClick(l, v, position, id);
+	}
+
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+	}
+
+	@Override
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+	}
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		userList = new ArrayList<User>();
+
+		Runnable runnable = new Runnable() {
+
+			@Override
+			public void run() {
+				try {
+					Thread.sleep(2 * 1000);
+					initData();
+					handler.sendMessage(handler.obtainMessage(0, userList));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		};
+
+		try {
+			new Thread(runnable).start();
+			handler = new Handler() {
+				@Override
+				public void handleMessage(Message msg) {
+					super.handleMessage(msg);
+					if (msg.what == 0) {
+						ArrayList<User> users = (ArrayList<User>) msg.obj;
+						BindListData(users);
+					}
+				}
+			};
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void onCreateContextMenu(ContextMenu menu, View v,
+			ContextMenuInfo menuInfo) {
+		super.onCreateContextMenu(menu, v, menuInfo);
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+	}
+
+	private void initData() {
+		userList.clear();
+
+		path = Config.RECOMMEND_BLOGS_PAGED;
+		pageIndex = 1;
+		pageSize = Config.BLOG_PAGE_SIZE;
+		path = path.replace("{PAGEINDEX}", "" + pageIndex);
+		path = path.replace("{PAGESIZE}", "" + pageSize);
+		userList = AppUtils.getUserList(path);
+	}
+
+	private void BindListData(ArrayList<User> users) {
+		adapter = new UserListAdapter(getActivity(), users);
+		this.setListAdapter(adapter);
+	}
+
 }

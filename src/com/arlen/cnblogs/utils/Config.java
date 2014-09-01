@@ -16,7 +16,7 @@ public class Config {
 	public final static String SIMPLE_DATA_FORMATE = "yyyy-MM-dd hh:mm:ss";
 
 	// 临时图片文件
-	public static final String TEMP_IMAGES_LOCATION = "cnblogs/images/";
+	public static final String TEMP_IMAGES_LOCATION = "Cnblogs/images/";
 
 	// 博客
 	// 博客分页大小
