@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.arlen.cnblogs.R;
+import com.arlen.cnblogs.UserActivity;
 import com.arlen.cnblogs.adapter.UserListAdapter;
 import com.arlen.cnblogs.entity.User;
 import com.arlen.cnblogs.utils.AppUtils;
@@ -49,7 +50,7 @@ public class UserFragment extends ListFragment {
 
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
-		super.onListItemClick(l, v, position, id);
+		showUserItem(userList.get(position));
 	}
 
 	@Override
@@ -124,6 +125,18 @@ public class UserFragment extends ListFragment {
 	private void BindListData(ArrayList<User> users) {
 		adapter = new UserListAdapter(getActivity(), users);
 		this.setListAdapter(adapter);
+	}
+
+	private void showUserItem(User userEntry) {
+		intent = new Intent(this.getActivity(), UserActivity.class);
+		intent.putExtra("blogapp", userEntry.getBlogapp());
+		intent.putExtra("link", userEntry.getUserLink().toString());
+		intent.putExtra("avatar", userEntry.getUserAvatar().toString());
+		intent.putExtra("postcount", userEntry.getPostCount());
+		intent.putExtra("updated",
+				AppUtils.parseDateToString(userEntry.getUpdatedDate()));
+		intent.putExtra("title", userEntry.getTitle());
+		startActivity(intent);
 	}
 
 }
