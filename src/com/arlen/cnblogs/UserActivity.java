@@ -14,12 +14,14 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.Window;
 import android.widget.ImageView;
@@ -27,13 +29,13 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class UserActivity extends Activity {
+public class UserActivity extends ListActivity {
 
 	private ImageView imageViewAvatar;
 	private TextView textViewUserName;
 	private TextView textViewUpdate;
 	private TextView textViewUri;
-	private ListView listViewBlogList;
+//	private ListView listViewBlogList;
 
 	private Intent intent;
 	private Handler handler = null;
@@ -74,7 +76,7 @@ public class UserActivity extends Activity {
 		textViewUserName = (TextView) findViewById(R.id.textViewUserName);
 		textViewUpdate = (TextView) findViewById(R.id.textViewUserUpdate);
 		textViewUri = (TextView) findViewById(R.id.textViewUserUri);
-		listViewBlogList = (ListView) findViewById(R.id.listViewUserBlogList);
+//		listViewBlogList = (ListView) findViewById(R.id.listViewUserBlogList);
 
 		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
 				128, 128);
@@ -168,7 +170,29 @@ public class UserActivity extends Activity {
 
 		return super.onOptionsItemSelected(item);
 	}
+	@Override
+	protected void onListItemClick(ListView l, View v, int position, long id) {
+		showBlogItem(blogList.get(position));
+	}
 
+	private void showBlogItem(Blog blogEntry) {
+		intent = new Intent(this, BlogActivity.class);
+
+		if (blogEntry.getAuthorAvatar() != null) {
+			intent.putExtra("avatar", blogEntry.getAuthorAvatar().toString());
+		} else {
+			intent.putExtra("avatar",
+					"https://github.com/ZhangTingkuo/AndroidCnblogs/blob/master/res/drawable-hdpi/ic_launcher.png");
+		}
+		intent.putExtra("title", blogEntry.getBlogTitle());
+		intent.putExtra("author", blogEntry.getAuthorName());
+		intent.putExtra("published",
+				AppUtils.parseDateToString(blogEntry.getPublishedDateDate()));
+		intent.putExtra("id", blogEntry.getBlogId());
+		intent.putExtra("link", blogEntry.getBlogTitle());
+
+		startActivity(intent);
+	}
 	/**
 	 * OverFlowœ‘ æÕº±Í
 	 */
@@ -206,6 +230,7 @@ public class UserActivity extends Activity {
 
 	private void BindListData(ArrayList<Blog> blogs) {
 		adapter = new UserBlogListAdapter(this, blogs);
-		listViewBlogList.setAdapter(adapter);
+//		listViewBlogList.setAdapter(adapter);
+		this.setListAdapter(adapter);
 	}
 }

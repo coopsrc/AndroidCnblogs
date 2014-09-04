@@ -61,7 +61,7 @@ public class BlogHomeFragment extends ListFragment {
 			intent.putExtra("avatar", blogEntry.getAuthorAvatar().toString());
 		} else {
 			intent.putExtra("avatar",
-					"http://pic.cnitblog.com/avatar/413207/20131211125235.png");
+					"https://github.com/ZhangTingkuo/AndroidCnblogs/blob/master/res/drawable-hdpi/ic_launcher.png");
 		}
 		intent.putExtra("title", blogEntry.getBlogTitle());
 		intent.putExtra("author", blogEntry.getAuthorName());
