@@ -1,6 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="#FFFFFFFF"
     android:orientation="vertical" >
 
     <LinearLayout
@@ -33,8 +34,8 @@
                 android:id="@+id/textViewUserUpdate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/splash_logo_en_color"
-                android:text="@string/app_name" />
+                android:text="@string/app_name"
+                android:textColor="@color/splash_logo_en_color" />
 
             <TextView
                 android:id="@+id/textViewUserUri"

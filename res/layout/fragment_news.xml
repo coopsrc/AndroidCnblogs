@@ -26,8 +26,7 @@
                 android:id="@+id/textViewNewsLatest"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/text_news_title_latest"
-                android:textColor="@color/title_text_color" />
+                android:text="@string/text_news_title_latest" />
         </LinearLayout>
 
         <LinearLayout
@@ -45,8 +44,7 @@
                 android:id="@+id/textViewNewsHot"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/text_news_title_hot"
-                android:textColor="@color/title_text_color" />
+                android:text="@string/text_news_title_hot" />
         </LinearLayout>
 
         <LinearLayout
@@ -63,8 +61,7 @@
                 android:id="@+id/textViewNewsRecommend"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/text_news_title_recommend"
-                android:textColor="@color/title_text_color" />
+                android:text="@string/text_news_title_recommend" />
         </LinearLayout>
     </LinearLayout>
 

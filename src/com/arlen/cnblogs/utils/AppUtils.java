@@ -131,16 +131,6 @@ public class AppUtils {
 	}
 
 	/**
-	 * 使用系统邮件发送邮件
-	 * 
-	 * @param context
-	 * @param content
-	 */
-	public static void sendEmailByIntent(Context context, String content) {
-
-	}
-
-	/**
 	 * 使用JavaMail发送邮件
 	 * 
 	 * @param content
