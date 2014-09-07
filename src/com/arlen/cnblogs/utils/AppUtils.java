@@ -25,9 +25,11 @@ import android.content.Context;
 import android.util.Log;
 
 import com.arlen.cnblogs.entity.Blog;
+import com.arlen.cnblogs.entity.News;
 import com.arlen.cnblogs.entity.User;
 import com.arlen.cnblogs.handler.BlogItemHandler;
 import com.arlen.cnblogs.handler.BlogListHandler;
+import com.arlen.cnblogs.handler.NewsListHandler;
 import com.arlen.cnblogs.handler.UserListHandler;
 import com.arlen.cnblogs.mail.MailSenderInfo;
 import com.arlen.cnblogs.mail.SimpleMailSender;
@@ -294,6 +296,36 @@ public class AppUtils {
 			reader.parse(inputSource);
 			Log.i("getBlogList", "获取博客列表 XML 完成");
 			return handler.getUserList();
+		} catch (ParserConfigurationException e) {
+			e.printStackTrace();
+		} catch (SAXException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+
+	/**
+	 * 获取博客列表
+	 * 
+	 * @param path
+	 * @return
+	 */
+	public static List<News> getNewsList(String path) {
+		Log.i("getBlogList", "获取博客列表 XML" + path);
+		try {
+			SAXParserFactory factory = SAXParserFactory.newInstance();
+			SAXParser parser = factory.newSAXParser();
+			XMLReader reader = parser.getXMLReader();
+			NewsListHandler handler = new NewsListHandler();
+			reader.setContentHandler(handler);
+			InputStream inputStream = getXmlStreamByUrl(path);
+			InputSource inputSource = new InputSource(inputStream);
+			reader.parse(inputSource);
+			Log.i("getBlogList", "获取博客列表 XML 完成");
+			return handler.getNewsList();
 		} catch (ParserConfigurationException e) {
 			e.printStackTrace();
 		} catch (SAXException e) {

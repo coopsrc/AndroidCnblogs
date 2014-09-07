@@ -34,6 +34,7 @@
     <string name="text_news_title_hot">热门</string>
     <string name="text_news_title_recommend">推荐</string>
     <string name="text_pub">发布于</string>
+    <string name="text_pub_time">发布时间：</string>
     <string name="menu_blog_view_content">查看内容</string>
     <string name="menu_blog_view_comment">查看评论</string>
     <string name="menu_blog_view_author">查看作者</string>

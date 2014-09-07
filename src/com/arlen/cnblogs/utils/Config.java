@@ -12,7 +12,7 @@ public class Config {
 	public final static String MAIL_PASSWORD = "Cnblogs.com";
 	public final static String MAIL_SUBJECT = "Cnblogs反馈信息(Android)";
 
-	// 数据格式转换
+	// 日期格式
 	public final static String SIMPLE_DATA_FORMATE = "yyyy-MM-dd hh:mm:ss";
 
 	// 临时图片文件
