@@ -57,8 +57,6 @@ public class UserBlogListAdapter extends BaseAdapter {
 					.findViewById(R.id.textViewBlogItemTitle);
 			itemViewCache.blogSummary = (TextView) convertView
 					.findViewById(R.id.textViewBlogItemSummary);
-			itemViewCache.authorName = (TextView) convertView
-					.findViewById(R.id.textViewBlogItemAuthor);
 			itemViewCache.publishedDate = (TextView) convertView
 					.findViewById(R.id.textViewBlogItemPublisheddate);
 			itemViewCache.blogComments = (TextView) convertView
@@ -77,8 +75,6 @@ public class UserBlogListAdapter extends BaseAdapter {
 
 		cache.blogSummary.setText(blog.getBlogSummary());
 
-		cache.authorName.setText(blog.getAuthorName());
-
 		Date date = blog.getPublishedDateDate();
 		cache.publishedDate.setText(AppUtils.parseDateToChinese(date));
 
@@ -96,7 +92,6 @@ public class UserBlogListAdapter extends BaseAdapter {
 	private static class ItemViewCache {
 		private TextView blogTitle;
 		private TextView blogSummary;
-		private TextView authorName;
 		private TextView publishedDate;
 		private TextView blogComments;
 		private TextView blogViews;
