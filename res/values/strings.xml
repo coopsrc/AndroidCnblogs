@@ -17,6 +17,7 @@
     <string name="title_activity_newblog">发表博客</string>
     <string name="title_activity_blog">博客正文</string>
     <string name="title_activity_user">用户中心</string>
+    <string name="title_activity_news">新闻内容</string>
     <string name="text_logo_cn">博客园</string>
     <string name="text_logo_en">Cnblogs.com</string>
     <string name="text_version">Version 1.0</string>

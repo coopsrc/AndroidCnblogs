@@ -10,7 +10,7 @@
         android:background="#FFCCCCCC" >
 
         <ImageView
-            android:id="@+id/imageViewBlogAvatar"
+            android:id="@+id/imageViewNewsTopinIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/app_name"
@@ -24,7 +24,7 @@
             android:orientation="vertical" >
 
             <TextView
-                android:id="@+id/textViewBlogTitle"
+                android:id="@+id/textViewNewsTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
@@ -32,7 +32,7 @@
                 android:textColor="@color/title_text_color" />
 
             <TextView
-                android:id="@+id/textViewBlogComments"
+                android:id="@+id/textViewPublisheDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
@@ -42,7 +42,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/textViewBlogContent"
+        android:id="@+id/textViewNewsContent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginEnd="3dp"

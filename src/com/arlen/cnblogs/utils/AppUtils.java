@@ -29,6 +29,7 @@ import com.arlen.cnblogs.entity.News;
 import com.arlen.cnblogs.entity.User;
 import com.arlen.cnblogs.handler.BlogItemHandler;
 import com.arlen.cnblogs.handler.BlogListHandler;
+import com.arlen.cnblogs.handler.NewsItemHandler;
 import com.arlen.cnblogs.handler.NewsListHandler;
 import com.arlen.cnblogs.handler.UserListHandler;
 import com.arlen.cnblogs.mail.MailSenderInfo;
@@ -259,7 +260,7 @@ public class AppUtils {
 	 * @return
 	 */
 	public static String replaceXmlTag(String str) {
-//		str = str.replace("<p>", "\t\t");
+		// str = str.replace("<p>", "\t\t");
 		str = str.replace("</p>", "\r\n");
 		str = str.replace("<br />", "\n");
 		str = str.replace("<br/>", "\n");
@@ -305,7 +306,6 @@ public class AppUtils {
 		}
 		return null;
 	}
-	
 
 	/**
 	 * 获取博客列表
@@ -334,6 +334,29 @@ public class AppUtils {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	public static String getNewsContent(String path) {
+		String blogContent = "";
+		try {
+			SAXParserFactory factory = SAXParserFactory.newInstance();
+			SAXParser parser = factory.newSAXParser();
+			XMLReader reader = parser.getXMLReader();
+			NewsItemHandler handler = new NewsItemHandler();
+			reader.setContentHandler(handler);
+			InputStream inputStream = getXmlStreamByUrl(path);
+			InputSource inputSource = new InputSource(inputStream);
+			reader.parse(inputSource);
+			Log.i("getBlogList", "获取博客列表 XML 完成");
+			return handler.getNewsContent();
+		} catch (ParserConfigurationException e) {
+			e.printStackTrace();
+		} catch (SAXException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return blogContent;
 	}
 
 }

@@ -3,6 +3,7 @@ package com.arlen.cnblogs.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.arlen.cnblogs.NewsActivity;
 import com.arlen.cnblogs.R;
 import com.arlen.cnblogs.adapter.NewsListAdapter;
 import com.arlen.cnblogs.entity.News;
@@ -53,8 +54,22 @@ public class NewsRecommendFragment extends ListFragment {
 		showBlogItem(newsList.get(position));
 	}
 	
-	private void showBlogItem(News blogEntry) {
+	private void showBlogItem(News newsEntry) {
+		intent = new Intent(this.getActivity(), NewsActivity.class);
+		if (newsEntry.getTopicIcon() != null) {
+			intent.putExtra("topicIcon", newsEntry.getTopicIcon().toString());
+		} else {
+			intent.putExtra("topicIcon",
+					"https://github.com/ZhangTingkuo/AndroidCnblogs/blob/master/res/drawable-hdpi/ic_launcher.png");
+		}
+
+		intent.putExtra("title", newsEntry.getNewsTitle());
+		intent.putExtra("sourceName", newsEntry.getSourceName());
+		intent.putExtra("published",
+				AppUtils.parseDateToString(newsEntry.getPublishedDate()));
+		intent.putExtra("id", newsEntry.getNewsId());
 		
+		startActivity(intent);
 	}
 
 	@Override
