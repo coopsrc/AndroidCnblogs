@@ -62,6 +62,10 @@
             android:name=".NewsActivity"
             android:label="@string/title_activity_news" >
         </activity>
+        <activity
+            android:name=".CommentActivity"
+            android:label="@string/title_activity_comment" >
+        </activity>
     </application>
 
 </manifest>

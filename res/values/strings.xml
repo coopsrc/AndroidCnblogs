@@ -40,5 +40,6 @@
     <string name="menu_blog_view_comment">查看评论</string>
     <string name="menu_blog_view_author">查看作者</string>
     <string name="menu_blog_view_cancle">取消</string>
+    <string name="title_activity_comment">评论</string>
 
 </resources>
