@@ -1,19 +1,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.arlen.cnblogs.BlogActivity" >
-
-    <item 
-        android:id="@+id/action_comment"
+    tools:context="com.arlen.cnblogs.BlogActivity" ><item
+        android:id="@+id/action_share"
+        android:icon="@drawable/ic_action_share"
         android:orderInCategory="100"
-        android:title="@string/action_comment"
         android:showAsAction="ifRoom"
-        android:icon="@drawable/ic_action_comment"/>
-    
+        android:title="@string/action_share"/>
     <item
-        android:id="@+id/action_collect"
-        android:icon="@drawable/ic_action_collect"
+        android:id="@+id/action_comment"
+        android:icon="@drawable/ic_action_comment"
         android:orderInCategory="100"
-        android:showAsAction="never"
-        android:title="@string/action_collect"/>
+        android:showAsAction="ifRoom"
+        android:title="@string/action_comment"/>
 
 </menu>

@@ -10,6 +10,7 @@
     <string name="action_settings">设置</string>
     <string name="action_exit">退出</string>
     <string name="action_comment">评论</string>
+    <string name="action_share">分享</string>
     
     <string name="title_activity_main">博客园</string>
     <string name="title_activity_settings">偏好设置</string>

@@ -16,8 +16,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.text.method.ArrowKeyMovementMethod;
-import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewConfiguration;
@@ -165,8 +163,19 @@ public class NewsActivity extends Activity {
 		case android.R.id.home:
 			finish();
 			break;
+		case R.id.action_comment:
+			viewComment(newsId);
+			break;
+		case R.id.action_share:
+			break;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	private void viewComment(int id) {
+		Intent intent = new Intent(NewsActivity.this, CommentActivity.class);
+		intent.putExtra("id", id);
+		startActivity(intent);
 	}
 
 	/**

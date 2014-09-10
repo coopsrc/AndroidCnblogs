@@ -182,7 +182,18 @@ public class BlogActivity extends Activity {
 		case android.R.id.home:
 			finish();
 			break;
+		case R.id.action_comment:
+			viewComment(blogId);
+			break;
+		case R.id.action_share:
+			break;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	
+	private void viewComment(int id){
+		Intent intent = new Intent(BlogActivity.this, CommentActivity.class);
+		intent.putExtra("id", id);
+		startActivity(intent);
 	}
 }
