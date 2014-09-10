@@ -127,13 +127,6 @@ public class NewsActivity extends Activity {
 		textViewNewsTitle = (TextView) findViewById(R.id.textViewNewsTitle);
 		textViewPublisheDate = (TextView) findViewById(R.id.textViewPublisheDate);
 		textViewNewsContent = (TextView) findViewById(R.id.textViewNewsContent);
-		textViewNewsContent.setMovementMethod(ScrollingMovementMethod
-				.getInstance());
-		textViewNewsContent.setFocusableInTouchMode(true);
-		textViewNewsContent.setClickable(true);
-		textViewNewsContent.setLongClickable(true);
-		textViewNewsContent.setMovementMethod(ArrowKeyMovementMethod
-				.getInstance());
 
 		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
 				128, 128);

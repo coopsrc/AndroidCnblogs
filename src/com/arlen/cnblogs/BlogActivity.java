@@ -16,8 +16,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.text.method.ArrowKeyMovementMethod;
-import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewConfiguration;
@@ -81,13 +79,6 @@ public class BlogActivity extends Activity {
 		textViewBlogTitle = (TextView) findViewById(R.id.textViewBlogTitle);
 		textViewBlogComments = (TextView) findViewById(R.id.textViewBlogComments);
 		textViewBlogContent = (TextView) findViewById(R.id.textViewBlogContent);
-		textViewBlogContent.setMovementMethod(ScrollingMovementMethod
-				.getInstance());
-		textViewBlogContent.setFocusableInTouchMode(true);
-		textViewBlogContent.setClickable(true);
-		textViewBlogContent.setLongClickable(true);
-		textViewBlogContent.setMovementMethod(ArrowKeyMovementMethod
-				.getInstance());
 
 		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
 				128, 128);

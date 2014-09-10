@@ -9,6 +9,8 @@
     <string name="action_collect">收藏</string>
     <string name="action_settings">设置</string>
     <string name="action_exit">退出</string>
+    <string name="action_comment">评论</string>
+    
     <string name="title_activity_main">博客园</string>
     <string name="title_activity_settings">偏好设置</string>
     <string name="title_activity_login">登录</string>
@@ -18,6 +20,8 @@
     <string name="title_activity_blog">博客正文</string>
     <string name="title_activity_user">用户中心</string>
     <string name="title_activity_news">新闻内容</string>
+    <string name="title_activity_comment">评论</string>
+    
     <string name="text_logo_cn">博客园</string>
     <string name="text_logo_en">Cnblogs.com</string>
     <string name="text_version">Version 1.0</string>
@@ -36,10 +40,10 @@
     <string name="text_news_title_recommend">推荐</string>
     <string name="text_author">作者：</string>
     <string name="text_pub_time">发布时间：</string>
+    
     <string name="menu_blog_view_content">查看内容</string>
     <string name="menu_blog_view_comment">查看评论</string>
     <string name="menu_blog_view_author">查看作者</string>
     <string name="menu_blog_view_cancle">取消</string>
-    <string name="title_activity_comment">评论</string>
 
 </resources>
