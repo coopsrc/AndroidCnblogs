@@ -34,7 +34,6 @@ public class UserActivity extends ListActivity {
 	private TextView textViewUserName;
 	private TextView textViewUpdate;
 	private TextView textViewUri;
-//	private ListView listViewBlogList;
 
 	private Intent intent;
 	private Handler handler = null;
@@ -75,7 +74,6 @@ public class UserActivity extends ListActivity {
 		textViewUserName = (TextView) findViewById(R.id.textViewUserName);
 		textViewUpdate = (TextView) findViewById(R.id.textViewUserUpdate);
 		textViewUri = (TextView) findViewById(R.id.textViewUserUri);
-//		listViewBlogList = (ListView) findViewById(R.id.listViewUserBlogList);
 
 		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
 				128, 128);
@@ -170,6 +168,7 @@ public class UserActivity extends ListActivity {
 
 		return super.onOptionsItemSelected(item);
 	}
+
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		showBlogItem(blogList.get(position));
@@ -181,7 +180,8 @@ public class UserActivity extends ListActivity {
 		if (blogEntry.getAuthorAvatar() != null) {
 			intent.putExtra("avatar", blogEntry.getAuthorAvatar().toString());
 		} else {
-			intent.putExtra("avatar",
+			intent.putExtra(
+					"avatar",
 					"https://github.com/ZhangTingkuo/AndroidCnblogs/blob/master/res/drawable-hdpi/ic_launcher.png");
 		}
 		intent.putExtra("title", blogEntry.getBlogTitle());
@@ -193,6 +193,7 @@ public class UserActivity extends ListActivity {
 
 		startActivity(intent);
 	}
+
 	/**
 	 * OverFlowœ‘ æÕº±Í
 	 */
@@ -230,7 +231,7 @@ public class UserActivity extends ListActivity {
 
 	private void BindListData(ArrayList<Blog> blogs) {
 		adapter = new UserBlogListAdapter(this, blogs);
-//		listViewBlogList.setAdapter(adapter);
+		// listViewBlogList.setAdapter(adapter);
 		this.setListAdapter(adapter);
 	}
 }

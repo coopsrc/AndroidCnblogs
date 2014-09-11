@@ -121,6 +121,8 @@ public class MainActivity extends FragmentActivity {
 
 		switch (item.getItemId()) {
 		case R.id.action_search:
+			intent = new Intent(MainActivity.this, SearchActivity.class);
+			startActivity(intent);
 			return true;
 		case R.id.action_new:
 			intent = new Intent(MainActivity.this, NewblogActivity.class);

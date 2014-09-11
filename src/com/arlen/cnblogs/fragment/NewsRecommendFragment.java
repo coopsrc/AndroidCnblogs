@@ -26,7 +26,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 public class NewsRecommendFragment extends ListFragment {
-	
+
 	private List<News> newsList;
 	private String path;
 	private int pageIndex;
@@ -53,13 +53,14 @@ public class NewsRecommendFragment extends ListFragment {
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		showBlogItem(newsList.get(position));
 	}
-	
+
 	private void showBlogItem(News newsEntry) {
 		intent = new Intent(this.getActivity(), NewsActivity.class);
 		if (newsEntry.getTopicIcon() != null) {
 			intent.putExtra("topicIcon", newsEntry.getTopicIcon().toString());
 		} else {
-			intent.putExtra("topicIcon",
+			intent.putExtra(
+					"topicIcon",
 					"https://github.com/ZhangTingkuo/AndroidCnblogs/blob/master/res/drawable-hdpi/ic_launcher.png");
 		}
 
@@ -68,7 +69,7 @@ public class NewsRecommendFragment extends ListFragment {
 		intent.putExtra("published",
 				AppUtils.parseDateToString(newsEntry.getPublishedDate()));
 		intent.putExtra("id", newsEntry.getNewsId());
-		
+
 		startActivity(intent);
 	}
 
@@ -101,7 +102,7 @@ public class NewsRecommendFragment extends ListFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		newsList = new ArrayList<News>();
 		Runnable runnable = new Runnable() {
 
@@ -116,7 +117,7 @@ public class NewsRecommendFragment extends ListFragment {
 				}
 			}
 		};
-		
+
 		try {
 			new Thread(runnable).start();
 			handler = new Handler() {
@@ -135,7 +136,7 @@ public class NewsRecommendFragment extends ListFragment {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private void initData() {
 		newsList.clear();
 
@@ -149,7 +150,7 @@ public class NewsRecommendFragment extends ListFragment {
 		newsList = AppUtils.getNewsList(path);
 		Log.i("HomeFragment", "获取最新新闻列表  --->  完成");
 	}
-	
+
 	private void BindListData(ArrayList<News> news) {
 		adapter = new NewsListAdapter(getActivity(), news);
 		this.setListAdapter(adapter);

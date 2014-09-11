@@ -67,7 +67,7 @@ public class CommentListAdapter extends BaseAdapter {
 		ItemViewCache cache = (ItemViewCache) convertView.getTag();
 		Comment comment = commentList.get(position);
 
-		cache.index.setText("# " + position + " ¥");
+		cache.index.setText("# " + (position + 1) + " ¥");
 		cache.published.setText(AppUtils.parseDateToString(comment
 				.getPublishedDate()));
 		cache.authorName.setText(comment.getAuthorName());

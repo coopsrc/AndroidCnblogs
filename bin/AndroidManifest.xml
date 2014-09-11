@@ -66,6 +66,10 @@
             android:name=".CommentActivity"
             android:label="@string/title_activity_comment" >
         </activity>
+        <activity
+            android:name=".SearchActivity"
+            android:label="@string/title_activity_search" >
+        </activity>
     </application>
 
 </manifest>

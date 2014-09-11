@@ -25,7 +25,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 public class BlogActivity extends Activity {
-	
+
 	private ImageView imageViewBlogAvatar;
 	private TextView textViewBlogTitle;
 	private TextView textViewBlogComments;
@@ -43,7 +43,7 @@ public class BlogActivity extends Activity {
 	private Handler handler = null;
 
 	private ImageLoader imageLoader = ImageLoader.getInstance();
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -73,7 +73,7 @@ public class BlogActivity extends Activity {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private void initComponent() {
 		imageViewBlogAvatar = (ImageView) findViewById(R.id.imageViewBlogAvatar);
 		textViewBlogTitle = (TextView) findViewById(R.id.textViewBlogTitle);
@@ -88,7 +88,7 @@ public class BlogActivity extends Activity {
 		layoutParams.bottomMargin = 15;
 		imageViewBlogAvatar.setLayoutParams(layoutParams);
 	}
-	
+
 	private void initData() {
 		intent = getIntent();
 
@@ -104,14 +104,15 @@ public class BlogActivity extends Activity {
 		path = Config.BLOGS_CONTENTS;
 		path = path.replace("{POSTID}", "" + blogId);
 	}
-	
+
 	private void addData() {
 		imageLoader.displayImage(authorAvatar, imageViewBlogAvatar);
 		textViewBlogTitle.setText(blogTitle);
-		textViewBlogComments.setText("作者："+authorName + "\r\n发布时间：" + publishedDate);
+		textViewBlogComments.setText("作者：" + authorName + "\r\n发布时间："
+				+ publishedDate);
 	}
-	
-	private void addContent(){
+
+	private void addContent() {
 		Runnable runnable = new Runnable() {
 
 			@Override
@@ -190,8 +191,8 @@ public class BlogActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
-	private void viewComment(int id){
+
+	private void viewComment(int id) {
 		Intent intent = new Intent(BlogActivity.this, CommentActivity.class);
 		intent.putExtra("id", id);
 		intent.putExtra("type", "blog");
