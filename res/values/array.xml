@@ -6,5 +6,21 @@
         <item name="news">新闻</item>
         <item name="user">博主</item>
     </string-array>
+    <string-array name="blog_list_dialog">
+        <item name="content">查看内容</item>
+        <item name="comment">查看评论</item>
+        <item name="author">查看作者</item>
+        <item name="cancle">取消</item>
+    </string-array>
+    <string-array name="news_list_dialog">
+        <item name="content">查看内容</item>
+        <item name="comment">查看评论</item>
+        <item name="cancle">取消</item>
+    </string-array>
+    <string-array name="comment_list_dialog">
+        <item name="content">回复</item>
+        <item name="comment">引用</item>
+        <item name="cancle">取消</item>
+    </string-array>
 
 </resources>

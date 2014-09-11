@@ -3,13 +3,6 @@ package com.arlen.cnblogs.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.arlen.cnblogs.NewsActivity;
-import com.arlen.cnblogs.R;
-import com.arlen.cnblogs.adapter.NewsListAdapter;
-import com.arlen.cnblogs.entity.News;
-import com.arlen.cnblogs.utils.AppUtils;
-import com.arlen.cnblogs.utils.Config;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,12 +13,21 @@ import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.AdapterView.OnItemLongClickListener;
 
-public class NewsHotFragment extends ListFragment {
+import com.arlen.cnblogs.NewsActivity;
+import com.arlen.cnblogs.R;
+import com.arlen.cnblogs.adapter.NewsListAdapter;
+import com.arlen.cnblogs.entity.News;
+import com.arlen.cnblogs.utils.AppUtils;
+import com.arlen.cnblogs.utils.Config;
+import com.arlen.cnblogs.view.ItemDialog;
+
+public class NewsHotFragment extends ListFragment implements OnItemLongClickListener {
 
 	private List<News> newsList;
 	private String path;
@@ -75,12 +77,7 @@ public class NewsHotFragment extends ListFragment {
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v,
 			ContextMenuInfo menuInfo) {
-		Log.i("onCreateContextMenu", "000000000");
 		super.onCreateContextMenu(menu, v, menuInfo);
-		MenuInflater inflater = this.getActivity().getMenuInflater();
-		inflater.inflate(R.menu.blog_list_context_menu, menu);
-		menu.setHeaderTitle(R.string.app_name);
-		Log.i("onCreateContextMenu", "1111111111");
 	}
 
 	@Override
@@ -151,6 +148,20 @@ public class NewsHotFragment extends ListFragment {
 	private void BindListData(ArrayList<News> news) {
 		adapter = new NewsListAdapter(getActivity(), news);
 		this.setListAdapter(adapter);
+		this.getListView().setOnItemLongClickListener(this);
+	}
+
+	@Override
+	public boolean onItemLongClick(AdapterView<?> parent, View view,
+			int position, long id) {
+		Log.e("onItemLongClick", "position   ---   " + position);
+		String[] items = getActivity().getResources().getStringArray(
+				R.array.news_list_dialog);
+		ItemDialog dialog = new ItemDialog(getActivity(), items);
+		dialog.setTitle("热门新闻");
+		dialog.show();
+
+		return true;
 	}
 
 }

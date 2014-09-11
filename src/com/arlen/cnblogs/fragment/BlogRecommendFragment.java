@@ -13,9 +13,10 @@ import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 
 import com.arlen.cnblogs.BlogActivity;
@@ -24,8 +25,9 @@ import com.arlen.cnblogs.adapter.BlogListAdapter;
 import com.arlen.cnblogs.entity.Blog;
 import com.arlen.cnblogs.utils.AppUtils;
 import com.arlen.cnblogs.utils.Config;
+import com.arlen.cnblogs.view.ItemDialog;
 
-public class BlogRecommendFragment extends ListFragment {
+public class BlogRecommendFragment extends ListFragment implements OnItemLongClickListener {
 
 	private List<Blog> blogList;
 	private String path;
@@ -76,12 +78,7 @@ public class BlogRecommendFragment extends ListFragment {
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v,
 			ContextMenuInfo menuInfo) {
-		Log.i("onCreateContextMenu", "000000000");
 		super.onCreateContextMenu(menu, v, menuInfo);
-		MenuInflater inflater = this.getActivity().getMenuInflater();
-		inflater.inflate(R.menu.blog_list_context_menu, menu);
-		menu.setHeaderTitle(R.string.app_name);
-		Log.i("onCreateContextMenu", "1111111111");
 	}
 
 	@Override
@@ -154,5 +151,19 @@ public class BlogRecommendFragment extends ListFragment {
 	private void BindListData(ArrayList<Blog> blogs) {
 		adapter = new BlogListAdapter(getActivity(), blogs);
 		this.setListAdapter(adapter);
+		this.getListView().setOnItemLongClickListener(this);
+	}
+
+	@Override
+	public boolean onItemLongClick(AdapterView<?> parent, View view,
+			int position, long id) {
+		Log.e("onItemLongClick", "position   ---   " + position);
+		String[] items = getActivity().getResources().getStringArray(
+				R.array.blog_list_dialog);
+		ItemDialog dialog = new ItemDialog(getActivity(), items);
+		dialog.setTitle("ÍÆ¼ö");
+		dialog.show();
+
+		return true;
 	}
 }

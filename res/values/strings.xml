@@ -40,10 +40,7 @@
     <string name="text_news_title_recommend">推荐</string>
     <string name="text_author">作者：</string>
     <string name="text_pub_time">发布时间：</string>
-    <string name="menu_blog_view_content">查看内容</string>
-    <string name="menu_blog_view_comment">查看评论</string>
-    <string name="menu_blog_view_author">查看作者</string>
-    <string name="menu_blog_view_cancle">取消</string>
+
     <string name="text_button_search">搜索博主</string>
 
 </resources>

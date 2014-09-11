@@ -12,13 +12,18 @@ import android.os.Message;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 
 import com.arlen.cnblogs.adapter.CommentListAdapter;
 import com.arlen.cnblogs.entity.Comment;
 import com.arlen.cnblogs.utils.AppUtils;
 import com.arlen.cnblogs.utils.Config;
+import com.arlen.cnblogs.view.ItemDialog;
 
-public class CommentActivity extends ListActivity {
+public class CommentActivity extends ListActivity implements
+		OnItemLongClickListener {
 
 	private List<Comment> commentList;
 	private String path;
@@ -125,5 +130,19 @@ public class CommentActivity extends ListActivity {
 	private void BindListData(List<Comment> comments) {
 		adapter = new CommentListAdapter(this, comments);
 		this.setListAdapter(adapter);
+		this.getListView().setOnItemLongClickListener(this);
+	}
+
+	@Override
+	public boolean onItemLongClick(AdapterView<?> parent, View view,
+			int position, long id) {
+		Log.e("onItemLongClick", "position   ---   " + position);
+		String[] items = this.getResources().getStringArray(
+				R.array.comment_list_dialog);
+		ItemDialog dialog = new ItemDialog(this, items);
+		dialog.setTitle("ÆÀÂÛ");
+		dialog.show();
+
+		return true;
 	}
 }
