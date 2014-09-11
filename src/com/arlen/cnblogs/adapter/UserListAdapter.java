@@ -77,8 +77,8 @@ public class UserListAdapter extends BaseAdapter {
 		}
 
 		cache.textViewUser.setText(user.getTitle());
-		cache.textViewCount.setText("博客总数：" + user.getPostCount());
-		cache.textViewDate.setText(AppUtils.parseDateToString(user
+		cache.textViewCount.setText("随笔总数：" + user.getPostCount());
+		cache.textViewDate.setText("最后更新：" + AppUtils.parseDateToString(user
 				.getUpdatedDate()));
 
 		return convertView;
