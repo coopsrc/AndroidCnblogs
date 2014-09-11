@@ -121,6 +121,7 @@ public class NewsRecommendFragment extends ListFragment {
 			new Thread(runnable).start();
 			handler = new Handler() {
 
+				@SuppressWarnings("unchecked")
 				@Override
 				public void handleMessage(Message msg) {
 					super.handleMessage(msg);

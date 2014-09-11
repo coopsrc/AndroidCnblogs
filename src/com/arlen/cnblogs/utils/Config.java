@@ -59,5 +59,8 @@ public class Config {
 	public static final String RECENT_NEWS_PAGED = "http://wcf.open.cnblogs.com/news/recent/paged/{PAGEINDEX}/{PAGESIZE}";
 	// 分页获取推荐新闻列表
 	public static final String RECOMMEND_NEWS_PAGED = "http://wcf.open.cnblogs.com/news/recommend/paged/{PAGEINDEX}/{PAGESIZE}";
-
+	
+	//评论
+	public static final int COMMENT_PAGE_SIZE = 10;
+	
 }

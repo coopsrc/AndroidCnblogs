@@ -29,7 +29,6 @@ public class NewsHotFragment extends ListFragment {
 	
 	private List<News> newsList;
 	private String path;
-	private int pageIndex;
 	private int pageSize;
 
 	private NewsListAdapter adapter;
@@ -121,6 +120,7 @@ public class NewsHotFragment extends ListFragment {
 			new Thread(runnable).start();
 			handler = new Handler() {
 
+				@SuppressWarnings("unchecked")
 				@Override
 				public void handleMessage(Message msg) {
 					super.handleMessage(msg);
@@ -139,7 +139,6 @@ public class NewsHotFragment extends ListFragment {
 		newsList.clear();
 
 		path = Config.HOT_NEWS_LIST;
-		pageIndex = 1;
 		pageSize = Config.News_PAGE_SIZE;
 		path = path.replace("{ITEMCOUNT}", "" + pageSize);
 		Log.i("HomeFragment", "最新新闻列表地址：" + path);

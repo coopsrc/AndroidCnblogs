@@ -5,11 +5,6 @@ import java.lang.reflect.Method;
 
 import org.apache.commons.lang.StringEscapeUtils;
 
-import com.arlen.cnblogs.utils.AppUtils;
-import com.arlen.cnblogs.utils.Config;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
@@ -23,6 +18,11 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.arlen.cnblogs.utils.AppUtils;
+import com.arlen.cnblogs.utils.Config;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 public class NewsActivity extends Activity {
 
@@ -175,6 +175,7 @@ public class NewsActivity extends Activity {
 	private void viewComment(int id) {
 		Intent intent = new Intent(NewsActivity.this, CommentActivity.class);
 		intent.putExtra("id", id);
+		intent.putExtra("type", "news");
 		startActivity(intent);
 	}
 

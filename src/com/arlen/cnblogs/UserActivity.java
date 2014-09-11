@@ -5,15 +5,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.arlen.cnblogs.adapter.UserBlogListAdapter;
-import com.arlen.cnblogs.entity.Blog;
-import com.arlen.cnblogs.utils.AppUtils;
-import com.arlen.cnblogs.utils.Config;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-
 import android.app.ActionBar;
-import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -28,6 +20,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.arlen.cnblogs.adapter.UserBlogListAdapter;
+import com.arlen.cnblogs.entity.Blog;
+import com.arlen.cnblogs.utils.AppUtils;
+import com.arlen.cnblogs.utils.Config;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 public class UserActivity extends ListActivity {
 
@@ -136,6 +135,7 @@ public class UserActivity extends ListActivity {
 			new Thread(runnable).start();
 			handler = new Handler() {
 
+				@SuppressWarnings("unchecked")
 				@Override
 				public void handleMessage(Message msg) {
 					super.handleMessage(msg);

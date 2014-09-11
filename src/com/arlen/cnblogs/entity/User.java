@@ -3,8 +3,6 @@ package com.arlen.cnblogs.entity;
 import java.net.URL;
 import java.util.Date;
 
-import android.R.integer;
-
 public class User {
 	public URL id;
 	public String title;

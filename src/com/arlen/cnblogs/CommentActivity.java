@@ -1,25 +1,90 @@
 package com.arlen.cnblogs;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.app.ActionBar;
-import android.app.Activity;
+import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class CommentActivity extends Activity {
+import com.arlen.cnblogs.adapter.CommentListAdapter;
+import com.arlen.cnblogs.entity.Comment;
+import com.arlen.cnblogs.utils.AppUtils;
+import com.arlen.cnblogs.utils.Config;
+
+public class CommentActivity extends ListActivity {
+
+	private List<Comment> commentList;
+	private String path;
+	private int pageIndex;
+	private int pageSize;
+
+	private String type;
+	private int id;
+	private Intent intent;
+
+	private CommentListAdapter adapter;
+	private static Handler handler = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_comment);
-		
+
 		ActionBar actionBar = getActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
+
+		receiveData();
+
+		commentList = new ArrayList<Comment>();
+		Runnable runnable = new Runnable() {
+
+			@Override
+			public void run() {
+				try {
+					Thread.sleep(2 * 1000);
+					initData();
+					handler.sendMessage(handler.obtainMessage(0, commentList));
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		};
+
+		try {
+			new Thread(runnable).start();
+			handler = new Handler() {
+
+				@SuppressWarnings("unchecked")
+				@Override
+				public void handleMessage(Message msg) {
+					super.handleMessage(msg);
+					if (msg.what == 0) {
+						ArrayList<Comment> comments = (ArrayList<Comment>) msg.obj;
+						BindListData(comments);
+					}
+				}
+			};
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	private void receiveData() {
+		intent = getIntent();
+		id = intent.getIntExtra("id", 0);
+		type = intent.getStringExtra("type");
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.comment, menu);
 		return true;
 	}
@@ -33,5 +98,32 @@ public class CommentActivity extends Activity {
 			break;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	private void initData() {
+		commentList.clear();
+
+		if (type.equals("blog")) {
+			path = Config.BLOGS_COMMENTS;
+			path = path.replace("{POSTID}", "" + id);
+		} else if (type.equals("news")) {
+			path = Config.NEWS_COMMENTS;
+			path = path.replace("{CONTENTID}", "" + id);
+		} else {
+			;
+		}
+		pageIndex = 1;
+		pageSize = Config.COMMENT_PAGE_SIZE;
+		path = path.replace("{PAGEINDEX}", "" + pageIndex);
+		path = path.replace("{PAGESIZE}", "" + pageSize);
+		Log.i("HomeFragment", "首页博客列表地址：" + path);
+		Log.i("HomeFragment", "获取首页博客列表  --->  开始");
+		commentList = AppUtils.getCommentList(path);
+		Log.i("HomeFragment", "获取首页博客列表  --->  完成");
+	}
+
+	private void BindListData(List<Comment> comments) {
+		adapter = new CommentListAdapter(this, comments);
+		this.setListAdapter(adapter);
 	}
 }

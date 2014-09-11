@@ -5,11 +5,6 @@ import java.lang.reflect.Method;
 
 import org.apache.commons.lang.StringEscapeUtils;
 
-import com.arlen.cnblogs.utils.AppUtils;
-import com.arlen.cnblogs.utils.Config;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
@@ -23,6 +18,11 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.arlen.cnblogs.utils.AppUtils;
+import com.arlen.cnblogs.utils.Config;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 public class BlogActivity extends Activity {
 	
@@ -108,7 +108,7 @@ public class BlogActivity extends Activity {
 	private void addData() {
 		imageLoader.displayImage(authorAvatar, imageViewBlogAvatar);
 		textViewBlogTitle.setText(blogTitle);
-		textViewBlogComments.setText(authorName + " 发布于 " + publishedDate);
+		textViewBlogComments.setText("作者："+authorName + "\r\n发布时间：" + publishedDate);
 	}
 	
 	private void addContent(){
@@ -194,6 +194,7 @@ public class BlogActivity extends Activity {
 	private void viewComment(int id){
 		Intent intent = new Intent(BlogActivity.this, CommentActivity.class);
 		intent.putExtra("id", id);
+		intent.putExtra("type", "blog");
 		startActivity(intent);
 	}
 }

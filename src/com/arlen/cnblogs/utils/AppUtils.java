@@ -24,10 +24,12 @@ import android.annotation.SuppressLint;
 import android.util.Log;
 
 import com.arlen.cnblogs.entity.Blog;
+import com.arlen.cnblogs.entity.Comment;
 import com.arlen.cnblogs.entity.News;
 import com.arlen.cnblogs.entity.User;
 import com.arlen.cnblogs.handler.BlogItemHandler;
 import com.arlen.cnblogs.handler.BlogListHandler;
+import com.arlen.cnblogs.handler.CommentListHandler;
 import com.arlen.cnblogs.handler.NewsItemHandler;
 import com.arlen.cnblogs.handler.NewsListHandler;
 import com.arlen.cnblogs.handler.UserListHandler;
@@ -356,6 +358,29 @@ public class AppUtils {
 			e.printStackTrace();
 		}
 		return blogContent;
+	}
+
+	public static List<Comment> getCommentList(String path) {
+		Log.i("getBlogList", "获取博客列表 XML" + path);
+		try {
+			SAXParserFactory factory = SAXParserFactory.newInstance();
+			SAXParser parser = factory.newSAXParser();
+			XMLReader reader = parser.getXMLReader();
+			CommentListHandler handler = new CommentListHandler();
+			reader.setContentHandler(handler);
+			InputStream inputStream = getXmlStreamByUrl(path);
+			InputSource inputSource = new InputSource(inputStream);
+			reader.parse(inputSource);
+			Log.i("getBlogList", "获取博客列表 XML 完成");
+			return handler.getCommentList();
+		} catch (ParserConfigurationException e) {
+			e.printStackTrace();
+		} catch (SAXException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

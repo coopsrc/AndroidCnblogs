@@ -33,7 +33,7 @@ public class BlogHomeFragment extends ListFragment {
 	private int pageSize;
 
 	private BlogListAdapter adapter;
-	private Handler handler = null;
+	private static Handler handler = null;
 
 	private Intent intent;
 
@@ -123,6 +123,7 @@ public class BlogHomeFragment extends ListFragment {
 			new Thread(runnable).start();
 			handler = new Handler() {
 
+				@SuppressWarnings("unchecked")
 				@Override
 				public void handleMessage(Message msg) {
 					super.handleMessage(msg);

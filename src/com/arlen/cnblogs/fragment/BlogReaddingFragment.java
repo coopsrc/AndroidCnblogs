@@ -29,7 +29,6 @@ public class BlogReaddingFragment extends ListFragment {
 
 	private List<Blog> blogList;
 	private String path;
-	private int pageIndex;
 	private int pageSize;
 
 	private BlogListAdapter adapter;
@@ -123,6 +122,7 @@ public class BlogReaddingFragment extends ListFragment {
 			new Thread(runnable).start();
 			handler = new Handler() {
 
+				@SuppressWarnings("unchecked")
 				@Override
 				public void handleMessage(Message msg) {
 					super.handleMessage(msg);
@@ -142,7 +142,6 @@ public class BlogReaddingFragment extends ListFragment {
 		blogList.clear();
 
 		path = Config.TOP_VIEW_POSTS_48_HOUR;
-		pageIndex = 1;
 		pageSize = Config.BLOG_PAGE_SIZE;
 		path = path.replace("{ITEMCOUNT}", "" + pageSize);
 		Log.i("ReaddingFragment", "首页博客列表地址：" + path);
