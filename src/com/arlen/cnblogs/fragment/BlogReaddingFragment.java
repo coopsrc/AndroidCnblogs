@@ -160,7 +160,11 @@ public class BlogReaddingFragment extends ListFragment implements OnItemLongClic
 		String[] items = getActivity().getResources().getStringArray(
 				R.array.blog_list_dialog);
 		ItemDialog dialog = new ItemDialog(getActivity(), items);
-		dialog.setTitle("ÔÄ¶ÁÅÅÐÐ");
+		dialog.setTitle("²©¿Í");
+		
+		dialog.TAG = "blog";
+		dialog.blogEntry = blogList.get(position);
+		
 		dialog.show();
 
 		return true;

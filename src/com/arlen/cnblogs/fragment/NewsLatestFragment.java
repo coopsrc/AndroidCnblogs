@@ -161,7 +161,11 @@ public class NewsLatestFragment extends ListFragment implements OnItemLongClickL
 		String[] items = getActivity().getResources().getStringArray(
 				R.array.news_list_dialog);
 		ItemDialog dialog = new ItemDialog(getActivity(), items);
-		dialog.setTitle("最新新闻");
+		dialog.setTitle("新闻");
+		
+		dialog.TAG = "news";
+		dialog.newsEntry = newsList.get(position);
+		
 		dialog.show();
 
 		return true;

@@ -40,6 +40,8 @@ public class BlogHomeFragment extends ListFragment implements
 
 	private Intent intent;
 
+	public int selectMenuIndex = 0;
+
 	public BlogHomeFragment() {
 
 	}
@@ -165,7 +167,11 @@ public class BlogHomeFragment extends ListFragment implements
 		String[] items = getActivity().getResources().getStringArray(
 				R.array.blog_list_dialog);
 		ItemDialog dialog = new ItemDialog(getActivity(), items);
-		dialog.setTitle("Ê×Ò³");
+		dialog.setTitle("²©¿Í");
+
+		dialog.TAG = "blog";
+		dialog.blogEntry = blogList.get(position);
+
 		dialog.show();
 
 		return true;

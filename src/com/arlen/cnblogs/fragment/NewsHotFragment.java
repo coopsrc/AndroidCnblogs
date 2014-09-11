@@ -158,7 +158,11 @@ public class NewsHotFragment extends ListFragment implements OnItemLongClickList
 		String[] items = getActivity().getResources().getStringArray(
 				R.array.news_list_dialog);
 		ItemDialog dialog = new ItemDialog(getActivity(), items);
-		dialog.setTitle("热门新闻");
+		dialog.setTitle("新闻");
+		
+		dialog.TAG = "news";
+		dialog.newsEntry = newsList.get(position);
+		
 		dialog.show();
 
 		return true;

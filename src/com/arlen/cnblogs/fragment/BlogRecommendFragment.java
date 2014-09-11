@@ -161,7 +161,11 @@ public class BlogRecommendFragment extends ListFragment implements OnItemLongCli
 		String[] items = getActivity().getResources().getStringArray(
 				R.array.blog_list_dialog);
 		ItemDialog dialog = new ItemDialog(getActivity(), items);
-		dialog.setTitle("ÍÆ¼ö");
+		dialog.setTitle("²©¿Í");
+		
+		dialog.TAG = "blog";
+		dialog.blogEntry = blogList.get(position);
+
 		dialog.show();
 
 		return true;

@@ -107,8 +107,8 @@ public class UserActivity extends ListActivity {
 
 	private void addData() {
 		imageLoader.displayImage(userAvatar, imageViewAvatar);
-		textViewUserName.setText(userName + "\t(" + postCount + ")");
-		textViewUpdate.setText(updateDate);
+		textViewUserName.setText(userName);
+		textViewUpdate.setText("随笔总数：" + postCount + "\r\n最后更新：" + updateDate);
 		textViewUri.setText(userUri);
 	}
 

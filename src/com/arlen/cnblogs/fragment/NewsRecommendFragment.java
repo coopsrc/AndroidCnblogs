@@ -27,7 +27,8 @@ import com.arlen.cnblogs.utils.AppUtils;
 import com.arlen.cnblogs.utils.Config;
 import com.arlen.cnblogs.view.ItemDialog;
 
-public class NewsRecommendFragment extends ListFragment implements OnItemLongClickListener {
+public class NewsRecommendFragment extends ListFragment implements
+		OnItemLongClickListener {
 
 	private List<News> newsList;
 	private String path;
@@ -161,7 +162,11 @@ public class NewsRecommendFragment extends ListFragment implements OnItemLongCli
 		String[] items = getActivity().getResources().getStringArray(
 				R.array.news_list_dialog);
 		ItemDialog dialog = new ItemDialog(getActivity(), items);
-		dialog.setTitle("推荐新闻");
+		dialog.setTitle("新闻");
+
+		dialog.TAG = "news";
+		dialog.newsEntry = newsList.get(position);
+
 		dialog.show();
 
 		return true;
