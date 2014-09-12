@@ -4,68 +4,49 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <ScrollView
-        android:id="@+id/scrollView"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:ignore="UselessParent" >
+        android:layout_height="match_parent"
+        android:layout_margin="3dp"
+        android:background="#FFCCCCCC" >
+
+        <ImageView
+            android:id="@+id/imageViewNewsTopinIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_launcher" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="5dip"
+            android:layout_marginTop="5dip"
             android:orientation="vertical" >
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/textViewNewsTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="3dp"
-                android:background="#FFCCCCCC" >
-
-                <ImageView
-                    android:id="@+id/imageViewNewsTopinIcon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:contentDescription="@string/app_name"
-                    android:src="@drawable/ic_launcher" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="5dip"
-                    android:layout_marginTop="5dip"
-                    android:orientation="vertical" >
-
-                    <TextView
-                        android:id="@+id/textViewNewsTitle"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="start"
-                        android:text="@string/app_name"
-                        android:textColor="@color/title_text_color" />
-
-                    <TextView
-                        android:id="@+id/textViewPublisheDate"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="end"
-                        android:text="@string/app_name"
-                        android:textColor="@color/splash_logo_en_color" />
-                </LinearLayout>
-            </LinearLayout>
+                android:layout_gravity="start"
+                android:text="@string/app_name"
+                android:textColor="@color/title_text_color" />
 
             <TextView
-                android:id="@+id/textViewNewsContent"
+                android:id="@+id/textViewPublisheDate"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="3dp"
-                android:layout_marginLeft="3dp"
-                android:layout_marginRight="3dp"
-                android:layout_marginStart="3dp"
-                android:focusable="true"
-                android:scrollbars="vertical"
-                android:text="@string/text_loading" >
-            </TextView>
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:text="@string/app_name"
+                android:textColor="@color/splash_logo_en_color" />
         </LinearLayout>
-    </ScrollView>
+    </LinearLayout>
+
+    <WebView
+        android:id="@+id/webViewNewsContent"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="3dp"
+        android:layout_marginStart="3dp" />
 
 </LinearLayout>

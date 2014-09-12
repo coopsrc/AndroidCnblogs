@@ -3,8 +3,6 @@ package com.arlen.cnblogs;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
-import org.apache.commons.lang.StringEscapeUtils;
-
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
@@ -15,6 +13,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewConfiguration;
 import android.view.Window;
+import android.webkit.WebSettings;
+import android.webkit.WebSettings.LayoutAlgorithm;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -29,7 +30,7 @@ public class BlogActivity extends Activity {
 	private ImageView imageViewBlogAvatar;
 	private TextView textViewBlogTitle;
 	private TextView textViewBlogComments;
-	private TextView textViewBlogContent;
+	private WebView webViewBlogContent;
 
 	private Intent intent;
 	private String authorAvatar;
@@ -78,7 +79,12 @@ public class BlogActivity extends Activity {
 		imageViewBlogAvatar = (ImageView) findViewById(R.id.imageViewBlogAvatar);
 		textViewBlogTitle = (TextView) findViewById(R.id.textViewBlogTitle);
 		textViewBlogComments = (TextView) findViewById(R.id.textViewBlogComments);
-		textViewBlogContent = (TextView) findViewById(R.id.textViewBlogContent);
+		webViewBlogContent = (WebView) findViewById(R.id.webViewBlogContent);
+		webViewBlogContent.setHorizontalScrollBarEnabled(false);// 设置水平滚动条，true表示允许使用
+		WebSettings webSettings = webViewBlogContent.getSettings();
+		webSettings.setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN);
+		webViewBlogContent.loadDataWithBaseURL(null, "<center/>正在加载 ...<hr>",
+				"text/html", "UTF-8", null);
 
 		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
 				128, 128);
@@ -136,9 +142,8 @@ public class BlogActivity extends Activity {
 					super.handleMessage(msg);
 					if (msg.what == 0) {
 						String content = (String) msg.obj;
-						content = StringEscapeUtils.unescapeHtml(content);
-						content = AppUtils.replaceXmlTag(content);
-						textViewBlogContent.setText(content);
+						webViewBlogContent.loadDataWithBaseURL(null, content,
+								"text/html", "UTF-8", null);
 					}
 				}
 
