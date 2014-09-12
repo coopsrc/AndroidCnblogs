@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewConfiguration;
@@ -82,6 +83,8 @@ public class BlogActivity extends Activity {
 		webViewBlogContent = (WebView) findViewById(R.id.webViewBlogContent);
 		webViewBlogContent.setHorizontalScrollBarEnabled(false);// 设置水平滚动条，true表示允许使用
 		WebSettings webSettings = webViewBlogContent.getSettings();
+		webSettings.setDefaultTextEncodingName("UTF-8");
+		webSettings.setCacheMode(1);
 		webSettings.setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN);
 		webViewBlogContent.loadDataWithBaseURL(null, "<center/>正在加载 ...<hr>",
 				"text/html", "UTF-8", null);
@@ -142,6 +145,7 @@ public class BlogActivity extends Activity {
 					super.handleMessage(msg);
 					if (msg.what == 0) {
 						String content = (String) msg.obj;
+						Log.e("content", content);
 						webViewBlogContent.loadDataWithBaseURL(null, content,
 								"text/html", "UTF-8", null);
 					}

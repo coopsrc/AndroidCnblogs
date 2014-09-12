@@ -127,6 +127,8 @@ public class NewsActivity extends Activity {
 		webViewNewsContent = (WebView) findViewById(R.id.webViewNewsContent);
 		webViewNewsContent.setHorizontalScrollBarEnabled(false);// 设置水平滚动条，true表示允许使用
 		WebSettings webSettings = webViewNewsContent.getSettings();
+		webSettings.setDefaultTextEncodingName("UTF-8");
+		webSettings.setCacheMode(1);
 		webSettings.setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN);
 		webViewNewsContent.loadDataWithBaseURL(null, "<center/>正在加载 ...<hr>",
 				"text/html", "UTF-8", null);
