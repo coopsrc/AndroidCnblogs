@@ -62,5 +62,14 @@ public class Config {
 
 	// ÆÀÂÛ
 	public static final int COMMENT_PAGE_SIZE = 10;
+	
+	//µÇÂ¼ ...
+	public static final String LOGIN_RUL = "http://passport.cnblogs.com/login.aspx";
+	public static final String INDEX_RUL = "http://www.cnblogs.com/";
+	public static final String MESSAGE_URL = "http://msg.cnblogs.com/msg/compose";
+	
+	//Êý¾Ý¿â
+	public static final int DATABASE_VERSION = 1;
+	public static final String DATABASE_NAME = "cnblogs.db";
 
 }
