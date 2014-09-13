@@ -33,8 +33,6 @@ import com.arlen.cnblogs.handler.CommentListHandler;
 import com.arlen.cnblogs.handler.NewsItemHandler;
 import com.arlen.cnblogs.handler.NewsListHandler;
 import com.arlen.cnblogs.handler.UserListHandler;
-import com.arlen.cnblogs.mail.MailSenderInfo;
-import com.arlen.cnblogs.mail.SimpleMailSender;
 
 public class AppUtils {
 
@@ -132,35 +130,6 @@ public class AppUtils {
 			return second + "秒前";
 		}
 		return parseDateToString(datetime);
-	}
-	
-	/**
-	 * 使用JavaMail发送邮件
-	 * 
-	 * @param content
-	 */
-	public static void sendEmailByJavaMail(String content) {
-		try {
-			// 设置邮件
-			MailSenderInfo mailSenderInfo = new MailSenderInfo();
-			mailSenderInfo.setMailServerHost(Config.MAIL_SERVER_HOST);
-			mailSenderInfo.setMailServerPort(Config.MAIL_SERVER_PORT);
-			mailSenderInfo.setValidate(true);
-			mailSenderInfo.setUserName(Config.MAIL_ACCUNT); // 你的邮箱地址
-			mailSenderInfo.setPassword(Config.MAIL_PASSWORD);// 您的邮箱密码
-			mailSenderInfo.setFromAddress(Config.MAIL_ACCUNT);
-			mailSenderInfo.setToAddress(Config.AUTHOR_EMAIL);
-			mailSenderInfo.setSubject(Config.MAIL_SUBJECT);
-			mailSenderInfo.setContent(content);
-
-			// 发送邮件
-			SimpleMailSender simpleMailSender = new SimpleMailSender();
-			simpleMailSender.sendTextMail(mailSenderInfo);
-			Log.i("sendEmailByJavaMail", "发送成功");
-		} catch (Exception e) {
-			Log.e("sendEmailByJavaMail", "发送失败");
-			e.printStackTrace();
-		}
 	}
 
 	/**
