@@ -33,18 +33,8 @@ public class DatabaseUtils {
 	}
 
 	public void addBlog(Context context, List<Blog> blogList) {
-		BlogDao blogDao = new BlogDao(context);
 		for (Blog blog : blogList) {
-			Object[] params = { blog.getBlogId(), blog.getBlogTitle(),
-					blog.getBlogSummary(),
-					AppUtils.parseDateToString(blog.getPublishedDateDate()),
-					AppUtils.parseDateToString(blog.getUpdatedDate()),
-					blog.getAuthorName(), blog.getAuthorUri().toString(),
-					blog.getAuthorAvatar().toString(),
-					blog.getBlogLink().toString(), blog.getBlogApp(),
-					blog.getBlogDiggs(), blog.getBlogViews(),
-					blog.getBlogComments() };
-			blogDao.addData(params);
+			addBlog(context, blog);
 		}
 	}
 
@@ -55,10 +45,8 @@ public class DatabaseUtils {
 	}
 
 	public void deleteBlog(Context context, List<Blog> blogList) {
-		BlogDao blogDao = new BlogDao(context);
 		for (Blog blog : blogList) {
-			Object[] params = { blog.getBlogId() };
-			blogDao.deleteData(params);
+			deleteBlog(context, blog);
 		}
 	}
 
@@ -77,19 +65,32 @@ public class DatabaseUtils {
 	}
 
 	public void updateBlog(Context context, List<Blog> blogList) {
-		BlogDao blogDao = new BlogDao(context);
 		for (Blog blog : blogList) {
-			Object[] params = { blog.getBlogId(), blog.getBlogTitle(),
-					blog.getBlogSummary(),
-					AppUtils.parseDateToString(blog.getPublishedDateDate()),
-					AppUtils.parseDateToString(blog.getUpdatedDate()),
-					blog.getAuthorName(), blog.getAuthorUri().toString(),
-					blog.getAuthorAvatar().toString(),
-					blog.getBlogLink().toString(), blog.getBlogApp(),
-					blog.getBlogDiggs(), blog.getBlogViews(),
-					blog.getBlogComments(), blog.getBlogId() };
-			blogDao.updateData(params);
+			updateBlog(context, blog);
 		}
+	}
+
+	public Blog viewBlog(Context context, String[] selectionArgs) {
+		BlogDao blogDao = new BlogDao(context);
+		Map<String, String> map = blogDao.viewData(selectionArgs);
+		Blog blog = new Blog();
+
+		blog.setBlogId(Integer.parseInt(map.get("blogId")));
+		blog.setBlogTitle(map.get("blogTitle"));
+		blog.setBlogSummary(map.get("blogSummary"));
+		blog.setPublishedDate(AppUtils.parseStringToDate(map
+				.get("publishedDate")));
+		blog.setUpdatedDate(AppUtils.parseStringToDate(map.get("updatedDate")));
+		blog.setAuthorName(map.get("authorName"));
+		blog.setAuthorUri(AppUtils.parseStringToUrl(map.get("authorUri")));
+		blog.setAuthorAvatar(AppUtils.parseStringToUrl(map.get("authorAvatar")));
+		blog.setBlogLink(AppUtils.parseStringToUrl(map.get("blogLink")));
+		blog.setBlogApp(map.get("blogApp"));
+		blog.setBlogDiggs(Integer.parseInt(map.get("blogDiggs")));
+		blog.setBlogViews(Integer.parseInt(map.get("blogViews")));
+		blog.setBlogComments(Integer.parseInt(map.get("blogComments")));
+
+		return blog;
 	}
 
 	public List<Blog> listBlog(Context context, String[] selectionArgs) {
@@ -120,28 +121,5 @@ public class DatabaseUtils {
 		}
 
 		return blogList;
-	}
-
-	public Blog viewBlogById(Context context, String[] selectionArgs) {
-		BlogDao blogDao = new BlogDao(context);
-		Map<String, String> map = blogDao.viewData(selectionArgs);
-		Blog blog = new Blog();
-
-		blog.setBlogId(Integer.parseInt(map.get("blogId")));
-		blog.setBlogTitle(map.get("blogTitle"));
-		blog.setBlogSummary(map.get("blogSummary"));
-		blog.setPublishedDate(AppUtils.parseStringToDate(map
-				.get("publishedDate")));
-		blog.setUpdatedDate(AppUtils.parseStringToDate(map.get("updatedDate")));
-		blog.setAuthorName(map.get("authorName"));
-		blog.setAuthorUri(AppUtils.parseStringToUrl(map.get("authorUri")));
-		blog.setAuthorAvatar(AppUtils.parseStringToUrl(map.get("authorAvatar")));
-		blog.setBlogLink(AppUtils.parseStringToUrl(map.get("blogLink")));
-		blog.setBlogApp(map.get("blogApp"));
-		blog.setBlogDiggs(Integer.parseInt(map.get("blogDiggs")));
-		blog.setBlogViews(Integer.parseInt(map.get("blogViews")));
-		blog.setBlogComments(Integer.parseInt(map.get("blogComments")));
-
-		return blog;
 	}
 }
