@@ -3,13 +3,10 @@ package com.arlen.cnblogs;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -18,24 +15,22 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewConfiguration;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.arlen.cnblogs.adapter.DrawerListAdapter;
 import com.arlen.cnblogs.fragment.BlogFragment;
 import com.arlen.cnblogs.fragment.NewsFragment;
 import com.arlen.cnblogs.fragment.UserFragment;
+import com.arlen.cnblogs.handler.ExitHandler;
+import com.arlen.cnblogs.utils.DBUtils;
 
 public class MainActivity extends FragmentActivity {
 	private DrawerLayout drawerLayout;
@@ -69,36 +64,24 @@ public class MainActivity extends FragmentActivity {
 		drawerLayout.setDrawerShadow(R.drawable.drawer_shadow,
 				GravityCompat.START);
 
-		drawerList.setAdapter(new DrawerListAdapter(getApplicationContext(),
-				drawerListItem, drawerListImage));
+		drawerList.setAdapter(new DrawerListAdapter(this, drawerListItem,
+				drawerListImage));
 		drawerList.setOnItemClickListener(new DrawerItemClickListener());
 
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		getActionBar().setHomeButtonEnabled(true);
 
-		drawerToggle = new ActionBarDrawerToggle(this, /* host Activity */
-		drawerLayout, /* DrawerLayout object */
-		R.drawable.ic_drawer, /* nav drawer image to replace 'Up' caret */
-		R.string.drawer_open, /* "open drawer" description for accessibility */
-		R.string.drawer_close /* "close drawer" description for accessibility */
-		) {
-			public void onDrawerClosed(View view) {
-				getActionBar().setTitle(actionBarTitle);
-				invalidateOptionsMenu(); // creates call to
-											// onPrepareOptionsMenu()
-			}
-
-			public void onDrawerOpened(View drawerView) {
-				getActionBar().setTitle(drawerTitle);
-				invalidateOptionsMenu(); // creates call to
-											// onPrepareOptionsMenu()
-			}
-		};
+		drawerToggle = new DrawerListToggle(this, drawerLayout,
+				R.drawable.ic_drawer, R.string.drawer_open,
+				R.string.drawer_close);
 		drawerLayout.setDrawerListener(drawerToggle);
 
 		if (savedInstanceState == null) {
 			selectItem(0);
 		}
+
+		//Create Database
+		DBUtils.createDB(this);
 	}
 
 	@Override
@@ -148,57 +131,25 @@ public class MainActivity extends FragmentActivity {
 		}
 	}
 
-	@SuppressLint("InflateParams")
-	private class DrawerListAdapter extends BaseAdapter {
-		private Context context;
-		private String[] contenct;
-		private int[] images;
+	private class DrawerListToggle extends ActionBarDrawerToggle {
 
-		public DrawerListAdapter(Context context, String[] contenct,
-				int[] images) {
-			super();
-			this.context = context;
-			this.contenct = contenct;
-			this.images = images;
+		public DrawerListToggle(Activity activity, DrawerLayout drawerLayout,
+				int drawerImageRes, int openDrawerContentDescRes,
+				int closeDrawerContentDescRes) {
+			super(activity, drawerLayout, drawerImageRes,
+					openDrawerContentDescRes, closeDrawerContentDescRes);
 		}
 
 		@Override
-		public int getCount() {
-			return contenct.length;
+		public void onDrawerClosed(View view) {
+			getActionBar().setTitle(actionBarTitle);
+			invalidateOptionsMenu();
 		}
 
 		@Override
-		public Object getItem(int position) {
-			return null;
-		}
-
-		@Override
-		public long getItemId(int position) {
-			return 0;
-		}
-
-		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-			if (convertView == null) {
-				convertView = LayoutInflater.from(context).inflate(
-						R.layout.drawer_list_item, null);
-				ItemViewCache itemViewCache = new ItemViewCache();
-				itemViewCache.imageView = (ImageView) convertView
-						.findViewById(R.id.imageViewIcon);
-				itemViewCache.textView = (TextView) convertView
-						.findViewById(R.id.textViewTitle);
-				convertView.setTag(itemViewCache);
-			}
-
-			ItemViewCache chche = (ItemViewCache) convertView.getTag();
-			chche.imageView.setImageResource(images[position]);
-			chche.textView.setText(contenct[position]);
-			return convertView;
-		}
-
-		private class ItemViewCache {
-			public ImageView imageView;
-			public TextView textView;
+		public void onDrawerOpened(View drawerView) {
+			getActionBar().setTitle(drawerTitle);
+			invalidateOptionsMenu();
 		}
 
 	}
@@ -245,21 +196,12 @@ public class MainActivity extends FragmentActivity {
 		if (!isExit) {
 			isExit = true;
 			Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
-			new ExitHandler().sendEmptyMessageDelayed(0, 1000 * 2);
+			new ExitHandler(isExit).sendEmptyMessageDelayed(0, 1000 * 2);
 		} else {
 			Intent intent = new Intent(Intent.ACTION_MAIN);
 			intent.addCategory(Intent.CATEGORY_HOME);
 			startActivity(intent);
 			System.exit(0);
-		}
-	}
-
-	private static class ExitHandler extends Handler {
-
-		@Override
-		public void handleMessage(Message msg) {
-			super.handleMessage(msg);
-			isExit = false;
 		}
 	}
 

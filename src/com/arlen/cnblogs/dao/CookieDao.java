@@ -11,11 +11,11 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.arlen.cnblogs.utils.Config;
 
-public class BlogDao implements BaseDao {
+public class CookieDao implements BaseDao {
 
 	private DbOpenHelper helper = null;
 
-	public BlogDao(Context context) {
+	public CookieDao(Context context) {
 		helper = new DbOpenHelper(context, Config.DATABASE_NAME, null,
 				Config.DATABASE_VERSION);
 	}
@@ -26,7 +26,7 @@ public class BlogDao implements BaseDao {
 		SQLiteDatabase database = null;
 
 		try {
-			String sql = "insert into blog(blogId,blogTitle,blogSummary,publishedDate,updatedDate,authorName,authorUri,authorAvatar,blogLink,blogApp,blogDiggs,blogViews,blogComments) values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			String sql = "insert into cookies(userName, cookie) values (?, ?)";
 			database = helper.getWritableDatabase();
 			database.execSQL(sql, params);
 			flag = true;
@@ -43,77 +43,27 @@ public class BlogDao implements BaseDao {
 
 	@Override
 	public boolean deleteData(Object[] params) {
-		boolean flag = false;
-		SQLiteDatabase database = null;
-
-		try {
-			String sql = "delete from blog where blogId = ? ";
-			database = helper.getWritableDatabase();
-			database.execSQL(sql, params);
-			flag = true;
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (database != null) {
-				database.close();
-			}
-		}
-
-		return flag;
+		return false;
 	}
 
 	@Override
 	public boolean updateData(Object[] params) {
-		boolean flag = false;
-		SQLiteDatabase database = null;
-
-		try {
-			String sql = "update blog set blogId = ?, blogTitle = ?, blogSummary = ?, publishedDate = ?, updatedDate = ?, authorName = ?, authorUri = ?, authorAvatar = ?, blogLink = ?, blogApp = ?, blogDiggs = ?, blogViews = ?, blogComments = ? where blogId = ?";
-			database = helper.getWritableDatabase();
-			database.execSQL(sql, params);
-			flag = true;
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (database != null) {
-				database.close();
-			}
-		}
-
-		return flag;
+		return false;
 	}
 
 	@Override
 	public boolean cleanData(Object[] params) {
-		boolean flag = false;
-		SQLiteDatabase database = null;
-		try {
-			String sql1 = "delete from blog";
-			String sql2 = "select * from sqlite_sequence";
-			String sql3 = "update sqlite_sequence set seq=0 where name = blog";
-			database = helper.getWritableDatabase();
-			database.execSQL(sql1, params);
-			database.execSQL(sql2, params);
-			database.execSQL(sql3, params);
-			flag = true;
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (database != null) {
-				database.close();
-			}
-		}
-
-		return flag;
-
+		return false;
 	}
 
 	@Override
 	public Map<String, String> viewData(String[] selectionArgs) {
 		Map<String, String> map = new HashMap<String, String>();
 		SQLiteDatabase database = null;
+
 		try {
-			String sql = "select * from blog where blogId = ?";
+			String sql = "select * from cookies where userName = ?";
+
 			database = helper.getReadableDatabase();
 			Cursor cursor = database.rawQuery(sql, selectionArgs);
 
@@ -127,11 +77,15 @@ public class BlogDao implements BaseDao {
 					map.put(key, value);
 				}
 			}
+
 		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
 			if (database != null) {
 				database.close();
 			}
 		}
+
 		return map;
 	}
 
@@ -140,7 +94,7 @@ public class BlogDao implements BaseDao {
 		List<Map<String, String>> list = new ArrayList<Map<String, String>>();
 		SQLiteDatabase database = null;
 		try {
-			String sql = "select * from blog";
+			String sql = "select * from cookies";
 			database = helper.getReadableDatabase();
 			Cursor cursor = database.rawQuery(sql, selectionArgs);
 
@@ -157,6 +111,8 @@ public class BlogDao implements BaseDao {
 				list.add(map);
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
 			if (database != null) {
 				database.close();
 			}

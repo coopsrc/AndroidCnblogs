@@ -9,6 +9,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 
+import com.arlen.cnblogs.login.Personal;
+import com.arlen.cnblogs.utils.Config;
+
 public class SplashActivity extends Activity {
 
 	@Override
@@ -18,8 +21,16 @@ public class SplashActivity extends Activity {
 		final View view = View.inflate(this, R.layout.activity_splash, null);
 		setContentView(view);
 
-		final Intent intent = new Intent(SplashActivity.this,
-				MainActivity.class);
+		if (Personal.isLogin(this)) {
+			Config.FLAG_LOGIN = true;
+		}
+
+		final Intent intent;
+		if (Config.FLAG_LOGIN) {
+			intent = new Intent(SplashActivity.this, MainActivity.class);
+		} else {
+			intent = new Intent(SplashActivity.this, LoginActivity.class);
+		}
 		Timer timer = new Timer();
 		TimerTask task = new TimerTask() {
 

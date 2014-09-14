@@ -16,11 +16,11 @@ public class Config {
 	public final static String SIMPLE_DATA_FORMATE = "yyyy-MM-dd hh:mm:ss";
 
 	// 临时图片文件
-	public static final String TEMP_IMAGES_LOCATION = "Cnblogs/images/";
+	public static final String TEMP_IMAGES_LOCATION = "ArlenCnblogs/images/";
 
 	// 博客
 	// 博客分页大小
-	public static final int BLOG_PAGE_SIZE = 15;
+	public static final int BLOG_PAGE_SIZE = 30;
 	// 48小时阅读排行
 	public static final String TOP_VIEW_POSTS_48_HOUR = "http://wcf.open.cnblogs.com/blog/48HoursTopViewPosts/{ITEMCOUNT}";
 	// 分页获取推荐博客列表(作者)
@@ -44,7 +44,7 @@ public class Config {
 
 	// 新闻
 	// 新闻分页大小
-	public static final int News_PAGE_SIZE = 30;
+	public static final int News_PAGE_SIZE = 50;
 	// 获取新闻列表
 	public static final String NEWS_LIST = "http://wcf.open.cnblogs.com/news/GetData";
 	// 获取热门新闻列表
@@ -61,14 +61,16 @@ public class Config {
 	public static final String RECOMMEND_NEWS_PAGED = "http://wcf.open.cnblogs.com/news/recommend/paged/{PAGEINDEX}/{PAGESIZE}";
 
 	// 评论
-	public static final int COMMENT_PAGE_SIZE = 10;
-	
-	//登录 ...
+	public static final int COMMENT_PAGE_SIZE = 20;
+
+	// 登录 ...
+	public static boolean FLAG_LOGIN = false;
+	public static boolean FLAG_VISITOR = true;
 	public static final String LOGIN_RUL = "http://passport.cnblogs.com/login.aspx";
 	public static final String INDEX_RUL = "http://www.cnblogs.com/";
 	public static final String MESSAGE_URL = "http://msg.cnblogs.com/msg/compose";
-	
-	//数据库
+
+	// 数据库
 	public static final int DATABASE_VERSION = 1;
 	public static final String DATABASE_NAME = "cnblogs.db";
 

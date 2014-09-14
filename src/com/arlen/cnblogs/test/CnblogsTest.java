@@ -3,7 +3,7 @@ package com.arlen.cnblogs.test;
 import java.util.Map;
 
 import com.arlen.cnblogs.dao.BlogDao;
-import com.arlen.cnblogs.db.DbOpenHelper;
+import com.arlen.cnblogs.dao.DbOpenHelper;
 import com.arlen.cnblogs.utils.Config;
 
 import android.test.AndroidTestCase;

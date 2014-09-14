@@ -42,5 +42,7 @@
     <string name="text_pub_time">发布时间：</string>
 
     <string name="text_button_search">搜索博主</string>
+    <string name="text_button_login">登录</string>
+    <string name="text_button_visitor">游客</string>
 
 </resources>

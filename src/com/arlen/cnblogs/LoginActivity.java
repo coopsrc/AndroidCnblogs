@@ -5,13 +5,35 @@ import java.lang.reflect.Method;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewConfiguration;
 import android.view.Window;
+import android.widget.Button;
+import android.widget.EditText;
+
+import com.arlen.cnblogs.login.Personal;
+import com.arlen.cnblogs.utils.Config;
+import com.arlen.cnblogs.utils.DBUtils;
+import com.arlen.cnblogs.view.LoginDialog;
+import com.arlen.cnblogs.view.LoginDialog.ProgressCallBack;
 
 public class LoginActivity extends Activity {
+
+	private EditText editTextUserName;
+	private EditText editTextPassword;
+	private Button buttonLogin;
+	private Button buttonVisitor;
+
+	private String userName;
+	private String password;
+	private String loginUrl;
+
+	private String cookie;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +44,69 @@ public class LoginActivity extends Activity {
 		actionBar.setDisplayHomeAsUpEnabled(true);
 
 		setOverflowShowAlways();
+
+		initComponent();
+		setListener();
+	}
+
+	private void setListener() {
+		OnClickListener listener = new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+
+				if (v.getId() == buttonLogin.getId()) {
+					userName = editTextUserName.getText().toString();
+					password = editTextPassword.getText().toString();
+					loginUrl = Config.LOGIN_RUL;
+					if (userName.trim().equals("")) {
+
+					} else if (userName.trim().equals("")) {
+
+					} else {
+						login();
+					}
+				} else if (v.getId() == buttonVisitor.getId()) {
+					Intent intent = new Intent(LoginActivity.this,
+							MainActivity.class);
+					startActivity(intent);
+					LoginActivity.this.finish();
+				}
+
+			}
+		};
+
+		buttonLogin.setOnClickListener(listener);
+		buttonVisitor.setOnClickListener(listener);
+	}
+
+	private void login() {
+		LoginDialog dialog = new LoginDialog(this);
+		ProgressCallBack callBack = new ProgressCallBack() {
+
+			@Override
+			public void action() {
+				cookie = Personal.Login(userName, password, loginUrl);
+				if (cookie != null) {
+					DBUtils.addCookie(LoginActivity.this, userName, cookie);
+					Intent intent = new Intent(LoginActivity.this,
+							MainActivity.class);
+					startActivity(intent);
+					LoginActivity.this.finish();
+					Config.FLAG_LOGIN = true;
+				}
+			}
+		};
+
+		dialog.showProgressDialog("µÇÂ¼", "ÕýÔÚµÇÂ¼ ...", callBack);
+
+	}
+
+	private void initComponent() {
+		editTextUserName = (EditText) findViewById(R.id.editTextUserName);
+		editTextPassword = (EditText) findViewById(R.id.editTextPassword);
+		buttonLogin = (Button) findViewById(R.id.buttonLogin);
+		buttonVisitor = (Button) findViewById(R.id.buttonVisitor);
 	}
 
 	private void setOverflowShowAlways() {
@@ -55,16 +140,12 @@ public class LoginActivity extends Activity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.login, menu);
 		return true;
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		if (id == R.id.action_settings) {
 			return true;

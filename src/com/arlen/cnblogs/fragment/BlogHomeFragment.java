@@ -25,6 +25,7 @@ import com.arlen.cnblogs.adapter.BlogListAdapter;
 import com.arlen.cnblogs.entity.Blog;
 import com.arlen.cnblogs.utils.AppUtils;
 import com.arlen.cnblogs.utils.Config;
+import com.arlen.cnblogs.utils.DBUtils;
 import com.arlen.cnblogs.view.ItemDialog;
 
 public class BlogHomeFragment extends ListFragment implements
@@ -39,8 +40,6 @@ public class BlogHomeFragment extends ListFragment implements
 	private static Handler handler = null;
 
 	private Intent intent;
-
-	public int selectMenuIndex = 0;
 
 	public BlogHomeFragment() {
 
@@ -65,9 +64,7 @@ public class BlogHomeFragment extends ListFragment implements
 		if (blogEntry.getAuthorAvatar() != null) {
 			intent.putExtra("avatar", blogEntry.getAuthorAvatar().toString());
 		} else {
-			intent.putExtra(
-					"avatar",
-					"https://github.com/ZhangTingkuo/AndroidCnblogs/blob/master/res/drawable-hdpi/ic_launcher.png");
+			intent.putExtra("avatar", "");
 		}
 		intent.putExtra("title", blogEntry.getBlogTitle());
 		intent.putExtra("author", blogEntry.getAuthorName());

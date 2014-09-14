@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewConfiguration;
@@ -145,7 +144,6 @@ public class BlogActivity extends Activity {
 					super.handleMessage(msg);
 					if (msg.what == 0) {
 						String content = (String) msg.obj;
-						Log.e("content", content);
 						webViewBlogContent.loadDataWithBaseURL(null, content,
 								"text/html", "UTF-8", null);
 					}
