@@ -17,10 +17,10 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 
 import com.arlen.cnblogs.adapter.CommentListAdapter;
+import com.arlen.cnblogs.dialog.ItemDialog;
 import com.arlen.cnblogs.entity.Comment;
 import com.arlen.cnblogs.utils.AppUtils;
 import com.arlen.cnblogs.utils.Config;
-import com.arlen.cnblogs.view.ItemDialog;
 
 public class CommentActivity extends ListActivity implements
 		OnItemLongClickListener {

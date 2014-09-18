@@ -1,4 +1,4 @@
-package com.arlen.cnblogs.view;
+package com.arlen.cnblogs.dialog;
 
 import android.app.ProgressDialog;
 import android.content.Context;

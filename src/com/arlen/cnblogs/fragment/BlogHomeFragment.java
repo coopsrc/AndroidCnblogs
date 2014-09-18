@@ -22,11 +22,11 @@ import android.widget.ListView;
 import com.arlen.cnblogs.BlogActivity;
 import com.arlen.cnblogs.R;
 import com.arlen.cnblogs.adapter.BlogListAdapter;
+import com.arlen.cnblogs.dialog.ItemDialog;
 import com.arlen.cnblogs.entity.Blog;
 import com.arlen.cnblogs.utils.AppUtils;
 import com.arlen.cnblogs.utils.Config;
 import com.arlen.cnblogs.utils.DBUtils;
-import com.arlen.cnblogs.view.ItemDialog;
 
 public class BlogHomeFragment extends ListFragment implements
 		OnItemLongClickListener {

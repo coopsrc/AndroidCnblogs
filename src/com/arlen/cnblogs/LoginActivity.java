@@ -16,11 +16,11 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.arlen.cnblogs.dialog.LoginDialog;
+import com.arlen.cnblogs.dialog.LoginDialog.ProgressCallBack;
 import com.arlen.cnblogs.login.Personal;
 import com.arlen.cnblogs.utils.Config;
 import com.arlen.cnblogs.utils.DBUtils;
-import com.arlen.cnblogs.view.LoginDialog;
-import com.arlen.cnblogs.view.LoginDialog.ProgressCallBack;
 
 public class LoginActivity extends Activity {
 

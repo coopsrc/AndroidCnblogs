@@ -1,4 +1,4 @@
-package com.arlen.cnblogs.view;
+package com.arlen.cnblogs.dialog;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;

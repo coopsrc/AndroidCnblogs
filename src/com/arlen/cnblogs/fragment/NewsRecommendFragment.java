@@ -22,10 +22,10 @@ import android.widget.ListView;
 import com.arlen.cnblogs.NewsActivity;
 import com.arlen.cnblogs.R;
 import com.arlen.cnblogs.adapter.NewsListAdapter;
+import com.arlen.cnblogs.dialog.ItemDialog;
 import com.arlen.cnblogs.entity.News;
 import com.arlen.cnblogs.utils.AppUtils;
 import com.arlen.cnblogs.utils.Config;
-import com.arlen.cnblogs.view.ItemDialog;
 
 public class NewsRecommendFragment extends ListFragment implements
 		OnItemLongClickListener {
