@@ -24,7 +24,8 @@ import android.widget.TextView;
 import com.arlen.cnblogs.adapter.UserBlogListAdapter;
 import com.arlen.cnblogs.entity.Blog;
 import com.arlen.cnblogs.utils.AppUtils;
-import com.arlen.cnblogs.utils.Config;
+import com.arlen.cnblogs.utils.AppMacros;
+import com.arlen.cnblogs.utils.HttpUtil;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
@@ -97,9 +98,9 @@ public class UserActivity extends ListActivity {
 		imageLoader.init(ImageLoaderConfiguration.createDefault(this
 				.getApplicationContext()));
 
-		path = Config.USER_BLOGS_LIST_PAGED;
+		path = AppMacros.USER_BLOGS_LIST_PAGED;
 		pageIndex = 1;
-		pageSize = Config.BLOG_PAGE_SIZE;
+		pageSize = AppMacros.BLOG_PAGE_SIZE;
 		path = path.replace("{BLOGAPP}", blogApp);
 		path = path.replace("{PAGEINDEX}", "" + pageIndex);
 		path = path.replace("{PAGESIZE}", "" + pageSize);
@@ -121,7 +122,7 @@ public class UserActivity extends ListActivity {
 					Thread.sleep(2 * 1000);
 					blogList = new ArrayList<Blog>();
 					blogList.clear();
-					blogList = AppUtils.getBlogList(path);
+					blogList = HttpUtil.getBlogList(path);
 					handler.sendMessage(handler.obtainMessage(0, blogList));
 				} catch (InterruptedException e) {
 					e.printStackTrace();

@@ -4,7 +4,7 @@ import java.util.Map;
 
 import com.arlen.cnblogs.dao.BlogDao;
 import com.arlen.cnblogs.dao.DbOpenHelper;
-import com.arlen.cnblogs.utils.Config;
+import com.arlen.cnblogs.utils.AppMacros;
 
 import android.test.AndroidTestCase;
 import android.util.Log;
@@ -17,7 +17,7 @@ public class CnblogsTest extends AndroidTestCase {
 
 	public void createDB() {
 		DbOpenHelper helper = new DbOpenHelper(getContext(),
-				Config.DATABASE_NAME, null, Config.DATABASE_VERSION);
+				AppMacros.DATABASE_NAME, null, AppMacros.DATABASE_VERSION);
 		helper.getWritableDatabase();
 	}
 

@@ -9,7 +9,8 @@ import com.arlen.cnblogs.adapter.NewsListAdapter;
 import com.arlen.cnblogs.dialog.ItemDialog;
 import com.arlen.cnblogs.entity.News;
 import com.arlen.cnblogs.utils.AppUtils;
-import com.arlen.cnblogs.utils.Config;
+import com.arlen.cnblogs.utils.AppMacros;
+import com.arlen.cnblogs.utils.HttpUtil;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -137,14 +138,14 @@ public class NewsLatestFragment extends ListFragment implements OnItemLongClickL
 	private void initData() {
 		newsList.clear();
 
-		path = Config.RECENT_NEWS_PAGED;
+		path = AppMacros.RECENT_NEWS_PAGED;
 		pageIndex = 1;
-		pageSize = Config.News_PAGE_SIZE;
+		pageSize = AppMacros.News_PAGE_SIZE;
 		path = path.replace("{PAGEINDEX}", "" + pageIndex);
 		path = path.replace("{PAGESIZE}", "" + pageSize);
 		Log.i("HomeFragment", "最新新闻列表地址：" + path);
 		Log.i("HomeFragment", "获取最新新闻列表  --->  开始");
-		newsList = AppUtils.getNewsList(path);
+		newsList = HttpUtil.getNewsList(path);
 		Log.i("HomeFragment", "获取最新新闻列表  --->  完成");
 	}
 

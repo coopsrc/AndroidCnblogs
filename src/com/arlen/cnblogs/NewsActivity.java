@@ -21,7 +21,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.arlen.cnblogs.utils.AppUtils;
-import com.arlen.cnblogs.utils.Config;
+import com.arlen.cnblogs.utils.AppMacros;
+import com.arlen.cnblogs.utils.HttpUtil;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
@@ -68,7 +69,7 @@ public class NewsActivity extends Activity {
 			public void run() {
 				try {
 					Thread.sleep(2 * 1000);
-					newsContent = AppUtils.getNewsContent(path);
+					newsContent = HttpUtil.getNewsContent(path);
 					handler.sendMessage(handler.obtainMessage(0, newsContent));
 				} catch (InterruptedException e) {
 					e.printStackTrace();
@@ -116,7 +117,7 @@ public class NewsActivity extends Activity {
 		imageLoader.init(ImageLoaderConfiguration.createDefault(this
 				.getApplicationContext()));
 
-		path = Config.NEWS_CONTENT;
+		path = AppMacros.NEWS_CONTENT;
 		path = path.replace("{CONTENTID}", "" + newsId);
 	}
 

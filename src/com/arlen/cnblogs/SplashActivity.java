@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.animation.AlphaAnimation;
 
 import com.arlen.cnblogs.login.Personal;
-import com.arlen.cnblogs.utils.Config;
+import com.arlen.cnblogs.utils.AppMacros;
 
 public class SplashActivity extends Activity {
 
@@ -22,11 +22,11 @@ public class SplashActivity extends Activity {
 		setContentView(view);
 
 		if (Personal.isLogin(this)) {
-			Config.FLAG_LOGIN = true;
+			AppMacros.FLAG_LOGIN = true;
 		}
 
 		final Intent intent;
-		if (Config.FLAG_LOGIN) {
+		if (AppMacros.FLAG_LOGIN) {
 			intent = new Intent(SplashActivity.this, MainActivity.class);
 		} else {
 			intent = new Intent(SplashActivity.this, LoginActivity.class);

@@ -9,15 +9,15 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.arlen.cnblogs.utils.Config;
+import com.arlen.cnblogs.utils.AppMacros;
 
 public class BlogDao implements BaseDao {
 
 	private DbOpenHelper helper = null;
 
 	public BlogDao(Context context) {
-		helper = new DbOpenHelper(context, Config.DATABASE_NAME, null,
-				Config.DATABASE_VERSION);
+		helper = new DbOpenHelper(context, AppMacros.DATABASE_NAME, null,
+				AppMacros.DATABASE_VERSION);
 	}
 
 	@Override

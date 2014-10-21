@@ -24,9 +24,9 @@ import com.arlen.cnblogs.R;
 import com.arlen.cnblogs.adapter.BlogListAdapter;
 import com.arlen.cnblogs.dialog.ItemDialog;
 import com.arlen.cnblogs.entity.Blog;
+import com.arlen.cnblogs.utils.AppMacros;
 import com.arlen.cnblogs.utils.AppUtils;
-import com.arlen.cnblogs.utils.Config;
-import com.arlen.cnblogs.utils.DBUtils;
+import com.arlen.cnblogs.utils.HttpUtil;
 
 public class BlogHomeFragment extends ListFragment implements
 		OnItemLongClickListener {
@@ -139,14 +139,14 @@ public class BlogHomeFragment extends ListFragment implements
 	private void initData() {
 		blogList.clear();
 
-		path = Config.RECENT_BLOGS_PAGED;
+		path = AppMacros.RECENT_BLOGS_PAGED;
 		pageIndex = 1;
-		pageSize = Config.BLOG_PAGE_SIZE;
+		pageSize = AppMacros.BLOG_PAGE_SIZE;
 		path = path.replace("{PAGEINDEX}", "" + pageIndex);
 		path = path.replace("{PAGESIZE}", "" + pageSize);
 		Log.i("HomeFragment", "首页博客列表地址：" + path);
 		Log.i("HomeFragment", "获取首页博客列表  --->  开始");
-		blogList = AppUtils.getBlogList(path);
+		blogList = HttpUtil.getBlogList(path);
 		Log.i("HomeFragment", "获取首页博客列表  --->  完成");
 	}
 

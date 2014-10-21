@@ -25,7 +25,8 @@ import com.arlen.cnblogs.adapter.BlogListAdapter;
 import com.arlen.cnblogs.dialog.ItemDialog;
 import com.arlen.cnblogs.entity.Blog;
 import com.arlen.cnblogs.utils.AppUtils;
-import com.arlen.cnblogs.utils.Config;
+import com.arlen.cnblogs.utils.AppMacros;
+import com.arlen.cnblogs.utils.HttpUtil;
 
 public class BlogRecommendFragment extends ListFragment implements OnItemLongClickListener {
 
@@ -139,12 +140,12 @@ public class BlogRecommendFragment extends ListFragment implements OnItemLongCli
 	private void initData() {
 		blogList.clear();
 
-		path = Config.TEN_DAYS_TOP_DIGG_POSTS;
-		pageSize = Config.BLOG_PAGE_SIZE;
+		path = AppMacros.TEN_DAYS_TOP_DIGG_POSTS;
+		pageSize = AppMacros.BLOG_PAGE_SIZE;
 		path = path.replace("{ITEMCOUNT}", "" + pageSize);
 		Log.i("RecommendFragment", "推荐博客列表地址：" + path);
 		Log.i("RecommendFragment", "获取推荐博客列表  --->  开始");
-		blogList = AppUtils.getBlogList(path);
+		blogList = HttpUtil.getBlogList(path);
 		Log.i("RecommendFragment", "获取推荐博客列表  --->  完成");
 	}
 

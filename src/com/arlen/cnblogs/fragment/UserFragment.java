@@ -21,7 +21,8 @@ import com.arlen.cnblogs.UserActivity;
 import com.arlen.cnblogs.adapter.UserListAdapter;
 import com.arlen.cnblogs.entity.User;
 import com.arlen.cnblogs.utils.AppUtils;
-import com.arlen.cnblogs.utils.Config;
+import com.arlen.cnblogs.utils.AppMacros;
+import com.arlen.cnblogs.utils.HttpUtil;
 
 public class UserFragment extends ListFragment {
 
@@ -115,12 +116,12 @@ public class UserFragment extends ListFragment {
 	private void initData() {
 		userList.clear();
 
-		path = Config.RECOMMEND_BLOGS_PAGED;
+		path = AppMacros.RECOMMEND_BLOGS_PAGED;
 		pageIndex = 1;
-		pageSize = Config.BLOG_PAGE_SIZE;
+		pageSize = AppMacros.BLOG_PAGE_SIZE;
 		path = path.replace("{PAGEINDEX}", "" + pageIndex);
 		path = path.replace("{PAGESIZE}", "" + pageSize);
-		userList = AppUtils.getUserList(path);
+		userList = HttpUtil.getUserList(path);
 	}
 
 	private void BindListData(ArrayList<User> users) {

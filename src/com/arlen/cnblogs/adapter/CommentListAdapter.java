@@ -71,7 +71,7 @@ public class CommentListAdapter extends BaseAdapter {
 		cache.published.setText(AppUtils.parseDateToString(comment
 				.getPublishedDate()));
 		cache.authorName.setText(comment.getAuthorName());
-		String content = AppUtils.replaceXmlTag(comment.getCommentContent());
+		String content = comment.getCommentContent();
 		cache.content.setText(content);
 
 		Log.i("HomeListAdapter", "getView" + position + " Íê³É");

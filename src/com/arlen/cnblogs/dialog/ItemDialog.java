@@ -25,7 +25,8 @@ import com.arlen.cnblogs.entity.Comment;
 import com.arlen.cnblogs.entity.News;
 import com.arlen.cnblogs.entity.User;
 import com.arlen.cnblogs.utils.AppUtils;
-import com.arlen.cnblogs.utils.Config;
+import com.arlen.cnblogs.utils.AppMacros;
+import com.arlen.cnblogs.utils.HttpUtil;
 
 public class ItemDialog extends Dialog implements OnItemClickListener {
 
@@ -153,7 +154,7 @@ public class ItemDialog extends Dialog implements OnItemClickListener {
 			@Override
 			public void run() {
 				String authorName = blogEntry.getAuthorName();
-				String path = Config.SEARCH_AUTHOR_BY_NAME;
+				String path = AppMacros.SEARCH_AUTHOR_BY_NAME;
 				Log.i("SearchActivity", "textAuthor:" + authorName);
 				try {
 					authorName = URLEncoder.encode(authorName, "utf-8");
@@ -163,7 +164,7 @@ public class ItemDialog extends Dialog implements OnItemClickListener {
 				path = path.replace("{TERM}", authorName);
 
 				Log.i("SearchActivity", "path:" + path);
-				List<User> userList = AppUtils.getUserList(path);
+				List<User> userList = HttpUtil.getUserList(path);
 				User userEntry = userList.get(0);
 
 				Intent intent = new Intent(context, UserActivity.class);

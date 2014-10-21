@@ -25,7 +25,8 @@ import com.arlen.cnblogs.adapter.BlogListAdapter;
 import com.arlen.cnblogs.dialog.ItemDialog;
 import com.arlen.cnblogs.entity.Blog;
 import com.arlen.cnblogs.utils.AppUtils;
-import com.arlen.cnblogs.utils.Config;
+import com.arlen.cnblogs.utils.AppMacros;
+import com.arlen.cnblogs.utils.HttpUtil;
 
 public class BlogReaddingFragment extends ListFragment implements OnItemLongClickListener {
 
@@ -138,12 +139,12 @@ public class BlogReaddingFragment extends ListFragment implements OnItemLongClic
 	private void initData() {
 		blogList.clear();
 
-		path = Config.TOP_VIEW_POSTS_48_HOUR;
-		pageSize = Config.BLOG_PAGE_SIZE;
+		path = AppMacros.TOP_VIEW_POSTS_48_HOUR;
+		pageSize = AppMacros.BLOG_PAGE_SIZE;
 		path = path.replace("{ITEMCOUNT}", "" + pageSize);
 		Log.i("ReaddingFragment", "首页博客列表地址：" + path);
 		Log.i("ReaddingFragment", "获取首页博客列表  --->  开始");
-		blogList = AppUtils.getBlogList(path);
+		blogList = HttpUtil.getBlogList(path);
 		Log.i("ReaddingFragment", "获取首页博客列表  --->  完成");
 	}
 

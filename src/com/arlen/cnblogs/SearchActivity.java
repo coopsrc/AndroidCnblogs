@@ -23,7 +23,8 @@ import android.widget.ListView;
 import com.arlen.cnblogs.adapter.UserListAdapter;
 import com.arlen.cnblogs.entity.User;
 import com.arlen.cnblogs.utils.AppUtils;
-import com.arlen.cnblogs.utils.Config;
+import com.arlen.cnblogs.utils.AppMacros;
+import com.arlen.cnblogs.utils.HttpUtil;
 
 public class SearchActivity extends ListActivity {
 
@@ -121,7 +122,7 @@ public class SearchActivity extends ListActivity {
 
 	private void initData() {
 		authorName = textAuthor.getText().toString();
-		path = Config.SEARCH_AUTHOR_BY_NAME;
+		path = AppMacros.SEARCH_AUTHOR_BY_NAME;
 		Log.i("SearchActivity", "textAuthor:" + authorName);
 		if (textAuthor.getText() != null) {
 			try {
@@ -132,7 +133,7 @@ public class SearchActivity extends ListActivity {
 			path = path.replace("{TERM}", authorName);
 		}
 		Log.i("SearchActivity", "path:" + path);
-		userList = AppUtils.getUserList(path);
+		userList = HttpUtil.getUserList(path);
 	}
 
 	private void initComponent() {

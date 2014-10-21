@@ -20,7 +20,8 @@ import com.arlen.cnblogs.adapter.CommentListAdapter;
 import com.arlen.cnblogs.dialog.ItemDialog;
 import com.arlen.cnblogs.entity.Comment;
 import com.arlen.cnblogs.utils.AppUtils;
-import com.arlen.cnblogs.utils.Config;
+import com.arlen.cnblogs.utils.AppMacros;
+import com.arlen.cnblogs.utils.HttpUtil;
 
 public class CommentActivity extends ListActivity implements
 		OnItemLongClickListener {
@@ -109,21 +110,21 @@ public class CommentActivity extends ListActivity implements
 		commentList.clear();
 
 		if (type.equals("blog")) {
-			path = Config.BLOGS_COMMENTS;
+			path = AppMacros.BLOGS_COMMENTS;
 			path = path.replace("{POSTID}", "" + id);
 		} else if (type.equals("news")) {
-			path = Config.NEWS_COMMENTS;
+			path = AppMacros.NEWS_COMMENTS;
 			path = path.replace("{CONTENTID}", "" + id);
 		} else {
 			;
 		}
 		pageIndex = 1;
-		pageSize = Config.COMMENT_PAGE_SIZE;
+		pageSize = AppMacros.COMMENT_PAGE_SIZE;
 		path = path.replace("{PAGEINDEX}", "" + pageIndex);
 		path = path.replace("{PAGESIZE}", "" + pageSize);
 		Log.i("HomeFragment", "首页博客列表地址：" + path);
 		Log.i("HomeFragment", "获取首页博客列表  --->  开始");
-		commentList = AppUtils.getCommentList(path);
+		commentList = HttpUtil.getCommentList(path);
 		Log.i("HomeFragment", "获取首页博客列表  --->  完成");
 	}
 

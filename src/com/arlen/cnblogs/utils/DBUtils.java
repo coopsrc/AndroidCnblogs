@@ -1,7 +1,6 @@
 package com.arlen.cnblogs.utils;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,8 +13,8 @@ import com.arlen.cnblogs.entity.Blog;
 
 public class DBUtils {
 	public static void createDB(Context context) {
-		DbOpenHelper helper = new DbOpenHelper(context, Config.DATABASE_NAME,
-				null, Config.DATABASE_VERSION);
+		DbOpenHelper helper = new DbOpenHelper(context, AppMacros.DATABASE_NAME,
+				null, AppMacros.DATABASE_VERSION);
 		helper.getWritableDatabase();
 	}
 

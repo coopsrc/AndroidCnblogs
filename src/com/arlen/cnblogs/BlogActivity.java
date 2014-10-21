@@ -21,7 +21,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.arlen.cnblogs.utils.AppUtils;
-import com.arlen.cnblogs.utils.Config;
+import com.arlen.cnblogs.utils.AppMacros;
+import com.arlen.cnblogs.utils.HttpUtil;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
@@ -109,7 +110,7 @@ public class BlogActivity extends Activity {
 		imageLoader.init(ImageLoaderConfiguration.createDefault(this
 				.getApplicationContext()));
 
-		path = Config.BLOGS_CONTENTS;
+		path = AppMacros.BLOGS_CONTENTS;
 		path = path.replace("{POSTID}", "" + blogId);
 	}
 
@@ -127,7 +128,7 @@ public class BlogActivity extends Activity {
 			public void run() {
 				try {
 					Thread.sleep(2 * 1000);
-					blogContent = AppUtils.getBlogContent(path);
+					blogContent = HttpUtil.getBlogContent(path);
 					handler.sendMessage(handler.obtainMessage(0, blogContent));
 				} catch (InterruptedException e) {
 					e.printStackTrace();
