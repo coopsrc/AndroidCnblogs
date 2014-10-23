@@ -60,6 +60,9 @@ public class AppMacros {
 	// 分页获取推荐新闻列表
 	public static final String RECOMMEND_NEWS_PAGED = "http://wcf.open.cnblogs.com/news/recommend/paged/{PAGEINDEX}/{PAGESIZE}";
 
+	// 推荐博主
+	public static final int USER_PAGE_SIZE = 20;
+	
 	// 评论
 	public static final int COMMENT_PAGE_SIZE = 10;
 

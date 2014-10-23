@@ -1,6 +1,7 @@
 package com.arlen.cnblogs.adapter;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.arlen.cnblogs.R;
@@ -90,5 +91,12 @@ public class UserListAdapter extends BaseAdapter {
 		private TextView textViewCount;
 		private TextView textViewDate;
 	}
-
+	
+	public void addAll(List<User> newList) {
+		List<User> tempList = new ArrayList<User>();
+		for (User user : newList) {
+			tempList.add(user);
+		}
+		userList = tempList;
+	}
 }

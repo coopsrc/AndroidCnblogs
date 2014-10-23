@@ -1,9 +1,10 @@
 package com.arlen.cnblogs.fragment;
 
-import com.arlen.cnblogs.R;
+import java.util.ArrayList;
+import java.util.List;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
@@ -11,23 +12,52 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.ListView;
+
+import com.arlen.cnblogs.R;
+import com.arlen.cnblogs.adapter.UserListAdapter;
+import com.arlen.cnblogs.entity.User;
+import com.arlen.cnblogs.utils.AppMacros;
+import com.arlen.cnblogs.utils.HttpUtil;
 
 public class UserFragment extends Fragment implements OnItemLongClickListener,
-		OnItemClickListener, OnRefreshListener {
+		OnItemClickListener, OnRefreshListener, OnScrollListener {
+	private static final String TAG = UserFragment.class.getSimpleName();
 
 	private SwipeRefreshLayout swipeRefreshLayout;
+	private ListView listView;
+
+	private UserListAdapter adapter;
+
+	private String path;
+	private int pageSize;
+	private int pageIndex = 1;
+	private List<User> userList;
+
+	private List<User> refreshList = new ArrayList<User>();
+	private List<User> tempList = new ArrayList<User>();
+	private int lastVisibleIndex;
+	private int maxVisibleIndex = 400;
+
+	public UserFragment() {
+		super();
+	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Log.i(TAG, "onCreate");
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		Log.i(TAG, "onCreateView");
 		View rootView = inflater.inflate(R.layout.fragment_user, container,
 				false);
 		return rootView;
@@ -36,24 +66,19 @@ public class UserFragment extends Fragment implements OnItemLongClickListener,
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
+		Log.i(TAG, "onViewCreated");
 		initComponent();
+		addData();
 	}
 
 	@Override
 	public void onRefresh() {
-		new Handler().postDelayed(new Runnable() {
-			@Override
-			public void run() {
-				swipeRefreshLayout.setRefreshing(false);
-				Log.i("lll", "kkk");
-			}
-		}, 5000);
+		new RefreshTask().execute();
 	}
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -61,6 +86,35 @@ public class UserFragment extends Fragment implements OnItemLongClickListener,
 	public boolean onItemLongClick(AdapterView<?> parent, View view,
 			int position, long id) {
 		return false;
+	}
+
+	@Override
+	public void onScrollStateChanged(AbsListView view, int scrollState) {
+		Log.i(TAG, "onScrollStateChanged -- " + scrollState);
+		Log.i(TAG, "onScrollStateChanged -- "
+				+ OnScrollListener.SCROLL_STATE_IDLE);
+		Log.i(TAG, "onScrollStateChanged -- " + lastVisibleIndex);
+		Log.i(TAG, "onScrollStateChanged -- " + adapter.getCount());
+
+		if (adapter.getCount() < maxVisibleIndex) {
+			if (scrollState == OnScrollListener.SCROLL_STATE_IDLE
+					&& lastVisibleIndex == adapter.getCount() - 1) {
+				LoadMoreTask loadMoreTask = new LoadMoreTask();
+				loadMoreTask.execute();
+			}
+		} else {
+			// Toast.makeText(getActivity(), "×îºóÒ»Ò³!",
+			// Toast.LENGTH_SHORT).show();
+		}
+	}
+
+	@Override
+	public void onScroll(AbsListView view, int firstVisibleItem,
+			int visibleItemCount, int totalItemCount) {
+		lastVisibleIndex = firstVisibleItem + visibleItemCount - 1;
+		Log.i(TAG, "onScroll -- " + firstVisibleItem);
+		Log.i(TAG, "onScroll -- " + visibleItemCount);
+		Log.i(TAG, "onScroll -- " + totalItemCount);
 	}
 
 	private void initComponent() {
@@ -72,6 +126,123 @@ public class UserFragment extends Fragment implements OnItemLongClickListener,
 				android.R.color.holo_green_light,
 				android.R.color.holo_orange_light,
 				android.R.color.holo_red_light);
+
+		listView = (ListView) this.getActivity()
+				.findViewById(R.id.listViewUser);
+		listView.setOnItemClickListener(this);
+		listView.setOnItemLongClickListener(this);
+		listView.setOnScrollListener(this);
 	}
 
+	private void addData() {
+		userList = new ArrayList<User>();
+		adapter = new UserListAdapter(getActivity(), userList);
+		listView.setAdapter(adapter);
+
+		new InitTask().execute();
+	}
+
+	private void initPath(int pageIndex) {
+		// http://wcf.open.cnblogs.com/blog/bloggers/recommend/{PAGEINDEX}/{PAGESIZE};
+		path = AppMacros.RECOMMEND_BLOGS_PAGED;
+		pageSize = AppMacros.USER_PAGE_SIZE;
+		path = path.replace("{PAGEINDEX}", "" + pageIndex);
+		path = path.replace("{PAGESIZE}", "" + pageSize);
+	}
+
+	private class InitTask extends AsyncTask<Void, Void, Void> {
+
+		@Override
+		protected Void doInBackground(Void... params) {
+			userList = HttpUtil.getUserList(path);
+			return null;
+		}
+
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			userList = new ArrayList<User>();
+			initPath(1);
+		}
+
+		@Override
+		protected void onPostExecute(Void result) {
+			super.onPostExecute(result);
+			adapter.addAll(userList);
+			adapter.notifyDataSetChanged();
+		}
+	}
+
+	private class RefreshTask extends AsyncTask<Void, Void, Void> {
+
+		@Override
+		protected Void doInBackground(Void... params) {
+			refreshList = HttpUtil.getUserList(path);
+			return null;
+		}
+
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			initPath(1);
+			if (refreshList != null && tempList != null) {
+				refreshList.clear();
+				tempList.clear();
+			}
+		}
+
+		@Override
+		protected void onPostExecute(Void result) {
+			super.onPostExecute(result);
+			for (User user : userList) {
+				tempList.add(user);
+			}
+			userList.clear();
+
+			for (User user : refreshList) {
+				userList.add(user);
+			}
+
+			for (User user : tempList) {
+				if (!userList.contains(user)) {
+					userList.add(user);
+				}
+			}
+			adapter.addAll(userList);
+			adapter.notifyDataSetChanged();
+			swipeRefreshLayout.setRefreshing(false);
+		}
+	}
+
+	private class LoadMoreTask extends AsyncTask<Void, Void, Void> {
+
+		@Override
+		protected Void doInBackground(Void... params) {
+			refreshList = HttpUtil.getUserList(path);
+			return null;
+		}
+
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			pageIndex++;
+			initPath(pageIndex);
+			if (refreshList != null && tempList != null) {
+				refreshList.clear();
+				tempList.clear();
+			}
+		}
+
+		@Override
+		protected void onPostExecute(Void result) {
+			super.onPostExecute(result);
+			if (refreshList != null) {
+				for (User user : refreshList) {
+					userList.add(user);
+				}
+				adapter.addAll(userList);
+			}
+			adapter.notifyDataSetChanged();
+		}
+	}
 }
