@@ -1,6 +1,7 @@
 package com.arlen.cnblogs.adapter;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 import android.annotation.SuppressLint;
@@ -15,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.arlen.cnblogs.R;
+import com.arlen.cnblogs.entity.Blog;
 import com.arlen.cnblogs.entity.News;
 import com.arlen.cnblogs.utils.AppUtils;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -136,5 +138,12 @@ public class NewsListAdapter extends BaseAdapter {
 		private TextView newsComments;
 		private TextView newsgViews;
 		private TextView newsDiggs;
+	}
+	
+	public void updataNewsList(List<News> newList) {
+		List<News> listTemp = new ArrayList<News>();
+		listTemp.addAll(newList);
+		newsList.clear();
+		newsList.addAll(listTemp);
 	}
 }

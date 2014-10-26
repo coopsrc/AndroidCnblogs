@@ -1,6 +1,7 @@
 package com.arlen.cnblogs.adapter;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -122,5 +123,12 @@ public class BlogListAdapter extends BaseAdapter {
 		private TextView blogComments;
 		private TextView blogViews;
 		private TextView blogDiggs;
+	}
+	
+	public void updataBlogList(List<Blog> newList) {
+		List<Blog> listTemp = new ArrayList<Blog>();
+		listTemp.addAll(newList);
+		blogList.clear();
+		blogList.addAll(listTemp);
 	}
 }

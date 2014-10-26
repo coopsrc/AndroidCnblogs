@@ -1,5 +1,6 @@
 package com.arlen.cnblogs.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.arlen.cnblogs.R;
 
 public class DrawerListAdapter extends BaseAdapter {
@@ -15,8 +15,7 @@ public class DrawerListAdapter extends BaseAdapter {
 	private String[] contenct;
 	private int[] images;
 
-	public DrawerListAdapter(Context context, String[] contenct,
-			int[] images) {
+	public DrawerListAdapter(Context context, String[] contenct, int[] images) {
 		super();
 		this.context = context;
 		this.contenct = contenct;
@@ -38,6 +37,7 @@ public class DrawerListAdapter extends BaseAdapter {
 		return 0;
 	}
 
+	@SuppressLint("InflateParams")
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		if (convertView == null) {

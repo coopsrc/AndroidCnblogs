@@ -17,6 +17,9 @@ public class AppMacros {
 
 	// 临时图片文件
 	public static final String TEMP_IMAGES_LOCATION = "ArlenCnblogs/images/";
+	
+	//分页大小(新闻、博客、用户、评论)
+	public static final int PAGE_SIZE = 10;
 
 	// 博客
 	// 博客分页大小

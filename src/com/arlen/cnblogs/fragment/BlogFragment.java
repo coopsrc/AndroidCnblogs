@@ -71,7 +71,7 @@ public class BlogFragment extends Fragment {
 
 		BlogHomeFragment homeFragment = new BlogHomeFragment();
 		BlogRecommendFragment recommendFragment = new BlogRecommendFragment();
-		BlogReaddingFragment readdingFragment = new BlogReaddingFragment();
+		BlogReadingFragment readdingFragment = new BlogReadingFragment();
 
 		fragmentList.add(homeFragment);
 		fragmentList.add(recommendFragment);

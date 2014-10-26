@@ -43,7 +43,7 @@ public class UserFragment extends Fragment implements OnItemLongClickListener,
 
 	private int lastVisibleIndex;
 	private int maxVisibleIndex = 400;
-	
+
 	private Intent intent;
 
 	public UserFragment() {
@@ -104,6 +104,7 @@ public class UserFragment extends Fragment implements OnItemLongClickListener,
 
 				pageIndex++;
 				initPath(pageIndex);
+				swipeRefreshLayout.setRefreshing(true);
 				new UserListTask(userList, swipeRefreshLayout, adapter)
 						.execute(path, "loadMore");
 			}
@@ -150,13 +151,13 @@ public class UserFragment extends Fragment implements OnItemLongClickListener,
 	private void initPath(int pageIndex) {
 		// http://wcf.open.cnblogs.com/blog/bloggers/recommend/{PAGEINDEX}/{PAGESIZE};
 		path = AppMacros.RECOMMEND_BLOGS_PAGED;
-		pageSize = AppMacros.USER_PAGE_SIZE;
+		pageSize = AppMacros.PAGE_SIZE;
 		path = path.replace("{PAGEINDEX}", "" + pageIndex);
 		path = path.replace("{PAGESIZE}", "" + pageSize);
 
 		Log.i(TAG, "pageIndex£º" + pageIndex);
 	}
-	
+
 	private void showUserItem(User user) {
 		intent = new Intent(this.getActivity(), UserActivity.class);
 		intent.putExtra("blogapp", user.getBlogapp());
