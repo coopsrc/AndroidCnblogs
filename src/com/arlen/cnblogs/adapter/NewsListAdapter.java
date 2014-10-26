@@ -16,7 +16,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.arlen.cnblogs.R;
-import com.arlen.cnblogs.entity.Blog;
 import com.arlen.cnblogs.entity.News;
 import com.arlen.cnblogs.utils.AppUtils;
 import com.nostra13.universalimageloader.core.ImageLoader;
