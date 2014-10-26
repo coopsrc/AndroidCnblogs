@@ -3,7 +3,7 @@ package com.arlen.cnblogs.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.os.AsyncTask;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -20,10 +20,12 @@ import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 
 import com.arlen.cnblogs.R;
+import com.arlen.cnblogs.UserActivity;
 import com.arlen.cnblogs.adapter.UserListAdapter;
 import com.arlen.cnblogs.entity.User;
+import com.arlen.cnblogs.task.UserListTask;
 import com.arlen.cnblogs.utils.AppMacros;
-import com.arlen.cnblogs.utils.HttpUtil;
+import com.arlen.cnblogs.utils.AppUtils;
 
 public class UserFragment extends Fragment implements OnItemLongClickListener,
 		OnItemClickListener, OnRefreshListener, OnScrollListener {
@@ -39,10 +41,10 @@ public class UserFragment extends Fragment implements OnItemLongClickListener,
 	private int pageIndex = 1;
 	private List<User> userList;
 
-	private List<User> refreshList = new ArrayList<User>();
-	private List<User> tempList = new ArrayList<User>();
 	private int lastVisibleIndex;
 	private int maxVisibleIndex = 400;
+	
+	private Intent intent;
 
 	public UserFragment() {
 		super();
@@ -68,39 +70,42 @@ public class UserFragment extends Fragment implements OnItemLongClickListener,
 		super.onViewCreated(view, savedInstanceState);
 		Log.i(TAG, "onViewCreated");
 		initComponent();
-		addData();
+		initData();
 	}
 
 	@Override
 	public void onRefresh() {
-		new RefreshTask().execute();
+		initPath(1);
+		// new UserListTask().execute(path, "refresh");
+		new UserListTask(userList, swipeRefreshLayout, adapter).execute(path,
+				"refresh");
 	}
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
-
+		Log.i(TAG, "onItemClick -- " + position);
+		showUserItem(userList.get(position));
 	}
 
 	@Override
 	public boolean onItemLongClick(AdapterView<?> parent, View view,
 			int position, long id) {
+		Log.i(TAG, "onItemLongClick -- " + position);
 		return false;
 	}
 
 	@Override
 	public void onScrollStateChanged(AbsListView view, int scrollState) {
-		Log.i(TAG, "onScrollStateChanged -- " + scrollState);
-		Log.i(TAG, "onScrollStateChanged -- "
-				+ OnScrollListener.SCROLL_STATE_IDLE);
-		Log.i(TAG, "onScrollStateChanged -- " + lastVisibleIndex);
-		Log.i(TAG, "onScrollStateChanged -- " + adapter.getCount());
 
 		if (adapter.getCount() < maxVisibleIndex) {
 			if (scrollState == OnScrollListener.SCROLL_STATE_IDLE
 					&& lastVisibleIndex == adapter.getCount() - 1) {
-				LoadMoreTask loadMoreTask = new LoadMoreTask();
-				loadMoreTask.execute();
+
+				pageIndex++;
+				initPath(pageIndex);
+				new UserListTask(userList, swipeRefreshLayout, adapter)
+						.execute(path, "loadMore");
 			}
 		} else {
 			// Toast.makeText(getActivity(), "×îºóÒ»Ò³!",
@@ -112,9 +117,6 @@ public class UserFragment extends Fragment implements OnItemLongClickListener,
 	public void onScroll(AbsListView view, int firstVisibleItem,
 			int visibleItemCount, int totalItemCount) {
 		lastVisibleIndex = firstVisibleItem + visibleItemCount - 1;
-		Log.i(TAG, "onScroll -- " + firstVisibleItem);
-		Log.i(TAG, "onScroll -- " + visibleItemCount);
-		Log.i(TAG, "onScroll -- " + totalItemCount);
 	}
 
 	private void initComponent() {
@@ -134,12 +136,15 @@ public class UserFragment extends Fragment implements OnItemLongClickListener,
 		listView.setOnScrollListener(this);
 	}
 
-	private void addData() {
+	private void initData() {
 		userList = new ArrayList<User>();
 		adapter = new UserListAdapter(getActivity(), userList);
 		listView.setAdapter(adapter);
 
-		new InitTask().execute();
+		initPath(1);
+		swipeRefreshLayout.setRefreshing(true);
+		new UserListTask(userList, swipeRefreshLayout, adapter).execute(path,
+				"init");
 	}
 
 	private void initPath(int pageIndex) {
@@ -148,101 +153,19 @@ public class UserFragment extends Fragment implements OnItemLongClickListener,
 		pageSize = AppMacros.USER_PAGE_SIZE;
 		path = path.replace("{PAGEINDEX}", "" + pageIndex);
 		path = path.replace("{PAGESIZE}", "" + pageSize);
+
+		Log.i(TAG, "pageIndex£º" + pageIndex);
 	}
-
-	private class InitTask extends AsyncTask<Void, Void, Void> {
-
-		@Override
-		protected Void doInBackground(Void... params) {
-			userList = HttpUtil.getUserList(path);
-			return null;
-		}
-
-		@Override
-		protected void onPreExecute() {
-			super.onPreExecute();
-			userList = new ArrayList<User>();
-			initPath(1);
-		}
-
-		@Override
-		protected void onPostExecute(Void result) {
-			super.onPostExecute(result);
-			adapter.addAll(userList);
-			adapter.notifyDataSetChanged();
-		}
-	}
-
-	private class RefreshTask extends AsyncTask<Void, Void, Void> {
-
-		@Override
-		protected Void doInBackground(Void... params) {
-			refreshList = HttpUtil.getUserList(path);
-			return null;
-		}
-
-		@Override
-		protected void onPreExecute() {
-			super.onPreExecute();
-			initPath(1);
-			if (refreshList != null && tempList != null) {
-				refreshList.clear();
-				tempList.clear();
-			}
-		}
-
-		@Override
-		protected void onPostExecute(Void result) {
-			super.onPostExecute(result);
-			for (User user : userList) {
-				tempList.add(user);
-			}
-			userList.clear();
-
-			for (User user : refreshList) {
-				userList.add(user);
-			}
-
-			for (User user : tempList) {
-				if (!userList.contains(user)) {
-					userList.add(user);
-				}
-			}
-			adapter.addAll(userList);
-			adapter.notifyDataSetChanged();
-			swipeRefreshLayout.setRefreshing(false);
-		}
-	}
-
-	private class LoadMoreTask extends AsyncTask<Void, Void, Void> {
-
-		@Override
-		protected Void doInBackground(Void... params) {
-			refreshList = HttpUtil.getUserList(path);
-			return null;
-		}
-
-		@Override
-		protected void onPreExecute() {
-			super.onPreExecute();
-			pageIndex++;
-			initPath(pageIndex);
-			if (refreshList != null && tempList != null) {
-				refreshList.clear();
-				tempList.clear();
-			}
-		}
-
-		@Override
-		protected void onPostExecute(Void result) {
-			super.onPostExecute(result);
-			if (refreshList != null) {
-				for (User user : refreshList) {
-					userList.add(user);
-				}
-				adapter.addAll(userList);
-			}
-			adapter.notifyDataSetChanged();
-		}
+	
+	private void showUserItem(User user) {
+		intent = new Intent(this.getActivity(), UserActivity.class);
+		intent.putExtra("blogapp", user.getBlogapp());
+		intent.putExtra("link", user.getUserLink().toString());
+		intent.putExtra("avatar", user.getUserAvatar().toString());
+		intent.putExtra("postcount", user.getPostCount());
+		intent.putExtra("updated",
+				AppUtils.parseDateToString(user.getUpdatedDate()));
+		intent.putExtra("title", user.getTitle());
+		startActivity(intent);
 	}
 }

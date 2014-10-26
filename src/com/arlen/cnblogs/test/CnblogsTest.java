@@ -47,4 +47,8 @@ public class CnblogsTest extends AndroidTestCase {
 		Map<String, String> map = blogDao.viewData(selectionArgs);
 		Log.i("viewData", "map --> " + map.get("blogId") + "===" + map.size());
 	}
+	
+	public void testList(){
+		
+	}
 }

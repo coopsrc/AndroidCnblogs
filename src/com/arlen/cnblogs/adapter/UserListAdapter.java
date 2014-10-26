@@ -79,8 +79,8 @@ public class UserListAdapter extends BaseAdapter {
 
 		cache.textViewUser.setText(user.getTitle());
 		cache.textViewCount.setText("随笔总数：" + user.getPostCount());
-		cache.textViewDate.setText("最后更新：" + AppUtils.parseDateToString(user
-				.getUpdatedDate()));
+		cache.textViewDate.setText("最后更新："
+				+ AppUtils.parseDateToString(user.getUpdatedDate()));
 
 		return convertView;
 	}
@@ -91,12 +91,11 @@ public class UserListAdapter extends BaseAdapter {
 		private TextView textViewCount;
 		private TextView textViewDate;
 	}
-	
-	public void addAll(List<User> newList) {
-		List<User> tempList = new ArrayList<User>();
-		for (User user : newList) {
-			tempList.add(user);
-		}
-		userList = tempList;
+
+	public void updataUserList(List<User> newList) {
+		List<User> listTemp = new ArrayList<User>();
+		listTemp.addAll(newList);
+		userList.clear();
+		userList.addAll(listTemp);
 	}
 }

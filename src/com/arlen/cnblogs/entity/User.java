@@ -67,4 +67,15 @@ public class User {
 	public void setPostCount(int postCount) {
 		this.postCount = postCount;
 	}
+
+	@Override
+	public boolean equals(Object object) {
+		if (object instanceof User) {
+			User user = (User) object;
+			return String.valueOf(user.getTitle()).equals(
+					String.valueOf(this.getTitle()));
+		} else {
+			return super.equals(object);
+		}
+	}
 }
