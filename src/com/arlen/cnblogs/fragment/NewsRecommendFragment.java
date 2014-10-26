@@ -22,6 +22,7 @@ import android.widget.ListView;
 import com.arlen.cnblogs.NewsActivity;
 import com.arlen.cnblogs.R;
 import com.arlen.cnblogs.adapter.NewsListAdapter;
+import com.arlen.cnblogs.dialog.ItemDialog;
 import com.arlen.cnblogs.entity.News;
 import com.arlen.cnblogs.task.NewsListTask;
 import com.arlen.cnblogs.utils.AppMacros;
@@ -30,7 +31,8 @@ import com.arlen.cnblogs.utils.AppUtils;
 public class NewsRecommendFragment extends Fragment implements
 		OnItemLongClickListener, OnItemClickListener, OnRefreshListener,
 		OnScrollListener {
-	private static final String TAG = NewsRecommendFragment.class.getSimpleName();
+	private static final String TAG = NewsRecommendFragment.class
+			.getSimpleName();
 
 	private SwipeRefreshLayout swipeRefreshLayout;
 	private ListView listView;
@@ -61,8 +63,8 @@ public class NewsRecommendFragment extends Fragment implements
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		Log.i(TAG, "onCreateView");
-		View rootView = inflater.inflate(R.layout.fragment_news_recommend, container,
-				false);
+		View rootView = inflater.inflate(R.layout.fragment_news_recommend,
+				container, false);
 		return rootView;
 	}
 
@@ -84,8 +86,18 @@ public class NewsRecommendFragment extends Fragment implements
 	@Override
 	public boolean onItemLongClick(AdapterView<?> parent, View view,
 			int position, long id) {
-		Log.i(TAG, "onItemLongClick -- " + position);
-		return false;
+		Log.e("onItemLongClick", "position   ---   " + position);
+		String[] items = getActivity().getResources().getStringArray(
+				R.array.news_list_dialog);
+		ItemDialog dialog = new ItemDialog(getActivity(), items);
+		dialog.setTitle("ÐÂÎÅ");
+
+		dialog.TAG = "news";
+		dialog.newsEntry = newsList.get(position);
+
+		dialog.show();
+
+		return true;
 	}
 
 	@Override

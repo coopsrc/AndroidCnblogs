@@ -22,6 +22,7 @@ import android.widget.ListView;
 import com.arlen.cnblogs.BlogActivity;
 import com.arlen.cnblogs.R;
 import com.arlen.cnblogs.adapter.BlogListAdapter;
+import com.arlen.cnblogs.dialog.ItemDialog;
 import com.arlen.cnblogs.entity.Blog;
 import com.arlen.cnblogs.task.BlogListTask;
 import com.arlen.cnblogs.utils.AppMacros;
@@ -85,8 +86,18 @@ public class BlogRecommendFragment extends Fragment implements
 	@Override
 	public boolean onItemLongClick(AdapterView<?> parent, View view,
 			int position, long id) {
-		Log.i(TAG, "onItemLongClick -- " + position);
-		return false;
+		Log.e("onItemLongClick", "position   ---   " + position);
+		String[] items = getActivity().getResources().getStringArray(
+				R.array.blog_list_dialog);
+		ItemDialog dialog = new ItemDialog(getActivity(), items);
+		dialog.setTitle("²©¿Í");
+
+		dialog.TAG = "blog";
+		dialog.blogEntry = blogList.get(position);
+
+		dialog.show();
+
+		return true;
 	}
 
 	@Override
