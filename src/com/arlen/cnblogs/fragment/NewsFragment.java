@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -20,11 +21,16 @@ import android.widget.TextView;
 import com.arlen.cnblogs.R;
 import com.arlen.cnblogs.adapter.NewsFragmentPagerAdapter;
 
-public class NewsFragment extends Fragment {
+public class NewsFragment extends Fragment implements OnClickListener {
+
+	private LinearLayout linearLayoutNewsTitleLatest;
+	private LinearLayout linearLayoutNewsTitleHot;
+	private LinearLayout linearLayoutNewsTitleRecommend;
 
 	private TextView latestTextView;
 	private TextView hotTextView;
 	private TextView recommendTextView;
+
 	private ImageView guildLineView;
 	private ViewPager viewPager;
 
@@ -146,10 +152,19 @@ public class NewsFragment extends Fragment {
 	}
 
 	private void initComponent(View view) {
+
+		linearLayoutNewsTitleLatest = (LinearLayout) view
+				.findViewById(R.id.linearLayoutNewsTitleLatest);
+		linearLayoutNewsTitleHot = (LinearLayout) view
+				.findViewById(R.id.linearLayoutNewsTitleHot);
+		linearLayoutNewsTitleRecommend = (LinearLayout) view
+				.findViewById(R.id.linearLayoutNewsTitleRecommend);
+
 		latestTextView = (TextView) view.findViewById(R.id.textViewNewsLatest);
 		hotTextView = (TextView) view.findViewById(R.id.textViewNewsHot);
 		recommendTextView = (TextView) view
 				.findViewById(R.id.textViewNewsRecommend);
+
 		guildLineView = (ImageView) view.findViewById(R.id.imageViewGuildLine);
 		viewPager = (ViewPager) view.findViewById(R.id.viewPagerNews);
 
@@ -160,5 +175,20 @@ public class NewsFragment extends Fragment {
 		fragmentList.add(latestFragment);
 		fragmentList.add(hotFragment);
 		fragmentList.add(recommendFragment);
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.linearLayoutNewsTitleLatest:
+			viewPager.setCurrentItem(0);
+			break;
+		case R.id.linearLayoutNewsTitleHot:
+			viewPager.setCurrentItem(1);
+			break;
+		case R.id.linearLayoutNewsTitleRecommend:
+			viewPager.setCurrentItem(2);
+			break;
+		}
 	}
 }

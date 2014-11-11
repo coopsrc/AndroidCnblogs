@@ -14,13 +14,12 @@ import android.view.MenuItem;
 import android.view.ViewConfiguration;
 import android.view.Window;
 import android.webkit.WebSettings;
-import android.webkit.WebView;
 import android.webkit.WebSettings.LayoutAlgorithm;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.arlen.cnblogs.utils.AppUtils;
 import com.arlen.cnblogs.utils.AppMacros;
 import com.arlen.cnblogs.utils.HttpUtil;
 import com.nostra13.universalimageloader.core.ImageLoader;

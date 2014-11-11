@@ -12,19 +12,25 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.LinearLayout.LayoutParams;
 
 import com.arlen.cnblogs.R;
 import com.arlen.cnblogs.adapter.BlogFragmentPagerAdapter;
 
-public class BlogFragment extends Fragment {
+public class BlogFragment extends Fragment implements OnClickListener {
 
 	private TextView homeTextView;
 	private TextView recommendTextView;
 	private TextView readdingTextView;
+
+	private LinearLayout linearLayoutBlogTitleHome;
+	private LinearLayout linearLayoutBlogTitleRecommend;
+	private LinearLayout linearLayoutBlogTitleReading;
 
 	private ImageView guildLineView;
 
@@ -33,6 +39,7 @@ public class BlogFragment extends Fragment {
 	private int currentPageIndex;
 	private int screenWidth;
 
+	private BlogFragmentPagerAdapter adapter;
 	private OnPageChangeListener blogPageChangeListener;
 	private List<Fragment> fragmentList = new ArrayList<Fragment>();
 
@@ -51,13 +58,21 @@ public class BlogFragment extends Fragment {
 
 		addListener();
 
-		viewPager.setAdapter(new BlogFragmentPagerAdapter(
-				getChildFragmentManager(), fragmentList));
+		adapter = new BlogFragmentPagerAdapter(getChildFragmentManager(),
+				fragmentList);
+		viewPager.setAdapter(adapter);
 
 		return rootView;
 	}
 
 	private void initComponent(View view) {
+
+		linearLayoutBlogTitleHome = (LinearLayout) view
+				.findViewById(R.id.linearLayoutBlogTitleHome);
+		linearLayoutBlogTitleRecommend = (LinearLayout) view
+				.findViewById(R.id.linearLayoutBlogTitleRecommend);
+		linearLayoutBlogTitleReading = (LinearLayout) view
+				.findViewById(R.id.linearLayoutBlogTitleReading);
 
 		homeTextView = (TextView) view.findViewById(R.id.textViewBlogHome);
 		recommendTextView = (TextView) view
@@ -91,6 +106,10 @@ public class BlogFragment extends Fragment {
 	}
 
 	private void addListener() {
+		linearLayoutBlogTitleHome.setOnClickListener(this);
+		linearLayoutBlogTitleRecommend.setOnClickListener(this);
+		linearLayoutBlogTitleReading.setOnClickListener(this);
+
 		blogPageChangeListener = new OnPageChangeListener() {
 
 			@Override
@@ -121,14 +140,14 @@ public class BlogFragment extends Fragment {
 			public void onPageScrolled(int position, float positionOffset,
 					int positionOffsetPixels) {
 				if (currentPageIndex == 0 && position == 0) {// 0->1
-					LinearLayout.LayoutParams layoutParams = (android.widget.LinearLayout.LayoutParams) guildLineView
+					LayoutParams layoutParams = (LayoutParams) guildLineView
 							.getLayoutParams();
 					layoutParams.leftMargin = (int) (positionOffset
 							* (screenWidth * 1.0 / 3) + currentPageIndex
 							* (screenWidth / 3));
 					guildLineView.setLayoutParams(layoutParams);
 				} else if (currentPageIndex == 1 && position == 0) { // 1->0
-					LinearLayout.LayoutParams layoutParams = (android.widget.LinearLayout.LayoutParams) guildLineView
+					LayoutParams layoutParams = (LayoutParams) guildLineView
 							.getLayoutParams();
 					layoutParams.leftMargin = (int) (-(1 - positionOffset)
 							* (screenWidth * 1.0 / 3) + currentPageIndex
@@ -136,14 +155,14 @@ public class BlogFragment extends Fragment {
 					guildLineView.setLayoutParams(layoutParams);
 
 				} else if (currentPageIndex == 1 && position == 1) { // 1->2
-					LinearLayout.LayoutParams layoutParams = (android.widget.LinearLayout.LayoutParams) guildLineView
+					LayoutParams layoutParams = (LayoutParams) guildLineView
 							.getLayoutParams();
 					layoutParams.leftMargin = (int) (positionOffset
 							* (screenWidth * 1.0 / 3) + currentPageIndex
 							* (screenWidth / 3));
 					guildLineView.setLayoutParams(layoutParams);
 				} else if (currentPageIndex == 2 && position == 1) {// 2->1
-					LinearLayout.LayoutParams layoutParams = (android.widget.LinearLayout.LayoutParams) guildLineView
+					LinearLayout.LayoutParams layoutParams = (LayoutParams) guildLineView
 							.getLayoutParams();
 					layoutParams.leftMargin = (int) (-(1 - positionOffset)
 							* (screenWidth * 1.0 / 3) + currentPageIndex
@@ -162,10 +181,23 @@ public class BlogFragment extends Fragment {
 	}
 
 	private void resetTextView() {
-		Log.i("resetTextView", "resetTextView");
 		homeTextView.setTextColor(Color.BLACK);
 		recommendTextView.setTextColor(Color.BLACK);
 		readdingTextView.setTextColor(Color.BLACK);
 	}
 
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.linearLayoutBlogTitleHome:
+			viewPager.setCurrentItem(0);
+			break;
+		case R.id.linearLayoutBlogTitleRecommend:
+			viewPager.setCurrentItem(1);
+			break;
+		case R.id.linearLayoutBlogTitleReading:
+			viewPager.setCurrentItem(2);
+			break;
+		}
+	}
 }
