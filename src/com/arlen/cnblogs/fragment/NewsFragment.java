@@ -63,6 +63,10 @@ public class NewsFragment extends Fragment implements OnClickListener {
 	}
 
 	private void addListener() {
+		linearLayoutNewsTitleLatest.setOnClickListener(this);
+		linearLayoutNewsTitleHot.setOnClickListener(this);
+		linearLayoutNewsTitleRecommend.setOnClickListener(this);
+
 		newsPageChangeListener = new OnPageChangeListener() {
 
 			@Override
