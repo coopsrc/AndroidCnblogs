@@ -6,7 +6,7 @@ import java.util.List;
 import com.arlen.cnblogs.adapter.UserListAdapter;
 import com.arlen.cnblogs.entity.User;
 import com.arlen.cnblogs.utils.AppUtils;
-import com.arlen.cnblogs.utils.HttpUtil;
+import com.arlen.cnblogs.utils.HttpUtils;
 
 import android.os.AsyncTask;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -27,7 +27,7 @@ public class UserListTask extends AsyncTask<String, Void, Void> {
 
 	protected Void doInBackground(String... params) {
 
-		newList = HttpUtil.getUserList(params[0]);
+		newList = HttpUtils.getUserList(params[0]);
 
 		if (params[1].equals("init")) {
 			userList.addAll(newList);

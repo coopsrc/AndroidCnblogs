@@ -6,7 +6,7 @@ import java.util.List;
 import com.arlen.cnblogs.adapter.NewsListAdapter;
 import com.arlen.cnblogs.entity.News;
 import com.arlen.cnblogs.utils.AppUtils;
-import com.arlen.cnblogs.utils.HttpUtil;
+import com.arlen.cnblogs.utils.HttpUtils;
 
 import android.os.AsyncTask;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -27,7 +27,7 @@ public class NewsListTask extends AsyncTask<String, Void, Void> {
 
 	protected Void doInBackground(String... params) {
 
-		newList = HttpUtil.getNewsList(params[0]);
+		newList = HttpUtils.getNewsList(params[0]);
 
 		if (params[1].equals("init")) {
 			newsList.addAll(newList);

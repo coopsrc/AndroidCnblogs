@@ -3,14 +3,14 @@ package com.arlen.cnblogs;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import com.arlen.cnblogs.utils.AppMacros;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 
-import com.arlen.cnblogs.login.Personal;
-import com.arlen.cnblogs.utils.AppMacros;
 
 public class SplashActivity extends Activity {
 
@@ -21,9 +21,9 @@ public class SplashActivity extends Activity {
 		final View view = View.inflate(this, R.layout.activity_splash, null);
 		setContentView(view);
 
-		if (Personal.isLogin(this)) {
-			AppMacros.FLAG_LOGIN = true;
-		}
+//		if (Personal.isLogin(this)) {
+//			AppMacros.FLAG_LOGIN = true;
+//		}
 
 		final Intent intent;
 		if (AppMacros.FLAG_LOGIN) {

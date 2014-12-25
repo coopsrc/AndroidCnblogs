@@ -72,9 +72,10 @@ public class AppMacros {
 	// µÇÂ¼ ...
 	public static boolean FLAG_LOGIN = false;
 	public static boolean FLAG_VISITOR = true;
-	public static final String LOGIN_RUL = "http://passport.cnblogs.com/login.aspx";
-	public static final String INDEX_RUL = "http://www.cnblogs.com/";
-	public static final String MESSAGE_URL = "http://msg.cnblogs.com/msg/compose";
+	public static final String CNBLOGS_LOGIN = "http://passport.cnblogs.com/login.aspx";
+	public static final String CNBLOGS_INDEX = "http://www.cnblogs.com/";
+	public static final String CNBLOGS_HOME = "http://home.cnblogs.com/";
+	public static final String CNBLOGS_MESSAGE = "http://msg.cnblogs.com/msg/compose";
 
 	// Êý¾Ý¿â
 	public static final int DATABASE_VERSION = 1;

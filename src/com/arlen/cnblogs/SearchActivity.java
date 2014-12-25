@@ -22,9 +22,9 @@ import android.widget.ListView;
 
 import com.arlen.cnblogs.adapter.UserListAdapter;
 import com.arlen.cnblogs.entity.User;
-import com.arlen.cnblogs.utils.AppUtils;
 import com.arlen.cnblogs.utils.AppMacros;
-import com.arlen.cnblogs.utils.HttpUtil;
+import com.arlen.cnblogs.utils.AppUtils;
+import com.arlen.cnblogs.utils.HttpUtils;
 
 public class SearchActivity extends ListActivity {
 
@@ -66,7 +66,7 @@ public class SearchActivity extends ListActivity {
 			@Override
 			public void onClick(View v) {
 				userList = new ArrayList<User>();
-				
+
 				Runnable runnable = new Runnable() {
 
 					@Override
@@ -111,12 +111,6 @@ public class SearchActivity extends ListActivity {
 	private void showUserItem(User userEntry) {
 		intent = new Intent(this, UserActivity.class);
 		intent.putExtra("blogapp", userEntry.getBlogapp());
-		intent.putExtra("link", userEntry.getUserLink().toString());
-		intent.putExtra("avatar", userEntry.getUserAvatar().toString());
-		intent.putExtra("postcount", userEntry.getPostCount());
-		intent.putExtra("updated",
-				AppUtils.parseDateToString(userEntry.getUpdatedDate()));
-		intent.putExtra("title", userEntry.getTitle());
 		startActivity(intent);
 	}
 
@@ -133,7 +127,7 @@ public class SearchActivity extends ListActivity {
 			path = path.replace("{TERM}", authorName);
 		}
 		Log.i("SearchActivity", "path:" + path);
-		userList = HttpUtil.getUserList(path);
+		userList = HttpUtils.getUserList(path);
 	}
 
 	private void initComponent() {

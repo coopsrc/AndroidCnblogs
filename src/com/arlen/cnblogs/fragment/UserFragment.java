@@ -25,7 +25,6 @@ import com.arlen.cnblogs.adapter.UserListAdapter;
 import com.arlen.cnblogs.entity.User;
 import com.arlen.cnblogs.task.UserListTask;
 import com.arlen.cnblogs.utils.AppMacros;
-import com.arlen.cnblogs.utils.AppUtils;
 
 public class UserFragment extends Fragment implements OnItemLongClickListener,
 		OnItemClickListener, OnRefreshListener, OnScrollListener {
@@ -161,12 +160,6 @@ public class UserFragment extends Fragment implements OnItemLongClickListener,
 	private void showUserItem(User user) {
 		intent = new Intent(this.getActivity(), UserActivity.class);
 		intent.putExtra("blogapp", user.getBlogapp());
-		intent.putExtra("link", user.getUserLink().toString());
-		intent.putExtra("avatar", user.getUserAvatar().toString());
-		intent.putExtra("postcount", user.getPostCount());
-		intent.putExtra("updated",
-				AppUtils.parseDateToString(user.getUpdatedDate()));
-		intent.putExtra("title", user.getTitle());
 		startActivity(intent);
 	}
 }

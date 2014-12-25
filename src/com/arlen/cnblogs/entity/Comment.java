@@ -68,4 +68,24 @@ public class Comment {
 		this.commentContent = commentContent;
 	}
 
+	// public boolean equals(Object object) {
+	// if (object instanceof Blog) {
+	// Blog blog = (Blog) object;
+	// return String.valueOf(blog.getBlogId()).equals(
+	// String.valueOf(this.getBlogId()));
+	// } else {
+	// return super.equals(object);
+	// }
+	// }
+
+	@Override
+	public boolean equals(Object object) {
+		if (object instanceof Comment) {
+			Comment comment = (Comment) object;
+			return String.valueOf(comment.getCommentId()).equals(
+					String.valueOf(this.getCommentId()));
+		} else {
+			return super.equals(object);
+		}
+	}
 }

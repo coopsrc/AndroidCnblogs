@@ -12,8 +12,9 @@
             android:id="@+id/editTextAuthor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:lines="1"
+            android:text="若。"
             tools:ignore="TextFields,LabelFor" >
 
             <requestFocus />

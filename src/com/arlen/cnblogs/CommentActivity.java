@@ -4,38 +4,50 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.ActionBar;
-import android.app.ListActivity;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.ListView;
 
 import com.arlen.cnblogs.adapter.CommentListAdapter;
 import com.arlen.cnblogs.dialog.ItemDialog;
 import com.arlen.cnblogs.entity.Comment;
+import com.arlen.cnblogs.task.CommentListTask;
 import com.arlen.cnblogs.utils.AppMacros;
-import com.arlen.cnblogs.utils.HttpUtil;
 
-public class CommentActivity extends ListActivity implements
-		OnItemLongClickListener {
+public class CommentActivity extends Activity implements
+		OnItemLongClickListener, OnItemClickListener, OnRefreshListener,
+		OnScrollListener {
+
+	private static final String TAG = CommentActivity.class.getSimpleName();
+
+	private SwipeRefreshLayout swipeRefreshLayout;
+	private ListView listView;
+
+	private CommentListAdapter adapter;
 
 	private List<Comment> commentList;
 	private String path;
-	private int pageIndex;
+	private int pageIndex = 1;
 	private int pageSize;
+
+	private int lastVisibleIndex;
+	private int maxVisibleIndex = 400;
 
 	private String type;
 	private int id;
 	private Intent intent;
-
-	private CommentListAdapter adapter;
-	private static Handler handler = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,42 +56,9 @@ public class CommentActivity extends ListActivity implements
 
 		ActionBar actionBar = getActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
-
+		initComponent();
 		receiveData();
-
-		commentList = new ArrayList<Comment>();
-		Runnable runnable = new Runnable() {
-
-			@Override
-			public void run() {
-				try {
-					Thread.sleep(2 * 1000);
-					initData();
-					handler.sendMessage(handler.obtainMessage(0, commentList));
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-		};
-
-		try {
-			new Thread(runnable).start();
-			handler = new Handler() {
-
-				@SuppressWarnings("unchecked")
-				@Override
-				public void handleMessage(Message msg) {
-					super.handleMessage(msg);
-					if (msg.what == 0) {
-						ArrayList<Comment> comments = (ArrayList<Comment>) msg.obj;
-						BindListData(comments);
-					}
-				}
-			};
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
+		initData();
 	}
 
 	private void receiveData() {
@@ -105,32 +84,53 @@ public class CommentActivity extends ListActivity implements
 		return super.onOptionsItemSelected(item);
 	}
 
-	private void initData() {
-		commentList.clear();
+	private void initComponent() {
+		swipeRefreshLayout = (SwipeRefreshLayout) this
+				.findViewById(R.id.swipeRefreshLayoutComment);
+		swipeRefreshLayout.setOnRefreshListener(this);
+		swipeRefreshLayout.setColorSchemeResources(
+				android.R.color.holo_blue_bright,
+				android.R.color.holo_green_light,
+				android.R.color.holo_orange_light,
+				android.R.color.holo_red_light);
 
+		listView = (ListView) this.findViewById(R.id.listViewComment);
+		listView.setOnItemClickListener(this);
+		listView.setOnItemLongClickListener(this);
+		listView.setOnScrollListener(this);
+	}
+
+	private void initData() {
+		commentList = new ArrayList<Comment>();
+		adapter = new CommentListAdapter(this, commentList);
+		listView.setAdapter(adapter);
+
+		initPath(1);
+		new CommentListTask(commentList, swipeRefreshLayout, adapter).execute(
+				path, "init");
+		swipeRefreshLayout.setRefreshing(true);
+	}
+
+	private void initPath(int pageIndex) {
 		if (type.equals("blog")) {
 			path = AppMacros.BLOGS_COMMENTS;
 			path = path.replace("{POSTID}", "" + id);
 		} else if (type.equals("news")) {
 			path = AppMacros.NEWS_COMMENTS;
 			path = path.replace("{CONTENTID}", "" + id);
-		} else {
-			;
 		}
-		pageIndex = 1;
+
 		pageSize = AppMacros.COMMENT_PAGE_SIZE;
 		path = path.replace("{PAGEINDEX}", "" + pageIndex);
 		path = path.replace("{PAGESIZE}", "" + pageSize);
-		Log.i("HomeFragment", "首页博客列表地址：" + path);
-		Log.i("HomeFragment", "获取首页博客列表  --->  开始");
-		commentList = HttpUtil.getCommentList(path);
-		Log.i("HomeFragment", "获取首页博客列表  --->  完成");
+
+		Log.i(TAG, "pageIndex：" + pageIndex);
 	}
 
-	private void BindListData(List<Comment> comments) {
-		adapter = new CommentListAdapter(this, comments);
-		this.setListAdapter(adapter);
-		this.getListView().setOnItemLongClickListener(this);
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position,
+			long id) {
+
 	}
 
 	@Override
@@ -144,5 +144,37 @@ public class CommentActivity extends ListActivity implements
 		dialog.show();
 
 		return true;
+	}
+
+	@Override
+	public void onScrollStateChanged(AbsListView view, int scrollState) {
+		if (adapter.getCount() < maxVisibleIndex) {
+			if (scrollState == OnScrollListener.SCROLL_STATE_IDLE
+					&& lastVisibleIndex == adapter.getCount() - 1) {
+
+				pageIndex++;
+				initPath(pageIndex);
+				swipeRefreshLayout.setRefreshing(true);
+				new CommentListTask(commentList, swipeRefreshLayout, adapter)
+						.execute(path, "loadMore");
+			}
+		} else {
+			// Toast.makeText(getActivity(), "最后一页!",
+			// Toast.LENGTH_SHORT).show();
+		}
+	}
+
+	@Override
+	public void onScroll(AbsListView view, int firstVisibleItem,
+			int visibleItemCount, int totalItemCount) {
+		lastVisibleIndex = firstVisibleItem + visibleItemCount - 1;
+	}
+
+	@Override
+	public void onRefresh() {
+		initPath(1);
+		new CommentListTask(commentList, swipeRefreshLayout, adapter).execute(
+				path, "refresh");
+
 	}
 }

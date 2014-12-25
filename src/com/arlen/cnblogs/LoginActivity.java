@@ -3,6 +3,11 @@ package com.arlen.cnblogs;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
+import com.arlen.cnblogs.dialog.LoginDialog;
+import com.arlen.cnblogs.dialog.LoginDialog.ProgressCallBack;
+import com.arlen.cnblogs.utils.AppMacros;
+import com.arlen.cnblogs.utils.UserUtils;
+
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
@@ -15,12 +20,6 @@ import android.view.ViewConfiguration;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
-
-import com.arlen.cnblogs.dialog.LoginDialog;
-import com.arlen.cnblogs.dialog.LoginDialog.ProgressCallBack;
-import com.arlen.cnblogs.login.Personal;
-import com.arlen.cnblogs.utils.AppMacros;
-import com.arlen.cnblogs.utils.DBUtils;
 
 public class LoginActivity extends Activity {
 
@@ -58,7 +57,7 @@ public class LoginActivity extends Activity {
 				if (v.getId() == buttonLogin.getId()) {
 					userName = editTextUserName.getText().toString();
 					password = editTextPassword.getText().toString();
-					loginUrl = AppMacros.LOGIN_RUL;
+					loginUrl = AppMacros.CNBLOGS_LOGIN;
 					if (userName.trim().equals("")) {
 
 					} else if (userName.trim().equals("")) {
@@ -86,14 +85,11 @@ public class LoginActivity extends Activity {
 
 			@Override
 			public void action() {
-				cookie = Personal.Login(userName, password, loginUrl);
-				if (cookie != null) {
-					DBUtils.addCookie(LoginActivity.this, userName, cookie);
-					Intent intent = new Intent(LoginActivity.this,
-							MainActivity.class);
-					startActivity(intent);
-					LoginActivity.this.finish();
-					AppMacros.FLAG_LOGIN = true;
+				try {
+
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 			}
 		};

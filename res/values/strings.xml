@@ -40,9 +40,10 @@
     <string name="text_news_title_recommend">推荐</string>
     <string name="text_author">作者：</string>
     <string name="text_pub_time">发布时间：</string>
-
     <string name="text_button_search">搜索博主</string>
     <string name="text_button_login">登录</string>
     <string name="text_button_visitor">游客</string>
+    <string name="text_username">用户名</string>
+    <string name="text_password">密码</string>
 
 </resources>

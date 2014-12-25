@@ -5,6 +5,7 @@ import java.util.Map;
 import com.arlen.cnblogs.dao.BlogDao;
 import com.arlen.cnblogs.dao.DbOpenHelper;
 import com.arlen.cnblogs.utils.AppMacros;
+import com.arlen.cnblogs.utils.UserUtils;
 
 import android.test.AndroidTestCase;
 import android.util.Log;
@@ -50,5 +51,16 @@ public class CnblogsTest extends AndroidTestCase {
 	
 	public void testList(){
 		
+	}
+	
+	public void testLogin(){
+		
+		String userName = "1757887521@qq.com";
+		String password = "zhang1757887521.";
+		try {
+			UserUtils.Login(userName, password);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

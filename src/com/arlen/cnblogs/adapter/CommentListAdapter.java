@@ -1,5 +1,6 @@
 package com.arlen.cnblogs.adapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.annotation.SuppressLint;
@@ -84,5 +85,13 @@ public class CommentListAdapter extends BaseAdapter {
 		private TextView published;
 		private TextView authorName;
 		private TextView content;
+	}
+
+	public void updataBlogList(List<Comment> newList) {
+		List<Comment> listTemp = new ArrayList<Comment>();
+		listTemp.addAll(newList);
+		commentList.clear();
+		commentList.addAll(listTemp);
+
 	}
 }

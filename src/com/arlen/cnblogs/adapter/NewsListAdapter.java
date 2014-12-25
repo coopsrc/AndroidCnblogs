@@ -138,7 +138,7 @@ public class NewsListAdapter extends BaseAdapter {
 		private TextView newsgViews;
 		private TextView newsDiggs;
 	}
-	
+
 	public void updataNewsList(List<News> newList) {
 		List<News> listTemp = new ArrayList<News>();
 		listTemp.addAll(newList);

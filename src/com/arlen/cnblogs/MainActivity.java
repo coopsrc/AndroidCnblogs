@@ -80,7 +80,7 @@ public class MainActivity extends FragmentActivity {
 			selectItem(0);
 		}
 
-		//Create Database
+		// Create Database
 		DBUtils.createDB(this);
 	}
 

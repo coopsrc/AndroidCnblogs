@@ -21,7 +21,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.arlen.cnblogs.utils.AppMacros;
-import com.arlen.cnblogs.utils.HttpUtil;
+import com.arlen.cnblogs.utils.HttpUtils;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
@@ -127,7 +127,7 @@ public class BlogActivity extends Activity {
 			public void run() {
 				try {
 					Thread.sleep(2 * 1000);
-					blogContent = HttpUtil.getBlogContent(path);
+					blogContent = HttpUtils.getBlogContent(path);
 					handler.sendMessage(handler.obtainMessage(0, blogContent));
 				} catch (InterruptedException e) {
 					e.printStackTrace();

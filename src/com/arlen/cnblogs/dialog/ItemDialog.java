@@ -26,7 +26,7 @@ import com.arlen.cnblogs.entity.News;
 import com.arlen.cnblogs.entity.User;
 import com.arlen.cnblogs.utils.AppUtils;
 import com.arlen.cnblogs.utils.AppMacros;
-import com.arlen.cnblogs.utils.HttpUtil;
+import com.arlen.cnblogs.utils.HttpUtils;
 
 public class ItemDialog extends Dialog implements OnItemClickListener {
 
@@ -164,7 +164,7 @@ public class ItemDialog extends Dialog implements OnItemClickListener {
 				path = path.replace("{TERM}", authorName);
 
 				Log.i("SearchActivity", "path:" + path);
-				List<User> userList = HttpUtil.getUserList(path);
+				List<User> userList = HttpUtils.getUserList(path);
 				User userEntry = userList.get(0);
 
 				Intent intent = new Intent(context, UserActivity.class);
