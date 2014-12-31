@@ -84,6 +84,8 @@ public class LoginActivity extends Activity {
 							MainActivity.class);
 					startActivity(intent);
 					LoginActivity.this.finish();
+				} else if (v.getId() == imageViewCode.getId()) {
+					initData();
 				}
 
 			}
@@ -91,6 +93,8 @@ public class LoginActivity extends Activity {
 
 		buttonLogin.setOnClickListener(listener);
 		buttonVisitor.setOnClickListener(listener);
+		imageViewCode.setOnClickListener(listener);
+		;
 	}
 
 	private void initComponent() {
@@ -200,8 +204,6 @@ public class LoginActivity extends Activity {
 						isLogin = LoginUtils.login(userName, password, map);
 					} else {
 						System.out.println("*** 需要 验证码*****");
-						// HttpUtils.getBotDetectCaptcha(map
-						// .get("LBD_VCID_c_login_logincaptcha"));
 						isLogin = LoginUtils.login(userName, password, code,
 								map);
 					}
