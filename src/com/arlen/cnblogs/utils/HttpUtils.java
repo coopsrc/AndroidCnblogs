@@ -14,6 +14,8 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import com.arlen.cnblogs.entity.Blog;
@@ -37,9 +39,9 @@ public class HttpUtils {
 	 * @param path
 	 * @return InputStream
 	 */
-	public static InputStream getXmlStream(String path) {
+	public static InputStream getStream(String path) {
 		InputStream inputStream = null;
-		Log.i(TAG, "获取XML InputStream " + path);
+		Log.i(TAG, "获取 InputStream " + path);
 		try {
 			URL url = new URL(path);
 			HttpURLConnection connection = (HttpURLConnection) url
@@ -51,17 +53,17 @@ public class HttpUtils {
 			connection.setDoInput(true);
 			connection.connect();
 			int code = connection.getResponseCode();
-			Log.d(TAG, "获取XML InputStream ResponseCode " + code);
+			Log.d(TAG, "获取 InputStream ResponseCode " + code);
 			if (code == HttpURLConnection.HTTP_OK) {
 				inputStream = connection.getInputStream();
 			}
 
 			if (inputStream != null) {
-				Log.i(TAG, "获取XML InputStream 成功");
+				Log.i(TAG, "获取 InputStream 成功");
 			}
 
 		} catch (Exception e) {
-			Log.e(TAG, "获取XML InputStream 失败");
+			Log.e(TAG, "获取 InputStream 失败");
 			e.printStackTrace();
 		}
 		return inputStream;
@@ -81,7 +83,7 @@ public class HttpUtils {
 			XMLReader reader = parser.getXMLReader();
 			BlogListHandler handler = new BlogListHandler();
 			reader.setContentHandler(handler);
-			InputStream inputStream = getXmlStream(path);
+			InputStream inputStream = getStream(path);
 			InputSource inputSource = new InputSource(inputStream);
 			reader.parse(inputSource);
 			Log.i(TAG, "获取博客列表 XML 完成");
@@ -111,7 +113,7 @@ public class HttpUtils {
 			XMLReader reader = parser.getXMLReader();
 			BlogItemHandler handler = new BlogItemHandler();
 			reader.setContentHandler(handler);
-			InputStream inputStream = getXmlStream(path);
+			InputStream inputStream = getStream(path);
 			InputSource inputSource = new InputSource(inputStream);
 			reader.parse(inputSource);
 			Log.i(TAG, "获取博客 内容  完成");
@@ -140,7 +142,7 @@ public class HttpUtils {
 			XMLReader reader = parser.getXMLReader();
 			UserListHandler handler = new UserListHandler();
 			reader.setContentHandler(handler);
-			InputStream inputStream = getXmlStream(path);
+			InputStream inputStream = getStream(path);
 			InputSource inputSource = new InputSource(inputStream);
 			reader.parse(inputSource);
 			Log.i(TAG, "获取博客列表 XML 完成");
@@ -169,7 +171,7 @@ public class HttpUtils {
 			XMLReader reader = parser.getXMLReader();
 			NewsListHandler handler = new NewsListHandler();
 			reader.setContentHandler(handler);
-			InputStream inputStream = getXmlStream(path);
+			InputStream inputStream = getStream(path);
 			InputSource inputSource = new InputSource(inputStream);
 			reader.parse(inputSource);
 			Log.i(TAG, "获取新闻列表 XML 完成");
@@ -199,7 +201,7 @@ public class HttpUtils {
 			XMLReader reader = parser.getXMLReader();
 			NewsItemHandler handler = new NewsItemHandler();
 			reader.setContentHandler(handler);
-			InputStream inputStream = getXmlStream(path);
+			InputStream inputStream = getStream(path);
 			InputSource inputSource = new InputSource(inputStream);
 			reader.parse(inputSource);
 			Log.i(TAG, "获取新闻内容 完成");
@@ -228,7 +230,7 @@ public class HttpUtils {
 			XMLReader reader = parser.getXMLReader();
 			CommentListHandler handler = new CommentListHandler();
 			reader.setContentHandler(handler);
-			InputStream inputStream = getXmlStream(path);
+			InputStream inputStream = getStream(path);
 			InputSource inputSource = new InputSource(inputStream);
 			reader.parse(inputSource);
 			Log.i(TAG, "获取评论列表 XML 完成");
@@ -242,8 +244,22 @@ public class HttpUtils {
 		}
 		return null;
 	}
-	
-	
-	
-	
+
+	/**
+	 * 获取登陆验证码
+	 * 
+	 * @param vcid
+	 * @return bitmap
+	 */
+	public static Bitmap getBotDetectCaptcha(String vcid) {
+		Bitmap bitmap = null;
+		String path = AppMacros.BotDetectCaptcha + vcid;
+		InputStream inputStream = getStream(path);
+		bitmap = BitmapFactory.decodeStream(inputStream);
+		
+		AppUtils.SaveBitmap2File(bitmap, "BotDetectCaptcha.jpg");
+		
+		return bitmap;
+	}
+
 }

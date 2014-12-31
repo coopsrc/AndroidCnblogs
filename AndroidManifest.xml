@@ -77,6 +77,10 @@
             android:name=".SearchActivity"
             android:label="@string/title_activity_search" >
         </activity>
+        <activity
+            android:name=".UserCenterActivity"
+            android:label="@string/title_activity_user_center" >
+        </activity>
     </application>
 
 </manifest>

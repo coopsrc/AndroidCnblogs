@@ -124,7 +124,7 @@ public class BlogListAdapter extends BaseAdapter {
 		private TextView blogViews;
 		private TextView blogDiggs;
 	}
-	
+
 	public void updataBlogList(List<Blog> newList) {
 		List<Blog> listTemp = new ArrayList<Blog>();
 		listTemp.addAll(newList);

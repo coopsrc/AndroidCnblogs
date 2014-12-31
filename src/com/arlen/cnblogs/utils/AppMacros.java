@@ -17,8 +17,8 @@ public class AppMacros {
 
 	// 临时图片文件
 	public static final String TEMP_IMAGES_LOCATION = "ArlenCnblogs/images/";
-	
-	//分页大小(新闻、博客、用户、评论)
+
+	// 分页大小(新闻、博客、用户、评论)
 	public static final int PAGE_SIZE = 10;
 
 	// 博客
@@ -65,7 +65,7 @@ public class AppMacros {
 
 	// 推荐博主
 	public static final int USER_PAGE_SIZE = 20;
-	
+
 	// 评论
 	public static final int COMMENT_PAGE_SIZE = 10;
 
@@ -76,6 +76,7 @@ public class AppMacros {
 	public static final String CNBLOGS_INDEX = "http://www.cnblogs.com/";
 	public static final String CNBLOGS_HOME = "http://home.cnblogs.com/";
 	public static final String CNBLOGS_MESSAGE = "http://msg.cnblogs.com/msg/compose";
+	public static final String BotDetectCaptcha = "http://passport.cnblogs.com/BotDetectCaptcha.ashx?get=image&c=c_login_logincaptcha&t=";
 
 	// 数据库
 	public static final int DATABASE_VERSION = 1;

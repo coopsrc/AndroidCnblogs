@@ -2,13 +2,15 @@ package com.arlen.cnblogs.test;
 
 import java.util.Map;
 
+import android.test.AndroidTestCase;
+import android.util.Log;
+
 import com.arlen.cnblogs.dao.BlogDao;
 import com.arlen.cnblogs.dao.DbOpenHelper;
 import com.arlen.cnblogs.utils.AppMacros;
-import com.arlen.cnblogs.utils.UserUtils;
-
-import android.test.AndroidTestCase;
-import android.util.Log;
+import com.arlen.cnblogs.utils.HtmlUtils;
+import com.arlen.cnblogs.utils.HttpUtils;
+import com.arlen.cnblogs.utils.LoginUtils;
 
 public class CnblogsTest extends AndroidTestCase {
 
@@ -41,26 +43,39 @@ public class CnblogsTest extends AndroidTestCase {
 				"blog", "blog", "blog", "blog", 99, 99, 99, 3333 };
 		blogDao.updateData(params);
 	}
-	
-	public void viewData(){
+
+	public void viewData() {
 		BlogDao blogDao = new BlogDao(getContext());
-		String[] selectionArgs = {"3333"};
+		String[] selectionArgs = { "3333" };
 		Map<String, String> map = blogDao.viewData(selectionArgs);
 		Log.i("viewData", "map --> " + map.get("blogId") + "===" + map.size());
 	}
-	
-	public void testList(){
+
+	public void loginTest() throws Exception {
+		Map<String, String> map = HtmlUtils.getNameParam();
+		String userName = "";
+		String password = "";
 		
+		String vcid = map.get("LBD_VCID_c_login_logincaptcha");
+
+		if (vcid == null) {
+			System.out.println("*** 不 需要  验证码*****");
+			LoginUtils.login(userName, password, map);
+		} else {
+			System.out.println("*** 需要 验证码*****");
+			String code = "123abC";
+			HttpUtils.getBotDetectCaptcha(map.get("LBD_VCID_c_login_logincaptcha"));
+//			LoginUtils.login(userName, password, code, map);
+		}
+
 	}
-	
-	public void testLogin(){
-		
-		String userName = "1757887521@qq.com";
-		String password = "zhang1757887521.";
+
+	public void getNamrParamTest() {
 		try {
-			UserUtils.Login(userName, password);
+			HtmlUtils.getNameParam();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+
 }

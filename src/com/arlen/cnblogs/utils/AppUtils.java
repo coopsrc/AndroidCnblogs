@@ -1,12 +1,26 @@
 package com.arlen.cnblogs.utils;
 
+import java.io.BufferedReader;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
 import android.annotation.SuppressLint;
+import android.graphics.Bitmap;
+import android.graphics.Bitmap.CompressFormat;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.util.Log;
 
 public class AppUtils {
@@ -107,6 +121,11 @@ public class AppUtils {
 		return parseDateToString(datetime);
 	}
 
+	/**
+	 * 取出博客、新闻、评论列表的重复内容
+	 * 
+	 * @param list
+	 */
 	public static <T> void removeDuplicate(List<T> list) {
 		for (int i = 0; i < list.size(); i++) {
 			for (int j = i + 1; j < list.size(); j++) {
@@ -116,4 +135,67 @@ public class AppUtils {
 			}
 		}
 	}
+
+	/**
+	 * 转换为圆角矩形
+	 * 
+	 * @param bitmap
+	 * @param corner
+	 * @return
+	 */
+	public static Bitmap roundCorner(Bitmap bitmap, int corner) {
+		Bitmap bitmapTemp = Bitmap.createBitmap(bitmap.getWidth(),
+				bitmap.getHeight(), Bitmap.Config.ARGB_8888);
+		Canvas canvas = new Canvas(bitmapTemp);
+		Paint paint = new Paint();
+		Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
+		RectF rectF = new RectF(rect);
+		float f = corner;
+		paint.setAntiAlias(true);
+		canvas.drawARGB(0, 0, 0, 0);
+		paint.setColor(-12434878);
+		canvas.drawRoundRect(rectF, f, f, paint);
+		paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+		canvas.drawBitmap(bitmap, rect, rect, paint);
+		return bitmapTemp;
+	}
+
+	public static String InputStream2String(InputStream inputStream) {
+		InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+		BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+		StringBuilder stringBuilder = new StringBuilder();
+		String line = null;
+
+		try {
+			while ((line = bufferedReader.readLine()) != null) {
+				stringBuilder.append(line);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				inputStream.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		return stringBuilder.toString();
+	}
+
+	public static void SaveBitmap2File(Bitmap bitmap, String fileName) {
+		CompressFormat format = Bitmap.CompressFormat.JPEG;
+		int quality = 100;
+		OutputStream outputStream = null;
+
+		try {
+			outputStream = new FileOutputStream("/sdcard/" + fileName);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		bitmap.compress(format, quality, outputStream);
+
+	}
+
 }

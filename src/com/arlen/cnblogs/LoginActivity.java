@@ -3,14 +3,11 @@ package com.arlen.cnblogs;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
-import com.arlen.cnblogs.dialog.LoginDialog;
-import com.arlen.cnblogs.dialog.LoginDialog.ProgressCallBack;
-import com.arlen.cnblogs.utils.AppMacros;
-import com.arlen.cnblogs.utils.UserUtils;
-
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,7 +27,6 @@ public class LoginActivity extends Activity {
 
 	private String userName;
 	private String password;
-	private String loginUrl;
 
 	private String cookie;
 
@@ -55,16 +51,7 @@ public class LoginActivity extends Activity {
 			public void onClick(View v) {
 
 				if (v.getId() == buttonLogin.getId()) {
-					userName = editTextUserName.getText().toString();
-					password = editTextPassword.getText().toString();
-					loginUrl = AppMacros.CNBLOGS_LOGIN;
-					if (userName.trim().equals("")) {
-
-					} else if (userName.trim().equals("")) {
-
-					} else {
-						login();
-					}
+					login();
 				} else if (v.getId() == buttonVisitor.getId()) {
 					Intent intent = new Intent(LoginActivity.this,
 							MainActivity.class);
@@ -78,24 +65,9 @@ public class LoginActivity extends Activity {
 		buttonLogin.setOnClickListener(listener);
 		buttonVisitor.setOnClickListener(listener);
 	}
-
-	private void login() {
-		LoginDialog dialog = new LoginDialog(this);
-		ProgressCallBack callBack = new ProgressCallBack() {
-
-			@Override
-			public void action() {
-				try {
-
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		};
-
-		dialog.showProgressDialog("µÇÂ¼", "ÕýÔÚµÇÂ¼ ...", callBack);
-
+	
+	private void login(){
+		
 	}
 
 	private void initComponent() {
@@ -103,6 +75,12 @@ public class LoginActivity extends Activity {
 		editTextPassword = (EditText) findViewById(R.id.editTextPassword);
 		buttonLogin = (Button) findViewById(R.id.buttonLogin);
 		buttonVisitor = (Button) findViewById(R.id.buttonVisitor);
+
+		// get login info from sharedPreferences
+		SharedPreferences sharedPreferences = this.getSharedPreferences(
+				"userinfo", Context.MODE_PRIVATE);
+		editTextUserName.setText(sharedPreferences.getString("userName", ""));
+		editTextPassword.setText(sharedPreferences.getString("password", ""));
 	}
 
 	private void setOverflowShowAlways() {
