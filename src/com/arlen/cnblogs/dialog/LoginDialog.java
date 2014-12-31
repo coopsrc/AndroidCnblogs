@@ -7,28 +7,28 @@ import android.os.Message;
 
 public class LoginDialog {
 	//
-	private Context mContext;
+	private Context context;
 	// 等带对话框的标题
-	private String mTitle;
+	private String title;
 	// 等待内容
-	private String mMessage;
+	private String message;
 	// show
 	private final int SHOW = 1;
 	// dismiss
 	private final int DISMISS = 0;
+	// 进度对话框
+	private ProgressDialog progressDialog = null;
 
-	public LoginDialog(Context mContext) {
-		this.mContext = mContext;
+	public LoginDialog(Context context) {
+		this.context = context;
 	}
 
-	// 控制进度对话框的显示与消失
 	private Handler handler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
 			case SHOW:
-				progressDialog = ProgressDialog
-						.show(mContext, mTitle, mMessage);
+				progressDialog = ProgressDialog.show(context, title, message);
 				break;
 			case DISMISS:
 				progressDialog.dismiss();
@@ -36,23 +36,11 @@ public class LoginDialog {
 			}
 		}
 	};
-	// 进度对话框
-	private ProgressDialog progressDialog = null;
 
-	/**
-	 * 启用进度对话框
-	 * 
-	 * @param title
-	 *            进度框的标题
-	 * @param message
-	 *            进度框显示的内容
-	 * @param callBack
-	 *            回调的执行方法
-	 */
 	public void showProgressDialog(String title, String message,
 			final ProgressCallBack callBack) {
-		this.mTitle = title;
-		this.mMessage = message;
+		this.title = title;
+		this.message = message;
 		handler.sendEmptyMessage(SHOW);// 弹出对话框
 		new Thread() {
 			public void run() {
@@ -62,7 +50,6 @@ public class LoginDialog {
 		}.start();
 	}
 
-	// 要在进度对话框显示时执行的操作
 	public interface ProgressCallBack {
 		public void action();
 	}

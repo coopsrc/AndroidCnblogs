@@ -45,6 +45,7 @@
     <string name="text_button_visitor">游客</string>
     <string name="text_username">用户名</string>
     <string name="text_password">密码</string>
+    <string name="text_logincode">验证码</string>
     <string name="title_activity_user_center">UserCenterActivity</string>
 
 </resources>

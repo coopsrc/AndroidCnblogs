@@ -248,12 +248,11 @@ public class HttpUtils {
 	/**
 	 * 获取登陆验证码
 	 * 
-	 * @param vcid
+	 * @param path
 	 * @return bitmap
 	 */
-	public static Bitmap getBotDetectCaptcha(String vcid) {
+	public static Bitmap getBitmap(String path) {
 		Bitmap bitmap = null;
-		String path = AppMacros.BotDetectCaptcha + vcid;
 		InputStream inputStream = getStream(path);
 		bitmap = BitmapFactory.decodeStream(inputStream);
 		

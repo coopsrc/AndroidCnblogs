@@ -30,6 +30,27 @@
         android:lines="1"
         tools:ignore="LabelFor" />
 
+    <EditText
+        android:id="@+id/editTextLoginCode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="40dp"
+        android:layout_marginStart="40dp"
+        android:hint="@string/text_logincode"
+        android:inputType="textPassword"
+        android:lines="1"
+        android:visibility="gone"
+        tools:ignore="LabelFor" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="40dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal" >
+    </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -59,13 +80,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
-        <ProgressBar
-            android:id="@+id/progressBarLogin"
-            style="?android:attr/progressBarStyleLarge"
+        <ImageView
+            android:id="@+id/imageViewLoginCode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true" />
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/title_activity_login"
+            android:src="@drawable/bg_guild_line"
+            android:visibility="gone" />
     </RelativeLayout>
 
 </LinearLayout>

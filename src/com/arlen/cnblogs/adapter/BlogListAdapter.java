@@ -18,22 +18,18 @@ import android.widget.TextView;
 
 import com.arlen.cnblogs.R;
 import com.arlen.cnblogs.entity.Blog;
+import com.arlen.cnblogs.task.ImageLoadTask;
 import com.arlen.cnblogs.utils.AppUtils;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 public class BlogListAdapter extends BaseAdapter {
 
 	private Context context;
 	private List<Blog> blogList;
-	private ImageLoader imageLoader = ImageLoader.getInstance();
 
 	public BlogListAdapter(Context context, List<Blog> blogList) {
 		super();
 		this.context = context;
 		this.blogList = blogList;
-
-		imageLoader.init(ImageLoaderConfiguration.createDefault(context));
 
 		Log.i("HomeListAdapter", "HomeListAdapter 初始化完成");
 	}
@@ -94,7 +90,7 @@ public class BlogListAdapter extends BaseAdapter {
 		layoutParams.topMargin = 5;
 		cache.authorAvatar.setLayoutParams(layoutParams);
 		if (url != null) {
-			imageLoader.displayImage(url.toString(), cache.authorAvatar);
+			new ImageLoadTask(cache.authorAvatar).execute(url.toString(),"avatar");
 		}
 		cache.blogSummary.setText(blog.getBlogSummary());
 

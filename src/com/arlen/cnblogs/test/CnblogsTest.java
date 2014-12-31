@@ -53,8 +53,8 @@ public class CnblogsTest extends AndroidTestCase {
 
 	public void loginTest() throws Exception {
 		Map<String, String> map = HtmlUtils.getNameParam();
-		String userName = "";
-		String password = "";
+		String userName = "1757887521@qq.com";
+		String password = "zhang1757887521.";
 		
 		String vcid = map.get("LBD_VCID_c_login_logincaptcha");
 
@@ -64,7 +64,7 @@ public class CnblogsTest extends AndroidTestCase {
 		} else {
 			System.out.println("*** 需要 验证码*****");
 			String code = "123abC";
-			HttpUtils.getBotDetectCaptcha(map.get("LBD_VCID_c_login_logincaptcha"));
+			HttpUtils.getBitmap(map.get("LBD_VCID_c_login_logincaptcha"));
 //			LoginUtils.login(userName, password, code, map);
 		}
 
