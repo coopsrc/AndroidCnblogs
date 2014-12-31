@@ -3,11 +3,12 @@ package com.arlen.cnblogs.adapter;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
 import com.arlen.cnblogs.R;
 import com.arlen.cnblogs.entity.User;
+import com.arlen.cnblogs.task.ImageLoadTask;
 import com.arlen.cnblogs.utils.AppUtils;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -21,13 +22,11 @@ import android.widget.TextView;
 public class UserListAdapter extends BaseAdapter {
 	private Context context;
 	private List<User> userList;
-	private ImageLoader imageLoader = ImageLoader.getInstance();
 
 	public UserListAdapter(Context context, List<User> userList) {
 		super();
 		this.context = context;
 		this.userList = userList;
-		imageLoader.init(ImageLoaderConfiguration.createDefault(context));
 	}
 
 	@Override
@@ -74,7 +73,8 @@ public class UserListAdapter extends BaseAdapter {
 		layoutParams.bottomMargin = 5;
 		cache.imageViewUser.setLayoutParams(layoutParams);
 		if (url != null) {
-			imageLoader.displayImage(url.toString(), cache.imageViewUser);
+			new ImageLoadTask(cache.imageViewUser).execute(url.toString(),
+					"avatar");
 		}
 
 		cache.textViewUser.setText(user.getTitle());

@@ -94,7 +94,7 @@ public class UserActivity extends Activity implements OnItemClickListener,
 		swipeRefreshLayout.setRefreshing(true);
 		new BlogListTask(blogList, swipeRefreshLayout, adapter).execute(path,
 				"init");
-		Log.e(TAG, " init "+blogList.size());
+		Log.e(TAG, " init " + blogList.size());
 	}
 
 	public void initPath(int pageIndex) {
@@ -197,7 +197,7 @@ public class UserActivity extends Activity implements OnItemClickListener,
 				swipeRefreshLayout.setRefreshing(true);
 				new BlogListTask(blogList, swipeRefreshLayout, adapter)
 						.execute(path, "loadMore");
-				Log.e(TAG, " loadMore "+blogList.size());
+				Log.e(TAG, " loadMore " + blogList.size());
 			}
 		} else {
 			// Toast.makeText(getActivity(), "×îºóÒ»Ò³!",
@@ -217,6 +217,6 @@ public class UserActivity extends Activity implements OnItemClickListener,
 		initPath(1);
 		new BlogListTask(blogList, swipeRefreshLayout, adapter).execute(path,
 				"refresh");
-		Log.e(TAG, " refresh "+blogList.size());
+		Log.e(TAG, " refresh " + blogList.size());
 	}
 }

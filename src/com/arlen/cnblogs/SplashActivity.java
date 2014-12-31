@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 
-
 public class SplashActivity extends Activity {
 
 	@Override
@@ -21,9 +20,9 @@ public class SplashActivity extends Activity {
 		final View view = View.inflate(this, R.layout.activity_splash, null);
 		setContentView(view);
 
-//		if (Personal.isLogin(this)) {
-//			AppMacros.FLAG_LOGIN = true;
-//		}
+		// if (Personal.isLogin(this)) {
+		// AppMacros.FLAG_LOGIN = true;
+		// }
 
 		final Intent intent;
 		if (AppMacros.FLAG_LOGIN) {

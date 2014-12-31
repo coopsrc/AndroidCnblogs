@@ -17,22 +17,18 @@ import android.widget.TextView;
 
 import com.arlen.cnblogs.R;
 import com.arlen.cnblogs.entity.News;
+import com.arlen.cnblogs.task.ImageLoadTask;
 import com.arlen.cnblogs.utils.AppUtils;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 public class NewsListAdapter extends BaseAdapter {
 
 	private Context context;
 	private List<News> newsList;
-	private ImageLoader imageLoader = ImageLoader.getInstance();
 
 	public NewsListAdapter(Context context, List<News> blogList) {
 		super();
 		this.context = context;
 		this.newsList = blogList;
-
-		imageLoader.init(ImageLoaderConfiguration.createDefault(context));
 
 		Log.i("NewsListAdapter", "HomeListAdapter 初始化完成");
 	}
@@ -95,7 +91,8 @@ public class NewsListAdapter extends BaseAdapter {
 		layoutParams.topMargin = 5;
 		cache.topicIcon.setLayoutParams(layoutParams);
 		if (url != null) {
-			imageLoader.displayImage(url.toString(), cache.topicIcon);
+			new ImageLoadTask(cache.topicIcon).execute(url.toString(),
+					"topicIcon");
 		}
 
 		cache.newsSummary.setText(news.getNewsSummary());

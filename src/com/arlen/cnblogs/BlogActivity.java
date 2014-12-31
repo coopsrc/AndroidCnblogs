@@ -20,10 +20,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.arlen.cnblogs.task.ImageLoadTask;
 import com.arlen.cnblogs.utils.AppMacros;
 import com.arlen.cnblogs.utils.HttpUtils;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 public class BlogActivity extends Activity {
 
@@ -42,8 +41,6 @@ public class BlogActivity extends Activity {
 
 	private String path;
 	private Handler handler = null;
-
-	private ImageLoader imageLoader = ImageLoader.getInstance();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -106,15 +103,12 @@ public class BlogActivity extends Activity {
 		publishedDate = intent.getStringExtra("published");
 		blogId = intent.getIntExtra("id", 0);
 
-		imageLoader.init(ImageLoaderConfiguration.createDefault(this
-				.getApplicationContext()));
-
 		path = AppMacros.BLOGS_CONTENTS;
 		path = path.replace("{POSTID}", "" + blogId);
 	}
 
 	private void addData() {
-		imageLoader.displayImage(authorAvatar, imageViewBlogAvatar);
+		new ImageLoadTask(imageViewBlogAvatar).execute(authorAvatar, "avatar");
 		textViewBlogTitle.setText(blogTitle);
 		textViewBlogComments.setText("作者：" + authorName + "\r\n发布时间："
 				+ publishedDate);

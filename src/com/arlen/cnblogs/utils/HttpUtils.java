@@ -255,9 +255,6 @@ public class HttpUtils {
 		Bitmap bitmap = null;
 		InputStream inputStream = getStream(path);
 		bitmap = BitmapFactory.decodeStream(inputStream);
-		
-		AppUtils.SaveBitmap2File(bitmap, "BotDetectCaptcha.jpg");
-		
 		return bitmap;
 	}
 

@@ -90,7 +90,8 @@ public class BlogListAdapter extends BaseAdapter {
 		layoutParams.topMargin = 5;
 		cache.authorAvatar.setLayoutParams(layoutParams);
 		if (url != null) {
-			new ImageLoadTask(cache.authorAvatar).execute(url.toString(),"avatar");
+			new ImageLoadTask(cache.authorAvatar).execute(url.toString(),
+					"avatar");
 		}
 		cache.blogSummary.setText(blog.getBlogSummary());
 

@@ -13,8 +13,8 @@ import com.arlen.cnblogs.entity.Blog;
 
 public class DBUtils {
 	public static void createDB(Context context) {
-		DbOpenHelper helper = new DbOpenHelper(context, AppMacros.DATABASE_NAME,
-				null, AppMacros.DATABASE_VERSION);
+		DbOpenHelper helper = new DbOpenHelper(context,
+				AppMacros.DATABASE_NAME, null, AppMacros.DATABASE_VERSION);
 		helper.getWritableDatabase();
 	}
 
@@ -122,26 +122,27 @@ public class DBUtils {
 
 		return blogList;
 	}
-	
-	public static void addCookie(Context context, String userName, String cookie){
+
+	public static void addCookie(Context context, String userName, String cookie) {
 		CookieDao cookieDao = new CookieDao(context);
-		Object[] params = {userName, cookie};
+		Object[] params = { userName, cookie };
 		cookieDao.addData(params);
 	}
-	
-	public static String viewCookie(Context context, String[] selectionArgs){
+
+	public static String viewCookie(Context context, String[] selectionArgs) {
 		String cookie = "";
 		CookieDao cookieDao = new CookieDao(context);
 		Map<String, String> map = cookieDao.viewData(selectionArgs);
 		cookie = map.get("cookie");
 		return cookie;
 	}
-	
-	public static List<String> listCookie(Context context, String[] selectionArgs){
+
+	public static List<String> listCookie(Context context,
+			String[] selectionArgs) {
 		List<String> cookieList = new ArrayList<String>();
 		CookieDao cookieDao = new CookieDao(context);
 		List<Map<String, String>> mapList = cookieDao.listData(selectionArgs);
-		for(Map<String, String> map : mapList){
+		for (Map<String, String> map : mapList) {
 			String cookie = "";
 			cookie = map.get("cookie");
 			cookieList.add(cookie);

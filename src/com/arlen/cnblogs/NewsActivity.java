@@ -20,10 +20,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.arlen.cnblogs.task.ImageLoadTask;
 import com.arlen.cnblogs.utils.AppMacros;
 import com.arlen.cnblogs.utils.HttpUtils;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 public class NewsActivity extends Activity {
 
@@ -43,8 +42,6 @@ public class NewsActivity extends Activity {
 
 	private String path;
 	private Handler handler = null;
-
-	private ImageLoader imageLoader = ImageLoader.getInstance();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -97,7 +94,7 @@ public class NewsActivity extends Activity {
 	}
 
 	private void addData() {
-		imageLoader.displayImage(topicIcon, imageViewTopinIcon);
+		new ImageLoadTask(imageViewTopinIcon).execute(topicIcon, "topicIcon");
 		textViewNewsTitle.setText(newsTitle);
 		textViewPublisheDate.setText("新闻来源：" + sourceName + "\r\n发布时间："
 				+ publishDate);
@@ -112,10 +109,6 @@ public class NewsActivity extends Activity {
 		sourceName = intent.getStringExtra("sourceName");
 		publishDate = intent.getStringExtra("published");
 		newsId = intent.getIntExtra("id", 0);
-
-		imageLoader.init(ImageLoaderConfiguration.createDefault(this
-				.getApplicationContext()));
-
 		path = AppMacros.NEWS_CONTENT;
 		path = path.replace("{CONTENTID}", "" + newsId);
 	}

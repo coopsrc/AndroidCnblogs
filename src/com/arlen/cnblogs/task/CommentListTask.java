@@ -13,7 +13,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 
 public class CommentListTask extends AsyncTask<String, Void, Void> {
-	
+
 	private static final String TAG = CommentListTask.class.getSimpleName();
 	private List<Comment> commentList;
 	private List<Comment> newList = new ArrayList<Comment>();
@@ -31,7 +31,7 @@ public class CommentListTask extends AsyncTask<String, Void, Void> {
 	@Override
 	protected Void doInBackground(String... params) {
 		newList = HttpUtils.getCommentList(params[0]);
-		
+
 		if (params[1].equals("init")) {
 			commentList.addAll(newList);
 		} else if (params[1].equals("refresh")) {
@@ -43,7 +43,7 @@ public class CommentListTask extends AsyncTask<String, Void, Void> {
 			commentList.addAll(newList);
 			AppUtils.removeDuplicate(commentList);
 		}
-		
+
 		return null;
 	}
 
@@ -59,7 +59,7 @@ public class CommentListTask extends AsyncTask<String, Void, Void> {
 		swipeRefreshLayout.setRefreshing(false);
 		adapter.updataBlogList(commentList);
 		adapter.notifyDataSetChanged();
-		
+
 		Log.e(TAG, "commentList Size : " + commentList.size());
 	}
 }

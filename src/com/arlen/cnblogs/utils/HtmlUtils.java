@@ -9,8 +9,7 @@ import org.jsoup.select.Elements;
 
 public class HtmlUtils {
 
-	public static Map<String, String> getNameParam()
-			throws Exception {
+	public static Map<String, String> getNameParam() throws Exception {
 
 		String path = AppMacros.CNBLOGS_LOGIN;
 		Map<String, String> map = new HashMap<String, String>();

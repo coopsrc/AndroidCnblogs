@@ -112,7 +112,7 @@ public class LoginUtils {
 			System.out.print(" === ");
 			System.out.println(params.get(i).getValue());
 		}
-		
+
 		try {
 			HttpResponse httpResponse = httpClient.execute(httpPost,
 					httpContext);
@@ -120,16 +120,16 @@ public class LoginUtils {
 			Log.i(TAG, "=======" + httpResponse.getAllHeaders().length);
 
 			Header locationHeader = httpResponse.getFirstHeader("Location");
-			
-			
-			HttpGet httpget = new HttpGet("http://home.cnblogs.com/ajax/ing/MyLastIng");
+
+			HttpGet httpget = new HttpGet(
+					"http://home.cnblogs.com/ajax/ing/MyLastIng");
 
 			try {
 				HttpResponse re2 = httpClient.execute(httpget);
 				// 输出登录成功后的页面
 				String str = EntityUtils.toString(re2.getEntity());
 				System.out.println(str);
-			}catch (Exception e) {
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} finally {

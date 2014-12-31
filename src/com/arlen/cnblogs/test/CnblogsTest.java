@@ -55,7 +55,7 @@ public class CnblogsTest extends AndroidTestCase {
 		Map<String, String> map = HtmlUtils.getNameParam();
 		String userName = "1757887521@qq.com";
 		String password = "zhang1757887521.";
-		
+
 		String vcid = map.get("LBD_VCID_c_login_logincaptcha");
 
 		if (vcid == null) {
@@ -65,7 +65,7 @@ public class CnblogsTest extends AndroidTestCase {
 			System.out.println("*** 需要 验证码*****");
 			String code = "123abC";
 			HttpUtils.getBitmap(map.get("LBD_VCID_c_login_logincaptcha"));
-//			LoginUtils.login(userName, password, code, map);
+			// LoginUtils.login(userName, password, code, map);
 		}
 
 	}
