@@ -128,13 +128,12 @@ public class UserActivity extends Activity implements OnItemClickListener,
 	private void showBlogItem(Blog blogEntry) {
 		intent = new Intent(this, BlogActivity.class);
 
-		if (blogEntry.getAuthorAvatar() != null) {
-			intent.putExtra("avatar", blogEntry.getAuthorAvatar().toString());
+		if (blogEntry.getAuthorAvatar() == null) {
+			intent.putExtra("avatar", "");
 		} else {
-			intent.putExtra(
-					"avatar",
-					"https://github.com/ZhangTingkuo/AndroidCnblogs/blob/master/res/drawable-hdpi/ic_launcher.png");
+			intent.putExtra("avatar", blogEntry.getAuthorAvatar().toString());
 		}
+
 		intent.putExtra("title", blogEntry.getBlogTitle());
 		intent.putExtra("author", blogEntry.getAuthorName());
 		intent.putExtra("published",

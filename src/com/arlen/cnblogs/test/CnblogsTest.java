@@ -78,4 +78,11 @@ public class CnblogsTest extends AndroidTestCase {
 		}
 	}
 
+	public void getPersonInfoTest() {
+		try {
+			HtmlUtils.getPersonInfo("zhangtingkuo");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

@@ -171,14 +171,16 @@ public class ItemDialog extends Dialog implements OnItemClickListener {
 				intent.putExtra("blogapp", userEntry.getBlogapp());
 				intent.putExtra("link", userEntry.getUserLink().toString());
 
-				if (userEntry.getUserAvatar() != null) {
-					intent.putExtra("avatar", userEntry.getUserAvatar()
-							.toString());
-				} else {
-					intent.putExtra(
-							"avatar",
-							"https://github.com/ZhangTingkuo/AndroidCnblogs/blob/master/res/drawable-hdpi/ic_launcher.png");
-				}
+//				if (userEntry.getUserAvatar() != null) {
+//					intent.putExtra("avatar", userEntry.getUserAvatar()
+//							.toString());
+//				} else {
+//					intent.putExtra(
+//							"avatar",
+//							"https://github.com/ZhangTingkuo/AndroidCnblogs/blob/master/res/drawable-hdpi/ic_launcher.png");
+//				}
+
+				intent.putExtra("avatar", userEntry.getUserAvatar().toString());
 
 				intent.putExtra("postcount", userEntry.getPostCount());
 				intent.putExtra("updated",

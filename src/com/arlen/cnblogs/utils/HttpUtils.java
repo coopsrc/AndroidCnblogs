@@ -257,5 +257,4 @@ public class HttpUtils {
 		bitmap = BitmapFactory.decodeStream(inputStream);
 		return bitmap;
 	}
-
 }

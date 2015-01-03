@@ -1,30 +1,93 @@
 package com.arlen.cnblogs;
 
+import java.lang.reflect.Method;
+
+import com.arlen.cnblogs.bean.PersonInfo;
+import com.arlen.cnblogs.task.PersonInfoTask;
+
+import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 public class UserCenterActivity extends Activity {
+
+	private ImageView imageViewAvatar;
+	private TextView textViewNickName;
+	private TextView textViewCnblogsAge;
+	private TextView textViewFollowers;
+	private TextView textViewFollowees;
+	private SwipeRefreshLayout refreshLayout;
+
+	private PersonInfo personInfo;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_user_center);
+
+		ActionBar actionBar = getActionBar();
+		actionBar.setDisplayHomeAsUpEnabled(true);
+
+		initComponent();
+
+		initData();
+	}
+
+	private void initComponent() {
+		imageViewAvatar = (ImageView) this
+				.findViewById(R.id.imageViewPersonalAvatar);
+		textViewNickName = (TextView) this
+				.findViewById(R.id.textViewPersonalNickName);
+		textViewCnblogsAge = (TextView) this
+				.findViewById(R.id.textViewPersonalCnblogsAge);
+		textViewFollowers = (TextView) this
+				.findViewById(R.id.textViewPersonalFollowers);
+		textViewFollowees = (TextView) this
+				.findViewById(R.id.textViewPersonalFollowees);
+		refreshLayout = (SwipeRefreshLayout) this
+				.findViewById(R.id.swipeRefreshLayoutPersonalBlog);
+	}
+
+	private void initData() {
+		PersonInfoTask task = new PersonInfoTask(personInfo);
+		task.setTextViewNickName(textViewNickName);
+		task.setTextViewCnblogsAge(textViewCnblogsAge);
+		task.setTextViewFollowers(textViewFollowers);
+		task.setTextViewFollowees(textViewFollowees);
+		task.execute();
+	}
+
+	@Override
+	public boolean onMenuOpened(int featureId, Menu menu) {
+		if (featureId == Window.FEATURE_ACTION_BAR && menu != null) {
+			if (menu.getClass().getSimpleName().equals("MenuBuilder")) {
+				try {
+					Method method = menu.getClass().getDeclaredMethod(
+							"setOptionalIconsVisible", Boolean.TYPE);
+					method.setAccessible(true);
+					method.invoke(menu, true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return super.onMenuOpened(featureId, menu);
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.user_center, menu);
 		return true;
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		if (id == R.id.action_settings) {
 			return true;

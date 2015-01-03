@@ -7,8 +7,6 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewConfiguration;
@@ -20,9 +18,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.arlen.cnblogs.task.BlogContentTask;
 import com.arlen.cnblogs.task.ImageLoadTask;
 import com.arlen.cnblogs.utils.AppMacros;
-import com.arlen.cnblogs.utils.HttpUtils;
+import com.arlen.cnblogs.utils.AppUtils;
 
 public class BlogActivity extends Activity {
 
@@ -37,10 +36,11 @@ public class BlogActivity extends Activity {
 	private String authorName;
 	private String publishedDate;
 	private int blogId;
-	private String blogContent;
 
 	private String path;
-	private Handler handler = null;
+
+	// share
+	private String blogLink;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +54,6 @@ public class BlogActivity extends Activity {
 		initComponent();
 		initData();
 		addData();
-		addContent();
 	}
 
 	/**
@@ -103,6 +102,8 @@ public class BlogActivity extends Activity {
 		publishedDate = intent.getStringExtra("published");
 		blogId = intent.getIntExtra("id", 0);
 
+		blogLink = intent.getStringExtra("link");
+
 		path = AppMacros.BLOGS_CONTENTS;
 		path = path.replace("{POSTID}", "" + blogId);
 	}
@@ -112,41 +113,7 @@ public class BlogActivity extends Activity {
 		textViewBlogTitle.setText(blogTitle);
 		textViewBlogComments.setText("作者：" + authorName + "\r\n发布时间："
 				+ publishedDate);
-	}
-
-	private void addContent() {
-		Runnable runnable = new Runnable() {
-
-			@Override
-			public void run() {
-				try {
-					Thread.sleep(2 * 1000);
-					blogContent = HttpUtils.getBlogContent(path);
-					handler.sendMessage(handler.obtainMessage(0, blogContent));
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-		};
-
-		try {
-			new Thread(runnable).start();
-			handler = new Handler() {
-
-				@Override
-				public void handleMessage(Message msg) {
-					super.handleMessage(msg);
-					if (msg.what == 0) {
-						String content = (String) msg.obj;
-						webViewBlogContent.loadDataWithBaseURL(null, content,
-								"text/html", "UTF-8", null);
-					}
-				}
-
-			};
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		new BlogContentTask(webViewBlogContent).execute(path);
 	}
 
 	/**
@@ -171,7 +138,6 @@ public class BlogActivity extends Activity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.blog, menu);
 		return true;
 	}
@@ -188,6 +154,7 @@ public class BlogActivity extends Activity {
 			viewComment(blogId);
 			break;
 		case R.id.action_share:
+			AppUtils.ShareText(this, blogLink);
 			break;
 		}
 		return super.onOptionsItemSelected(item);

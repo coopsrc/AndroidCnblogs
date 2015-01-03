@@ -160,6 +160,7 @@ public class UserFragment extends Fragment implements OnItemLongClickListener,
 	private void showUserItem(User user) {
 		intent = new Intent(this.getActivity(), UserActivity.class);
 		intent.putExtra("blogapp", user.getBlogapp());
+		AppMacros.slelctedUserAvatar = user.getUserAvatar().toString();
 		startActivity(intent);
 	}
 }

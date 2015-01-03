@@ -30,6 +30,7 @@ import com.arlen.cnblogs.fragment.BlogFragment;
 import com.arlen.cnblogs.fragment.NewsFragment;
 import com.arlen.cnblogs.fragment.UserFragment;
 import com.arlen.cnblogs.handler.ExitHandler;
+import com.arlen.cnblogs.utils.AppMacros;
 import com.arlen.cnblogs.utils.DBUtils;
 
 public class MainActivity extends FragmentActivity {
@@ -112,7 +113,13 @@ public class MainActivity extends FragmentActivity {
 			startActivity(intent);
 			return true;
 		case R.id.action_person:
-			intent = new Intent(MainActivity.this, PersonActivity.class);
+			
+			if (AppMacros.isLogin) {
+				intent = new Intent(MainActivity.this, UserCenterActivity.class);
+			} else {
+				intent = new Intent(MainActivity.this, LoginActivity.class);
+				intent.putExtra("from", "MainActivity");
+			}
 			startActivity(intent);
 			return true;
 		case R.id.action_collect:

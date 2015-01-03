@@ -20,7 +20,7 @@ public class ImageLoadTask extends AsyncTask<String, Void, Void> {
 	@Override
 	protected Void doInBackground(String... params) {
 		bitmap = HttpUtils.getBitmap(params[0]);
-		if (params[1].equals("avatar")) {
+		if (params[1].equals("avatar") || params[1].equals("topicIcon")) {
 			if (bitmap != null) {
 				bitmap = AppUtils.roundCorner(bitmap, 8);
 			}

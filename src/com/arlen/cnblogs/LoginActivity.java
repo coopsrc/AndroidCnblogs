@@ -4,14 +4,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Map;
 
-import com.arlen.cnblogs.dialog.LoginDialog;
-import com.arlen.cnblogs.dialog.LoginDialog.ProgressCallBack;
-import com.arlen.cnblogs.task.ImageLoadTask;
-import com.arlen.cnblogs.utils.AppMacros;
-import com.arlen.cnblogs.utils.HtmlUtils;
-import com.arlen.cnblogs.utils.HttpUtils;
-import com.arlen.cnblogs.utils.LoginUtils;
-
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
@@ -30,7 +22,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.arlen.cnblogs.dialog.LoginDialog;
+import com.arlen.cnblogs.dialog.LoginDialog.ProgressCallBack;
+import com.arlen.cnblogs.task.ImageLoadTask;
+import com.arlen.cnblogs.utils.AppMacros;
+import com.arlen.cnblogs.utils.HtmlUtils;
+import com.arlen.cnblogs.utils.LoginUtils;
+
 public class LoginActivity extends Activity {
+
+	public String from = "SplashActivity";
 
 	private EditText editTextUserName;
 	private EditText editTextPassword;
@@ -49,6 +50,8 @@ public class LoginActivity extends Activity {
 	public SharedPreferences sharedPreferences;
 	public SharedPreferences.Editor editor;
 
+	private Intent intent;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -62,6 +65,9 @@ public class LoginActivity extends Activity {
 		editor = sharedPreferences.edit();
 
 		setOverflowShowAlways();
+
+		intent = getIntent();
+		from = intent.getStringExtra("from");
 
 		initComponent();
 		initData();
@@ -106,8 +112,10 @@ public class LoginActivity extends Activity {
 		imageViewCode = (ImageView) findViewById(R.id.imageViewLoginCode);
 
 		// get login info from sharedPreferences
-		editTextUserName.setText(sharedPreferences.getString("userName", ""));
-		editTextPassword.setText(sharedPreferences.getString("password", ""));
+		editTextUserName.setText(sharedPreferences.getString("userName",
+				"1757887521@qq.com"));
+		editTextPassword.setText(sharedPreferences.getString("password",
+				"zhang1757887521."));
 	}
 
 	private void initData() {
@@ -212,10 +220,18 @@ public class LoginActivity extends Activity {
 				}
 
 				if (isLogin) {
-					editor.putString("userName", userName);
-					editor.putString("password", password);
+
 					Intent intent = new Intent(LoginActivity.this,
 							MainActivity.class);
+
+					if (from.equals("SplashActivity")) {
+						intent = new Intent(LoginActivity.this,
+								MainActivity.class);
+					} else if (from.equals("MainActivity")) {
+						intent = new Intent(LoginActivity.this,
+								UserCenterActivity.class);
+					}
+
 					startActivity(intent);
 					LoginActivity.this.finish();
 					AppMacros.FLAG_LOGIN = true;

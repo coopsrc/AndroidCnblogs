@@ -34,6 +34,8 @@ public class LoginUtils {
 		HttpPost httpPost = new HttpPost(AppMacros.CNBLOGS_LOGIN);
 
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("__EVENTARGUMENT", ""));
+		params.add(new BasicNameValuePair("__EVENTTARGET", ""));
 		params.add(new BasicNameValuePair("__VIEWSTATE", map.get("__VIEWSTATE")));
 		params.add(new BasicNameValuePair("__VIEWSTATEGENERATOR", map
 				.get("__VIEWSTATEGENERATOR")));
@@ -62,12 +64,28 @@ public class LoginUtils {
 			Log.i(TAG, "=======" + httpResponse.getAllHeaders().length);
 
 			Header locationHeader = httpResponse.getFirstHeader("Location");
-
 			if (locationHeader != null) {
 				Log.i(TAG, "登陆成功：" + locationHeader.getValue());
+				AppMacros.isLogin = true;
+				
+				HttpGet httpGet = new HttpGet(locationHeader.getValue());
+
+				try {
+					httpResponse = httpClient.execute(httpGet, httpContext);
+					httpResponse = httpClient.execute(httpGet, httpContext);
+					// 输出登录成功后的页面
+					String str = EntityUtils.toString(httpResponse.getEntity());
+					System.out.println("$$$$$$$$$$$$$$$$$$$$");
+					AppMacros.BLOG_APP = HtmlUtils.getBlogApp(str);
+					System.out.println(AppMacros.BLOG_APP);
+					System.out.println("$$$$$$$$$$$$$$$$$$$$");
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					httpGet.abort();
+				}
+				
 				return true;
-			} else {
-				Log.i(TAG, "登录失败！！！！！");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -81,20 +99,22 @@ public class LoginUtils {
 		HttpPost httpPost = new HttpPost(AppMacros.CNBLOGS_LOGIN);
 
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("__EVENTARGUMENT", ""));
+		params.add(new BasicNameValuePair("__EVENTTARGET", ""));
+		params.add(new BasicNameValuePair("__EVENTVALIDATION", map
+				.get("__EVENTVALIDATION")));
 		params.add(new BasicNameValuePair("__VIEWSTATE", map.get("__VIEWSTATE")));
 		params.add(new BasicNameValuePair("__VIEWSTATEGENERATOR", map
 				.get("__VIEWSTATEGENERATOR")));
-		params.add(new BasicNameValuePair("__EVENTVALIDATION", map
-				.get("__EVENTVALIDATION")));
-		params.add(new BasicNameValuePair("tbUserName", userName));
-		params.add(new BasicNameValuePair("tbPassword", password));
-		params.add(new BasicNameValuePair("LBD_VCID_c_login_logincaptcha", map
-				.get("LBD_VCID_c_login_logincaptcha")));
-		params.add(new BasicNameValuePair(
-				"LBD_BackWorkaround_c_login_logincaptcha", "1"));
+		params.add(new BasicNameValuePair("btnLogin", map.get("btnLogin")));
 		params.add(new BasicNameValuePair("CaptchaCodeTextBox", code));
 		params.add(new BasicNameValuePair("chkRemember", "on"));
-		params.add(new BasicNameValuePair("btnLogin", map.get("btnLogin")));
+		params.add(new BasicNameValuePair(
+				"LBD_BackWorkaround_c_login_logincaptcha", "1"));
+		params.add(new BasicNameValuePair("LBD_VCID_c_login_logincaptcha", map
+				.get("LBD_VCID_c_login_logincaptcha")));
+		params.add(new BasicNameValuePair("tbUserName", userName));
+		params.add(new BasicNameValuePair("tbPassword", password));
 		params.add(new BasicNameValuePair("txtReturnUrl", map
 				.get("txtReturnUrl")));
 
@@ -130,7 +150,6 @@ public class LoginUtils {
 				String str = EntityUtils.toString(re2.getEntity());
 				System.out.println(str);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} finally {
 				httpget.abort();

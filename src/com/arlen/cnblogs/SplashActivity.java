@@ -20,15 +20,12 @@ public class SplashActivity extends Activity {
 		final View view = View.inflate(this, R.layout.activity_splash, null);
 		setContentView(view);
 
-		// if (Personal.isLogin(this)) {
-		// AppMacros.FLAG_LOGIN = true;
-		// }
-
 		final Intent intent;
-		if (AppMacros.FLAG_LOGIN) {
+		if (AppMacros.isLogin) {
 			intent = new Intent(SplashActivity.this, MainActivity.class);
 		} else {
 			intent = new Intent(SplashActivity.this, LoginActivity.class);
+			intent.putExtra("from", "SplashActivity");
 		}
 		Timer timer = new Timer();
 		TimerTask task = new TimerTask() {

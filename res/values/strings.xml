@@ -22,6 +22,7 @@
     <string name="title_activity_news">新闻内容</string>
     <string name="title_activity_comment">查看评论</string>
     <string name="title_activity_search">搜索博主</string>
+    <string name="title_activity_user_center">用户中心</string>
     <string name="text_logo_cn">博客园</string>
     <string name="text_logo_en">Cnblogs.com</string>
     <string name="text_version">Version 1.0</string>
@@ -46,6 +47,9 @@
     <string name="text_username">用户名</string>
     <string name="text_password">密码</string>
     <string name="text_logincode">验证码</string>
-    <string name="title_activity_user_center">UserCenterActivity</string>
+    <string name="text_nickname">昵称:</string>
+    <string name="text_cnblogs_age">园龄:</string>
+    <string name="text_followers">粉丝:</string>
+    <string name="text_followees">关注:</string>
 
 </resources>

@@ -13,6 +13,9 @@ import java.util.Date;
 import java.util.List;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.graphics.Canvas;
@@ -122,7 +125,7 @@ public class AppUtils {
 	}
 
 	/**
-	 * 取出博客、新闻、评论列表的重复内容
+	 * 去除博客、新闻、评论列表的重复内容
 	 * 
 	 * @param list
 	 */
@@ -189,12 +192,37 @@ public class AppUtils {
 		OutputStream outputStream = null;
 
 		try {
-			outputStream = new FileOutputStream("/sdcard/" + fileName);
+			outputStream = new FileOutputStream("/sdcard/Cnblogs/image/avatar/"
+					+ fileName);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 		bitmap.compress(format, quality, outputStream);
+	}
+
+	public static void ShareText(Context context, String content) {
+		Intent intent = new Intent(Intent.ACTION_SEND);
+		// intent.setType("image/*");
+		intent.setType("text/plain");
+		intent.putExtra(Intent.EXTRA_SUBJECT, "Cnblogs");
+		intent.putExtra(Intent.EXTRA_TEXT, content);
+		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		context.startActivity(Intent.createChooser(intent,
+				((Activity) context).getTitle()));
+
+	}
+
+	public static void SharePicture(Context context, String content,
+			String picture) {
+		Intent intent = new Intent(Intent.ACTION_SEND);
+		intent.setType("image/png");
+		intent.putExtra(Intent.EXTRA_STREAM, picture);
+		intent.putExtra(Intent.EXTRA_SUBJECT, "Cnblogs");
+		intent.putExtra(Intent.EXTRA_TEXT, content);
+		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		context.startActivity(Intent.createChooser(intent,
+				((Activity) context).getTitle()));
 
 	}
 

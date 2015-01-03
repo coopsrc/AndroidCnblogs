@@ -182,6 +182,9 @@ public class BlogRecommendFragment extends Fragment implements
 		intent.putExtra("id", blogEntry.getBlogId());
 		intent.putExtra("link", blogEntry.getBlogTitle());
 
+		// for share
+		intent.putExtra("link", blogEntry.getBlogLink().toString());
+
 		startActivity(intent);
 	}
 }

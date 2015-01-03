@@ -65,6 +65,7 @@ public class AppMacros {
 
 	// 推荐博主
 	public static final int USER_PAGE_SIZE = 20;
+	public static String slelctedUserAvatar = "";
 
 	// 评论
 	public static final int COMMENT_PAGE_SIZE = 10;
@@ -72,11 +73,15 @@ public class AppMacros {
 	// 登录 ...
 	public static boolean FLAG_LOGIN = false;
 	public static boolean FLAG_VISITOR = true;
+	public static String BLOG_APP = "zhangtingkuo";
+	public static boolean isLogin = false;
 	public static final String CNBLOGS_LOGIN = "http://passport.cnblogs.com/login.aspx";
 	public static final String CNBLOGS_INDEX = "http://www.cnblogs.com/";
 	public static final String CNBLOGS_HOME = "http://home.cnblogs.com/";
 	public static final String CNBLOGS_MESSAGE = "http://msg.cnblogs.com/msg/compose";
 	public static final String BotDetectCaptcha = "http://passport.cnblogs.com/BotDetectCaptcha.ashx?get=image&c=c_login_logincaptcha&t=";
+	public static final String PERSON_INFO = "http://www.cnblogs.com/mvc/blog/news.aspx?blogApp=";
+	public static final String CURRENT_USER_INFO = "http://home.cnblogs.com/user/CurrentIngUserInfo";
 
 	// 数据库
 	public static final int DATABASE_VERSION = 1;
