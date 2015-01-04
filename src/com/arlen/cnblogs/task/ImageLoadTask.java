@@ -35,5 +35,4 @@ public class ImageLoadTask extends AsyncTask<String, Void, Void> {
 		super.onPostExecute(result);
 		imageView.setImageBitmap(bitmap);
 	}
-
 }

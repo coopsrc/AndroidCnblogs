@@ -100,7 +100,6 @@ public class LoginActivity extends Activity {
 		buttonLogin.setOnClickListener(listener);
 		buttonVisitor.setOnClickListener(listener);
 		imageViewCode.setOnClickListener(listener);
-		;
 	}
 
 	private void initComponent() {

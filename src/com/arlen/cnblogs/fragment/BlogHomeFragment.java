@@ -180,7 +180,6 @@ public class BlogHomeFragment extends Fragment implements
 		intent.putExtra("published",
 				AppUtils.parseDateToString(blogEntry.getPublishedDateDate()));
 		intent.putExtra("id", blogEntry.getBlogId());
-		intent.putExtra("link", blogEntry.getBlogTitle());
 
 		// for share
 		intent.putExtra("link", blogEntry.getBlogLink().toString());

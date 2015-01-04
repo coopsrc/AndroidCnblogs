@@ -180,6 +180,9 @@ public class NewsHotFragment extends Fragment implements
 				AppUtils.parseDateToString(newsEntry.getPublishedDate()));
 		intent.putExtra("id", newsEntry.getNewsId());
 
+		// for share
+		intent.putExtra("link", newsEntry.getNewsLink().toString());
+
 		startActivity(intent);
 	}
 }

@@ -7,8 +7,6 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewConfiguration;
@@ -21,8 +19,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.arlen.cnblogs.task.ImageLoadTask;
+import com.arlen.cnblogs.task.NewsContentTask;
 import com.arlen.cnblogs.utils.AppMacros;
-import com.arlen.cnblogs.utils.HttpUtils;
+import com.arlen.cnblogs.utils.AppUtils;
 
 public class NewsActivity extends Activity {
 
@@ -37,11 +36,12 @@ public class NewsActivity extends Activity {
 	private String newsTitle;
 	private String sourceName;
 	private String publishDate;
-	private String newsContent;
 	private int newsId;
 
 	private String path;
-	private Handler handler = null;
+
+	// share
+	private String newsLink;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -55,42 +55,6 @@ public class NewsActivity extends Activity {
 		initComponent();
 		initData();
 		addData();
-		addContent();
-	}
-
-	private void addContent() {
-		Runnable runnable = new Runnable() {
-
-			@Override
-			public void run() {
-				try {
-					Thread.sleep(2 * 1000);
-					newsContent = HttpUtils.getNewsContent(path);
-					handler.sendMessage(handler.obtainMessage(0, newsContent));
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-		};
-
-		try {
-			new Thread(runnable).start();
-			handler = new Handler() {
-
-				@Override
-				public void handleMessage(Message msg) {
-					super.handleMessage(msg);
-					if (msg.what == 0) {
-						String content = (String) msg.obj;
-						webViewNewsContent.loadDataWithBaseURL(null, content,
-								"text/html", "UTF-8", null);
-					}
-				}
-
-			};
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 
 	private void addData() {
@@ -98,6 +62,8 @@ public class NewsActivity extends Activity {
 		textViewNewsTitle.setText(newsTitle);
 		textViewPublisheDate.setText("新闻来源：" + sourceName + "\r\n发布时间："
 				+ publishDate);
+
+		new NewsContentTask(webViewNewsContent).execute(path);
 	}
 
 	private void initData() {
@@ -109,6 +75,9 @@ public class NewsActivity extends Activity {
 		sourceName = intent.getStringExtra("sourceName");
 		publishDate = intent.getStringExtra("published");
 		newsId = intent.getIntExtra("id", 0);
+
+		newsLink = intent.getStringExtra("link");
+
 		path = AppMacros.NEWS_CONTENT;
 		path = path.replace("{CONTENTID}", "" + newsId);
 	}
@@ -167,6 +136,7 @@ public class NewsActivity extends Activity {
 			viewComment(newsId);
 			break;
 		case R.id.action_share:
+			AppUtils.ShareText(this, newsLink);
 			break;
 		}
 		return super.onOptionsItemSelected(item);
