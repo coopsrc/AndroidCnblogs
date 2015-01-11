@@ -23,7 +23,6 @@ import android.widget.ListView;
 import com.arlen.cnblogs.adapter.UserListAdapter;
 import com.arlen.cnblogs.entity.User;
 import com.arlen.cnblogs.utils.AppMacros;
-import com.arlen.cnblogs.utils.AppUtils;
 import com.arlen.cnblogs.utils.HttpUtils;
 
 public class SearchActivity extends ListActivity {

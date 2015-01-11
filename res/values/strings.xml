@@ -16,7 +16,7 @@
     <string name="title_activity_login">登录</string>
     <string name="title_activity_person">个人中心</string>
     <string name="title_activity_collection">收藏列表</string>
-    <string name="title_activity_newblog">发表博客</string>
+    <string name="title_activity_publish">发表博客</string>
     <string name="title_activity_blog">博客正文</string>
     <string name="title_activity_user">用户中心</string>
     <string name="title_activity_news">新闻内容</string>
@@ -51,5 +51,7 @@
     <string name="text_cnblogs_age">园龄:</string>
     <string name="text_followers">粉丝:</string>
     <string name="text_followees">关注:</string>
+    <string name="text_button_draft">保存草稿</string>
+    <string name="text_button_publish">发布博客</string>
 
 </resources>

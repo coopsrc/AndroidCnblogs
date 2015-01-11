@@ -54,8 +54,8 @@
             android:label="@string/title_activity_collection" >
         </activity>
         <activity
-            android:name=".NewblogActivity"
-            android:label="@string/title_activity_newblog" >
+            android:name=".PublishActivity"
+            android:label="@string/title_activity_publish" >
         </activity>
         <activity
             android:name=".BlogActivity"

@@ -109,7 +109,7 @@ public class MainActivity extends FragmentActivity {
 			startActivity(intent);
 			return true;
 		case R.id.action_new:
-			intent = new Intent(MainActivity.this, NewblogActivity.class);
+			intent = new Intent(MainActivity.this, PublishActivity.class);
 			startActivity(intent);
 			return true;
 		case R.id.action_person:

@@ -2,6 +2,7 @@ package com.arlen.cnblogs;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.Date;
 import java.util.Map;
 
 import android.app.ActionBar;
@@ -112,9 +113,9 @@ public class LoginActivity extends Activity {
 
 		// get login info from sharedPreferences
 		editTextUserName.setText(sharedPreferences.getString("userName",
-				"1757887521@qq.com"));
+				""));
 		editTextPassword.setText(sharedPreferences.getString("password",
-				"zhang1757887521."));
+				""));
 	}
 
 	private void initData() {
@@ -219,7 +220,6 @@ public class LoginActivity extends Activity {
 				}
 
 				if (isLogin) {
-
 					Intent intent = new Intent(LoginActivity.this,
 							MainActivity.class);
 
