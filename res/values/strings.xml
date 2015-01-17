@@ -47,10 +47,10 @@
     <string name="text_username">用户名</string>
     <string name="text_password">密码</string>
     <string name="text_logincode">验证码</string>
-    <string name="text_nickname">昵称:</string>
-    <string name="text_cnblogs_age">园龄:</string>
-    <string name="text_followers">粉丝:</string>
-    <string name="text_followees">关注:</string>
+    <string name="text_nickname">昵称：</string>
+    <string name="text_cnblogs_age">园龄：</string>
+    <string name="text_followers">粉丝：</string>
+    <string name="text_followees">关注：</string>
     <string name="text_button_draft">保存草稿</string>
     <string name="text_button_publish">发布博客</string>
 
