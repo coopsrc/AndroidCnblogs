@@ -68,7 +68,6 @@ public class LoginUtils {
 
         try {
           httpResponse = httpClient.execute(httpGet, httpContext);
-          httpResponse = httpClient.execute(httpGet, httpContext);
           // 输出登录成功后的页面
           String str = EntityUtils.toString(httpResponse.getEntity());
           System.out.println("$$$$$$$$$$$$$$$$$$$$");
@@ -173,7 +172,8 @@ public class LoginUtils {
     params.add(new BasicNameValuePair("Editor$Edit$Advanced$txbEntryName", ""));
     params.add(new BasicNameValuePair("Editor$Edit$Advanced$txbExcerpt", ""));
     params.add(new BasicNameValuePair("Editor$Edit$Advanced$txbTag", ""));
-    params.add(new BasicNameValuePair("Editor$Edit$APOptions$Advancedpanel1$cklCategories$0", "515044"));
+    params.add(new BasicNameValuePair("Editor$Edit$APOptions$Advancedpanel1$cklCategories$0",
+        "515044"));
     params.add(new BasicNameValuePair("Editor$Edit$EditorBody", content));
     params.add(new BasicNameValuePair("Editor$Edit$lkbPost", "发布"));
     params.add(new BasicNameValuePair("Editor$Edit$txbTitle", title));
@@ -187,16 +187,13 @@ public class LoginUtils {
       System.out.println(result);
 
       if (result.contains("PostDone.aspx")) {
-        System.out.println("发布成功====发布成功====发布成功====发布成功====发布成功====发布成功====");
         return true;
       } else {
-        System.out.println("发布失败====发布失败====发布失败====发布失败====发布失败====发布失败====");
         return false;
       }
     } catch (Exception e) {
       e.printStackTrace();
     }
-
     return false;
   }
 }

@@ -13,65 +13,64 @@ import android.view.Window;
 
 public class CollectionActivity extends Activity {
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_collection);
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_collection);
 
-		ActionBar actionBar = getActionBar();
-		actionBar.setDisplayHomeAsUpEnabled(true);
+    ActionBar actionBar = getActionBar();
+    actionBar.setDisplayHomeAsUpEnabled(true);
 
-		setOverflowShowAlways();
-	}
+    setOverflowShowAlways();
+  }
 
-	private void setOverflowShowAlways() {
-		try {
-			ViewConfiguration viewConfiguration = ViewConfiguration.get(this);
-			Field field = ViewConfiguration.class
-					.getDeclaredField("sHasPermanentMenuKey");
-			field.setAccessible(true);
-			field.setBoolean(viewConfiguration, false);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+  private void setOverflowShowAlways() {
+    try {
+      ViewConfiguration viewConfiguration = ViewConfiguration.get(this);
+      Field field = ViewConfiguration.class.getDeclaredField("sHasPermanentMenuKey");
+      field.setAccessible(true);
+      field.setBoolean(viewConfiguration, false);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
 
-	@Override
-	public boolean onMenuOpened(int featureId, Menu menu) {
-		if (featureId == Window.FEATURE_ACTION_BAR && menu != null) {
-			if (menu.getClass().getSimpleName().equals("MenuBuilder")) {
-				try {
-					Method method = menu.getClass().getDeclaredMethod(
-							"setOptionalIconsVisible", Boolean.TYPE);
-					method.setAccessible(true);
-					method.invoke(menu, true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		return super.onMenuOpened(featureId, menu);
-	}
+  @Override
+  public boolean onMenuOpened(int featureId, Menu menu) {
+    if (featureId == Window.FEATURE_ACTION_BAR && menu != null) {
+      if (menu.getClass().getSimpleName().equals("MenuBuilder")) {
+        try {
+          Method method =
+              menu.getClass().getDeclaredMethod("setOptionalIconsVisible", Boolean.TYPE);
+          method.setAccessible(true);
+          method.invoke(menu, true);
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+      }
+    }
+    return super.onMenuOpened(featureId, menu);
+  }
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.collection, menu);
-		return true;
-	}
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    // Inflate the menu; this adds items to the action bar if it is present.
+    getMenuInflater().inflate(R.menu.collection, menu);
+    return true;
+  }
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		} else if (id == android.R.id.home) {
-			finish();
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    // Handle action bar item clicks here. The action bar will
+    // automatically handle clicks on the Home/Up button, so long
+    // as you specify a parent activity in AndroidManifest.xml.
+    int id = item.getItemId();
+    if (id == R.id.action_settings) {
+      return true;
+    } else if (id == android.R.id.home) {
+      finish();
+      return true;
+    }
+    return super.onOptionsItemSelected(item);
+  }
 }

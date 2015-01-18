@@ -1,9 +1,7 @@
 package com.arlen.cnblogs.utils;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -220,7 +218,8 @@ public class AppUtils {
     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     context.startActivity(Intent.createChooser(intent, ((Activity) context).getTitle()));
   }
-//01-11 03:21:20.666: I/System.out(1366): http://www.cnblogs.com/zhangtingkuo/admin/EditPosts.aspx?opt=1
+
+  // http://www.cnblogs.com/zhangtingkuo/admin/EditPosts.aspx?opt=1
 
   public static String LoadModule(Context context, String fileName) {
     String content = "";

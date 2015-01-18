@@ -2,13 +2,8 @@ package com.arlen.cnblogs;
 
 import java.lang.reflect.Method;
 
-import com.arlen.cnblogs.bean.PersonInfo;
-import com.arlen.cnblogs.task.PersonInfoTask;
-import com.arlen.cnblogs.utils.HttpThread;
-
 import android.app.ActionBar;
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.Menu;
@@ -16,6 +11,9 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.arlen.cnblogs.bean.PersonInfo;
+import com.arlen.cnblogs.task.PersonInfoTask;
 
 public class UserCenterActivity extends Activity {
 
@@ -62,18 +60,7 @@ public class UserCenterActivity extends Activity {
   }
 
   private void setAvatar() {
-    ProgressDialog proDialog = ProgressDialog.show(this, "",
-      "正在获取数据……", true, true);
-    HttpThread jsonThread = new HttpThread(this, proDialog);
-    String url = "http://home.cnblogs.com/user/CurrentIngUserInfo";
-    String[] key = { "type" };
-    String[] value = { "0" };
-    String[] jsonKey = { "Avatar", "Username"};
-    jsonThread.setUrl(url);
-    jsonThread.setKey(key);
-    jsonThread.setValue(value);
-    jsonThread.setJsonKey(jsonKey);
-    jsonThread.start();
+
   }
 
   @Override

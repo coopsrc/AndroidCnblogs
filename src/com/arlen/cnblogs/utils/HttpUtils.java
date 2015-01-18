@@ -33,41 +33,77 @@ public class HttpUtils {
 
 	private static final String TAG = HttpUtils.class.getSimpleName();
 
-	/**
-	 * 获取XML数据流
-	 * 
-	 * @param path
-	 * @return InputStream
-	 */
-	public static InputStream getStream(String path) {
-		InputStream inputStream = null;
-		Log.i(TAG, "获取 InputStream " + path);
-		try {
-			URL url = new URL(path);
-			HttpURLConnection connection = (HttpURLConnection) url
-					.openConnection();
-			connection.setDoInput(true);
-			connection.setReadTimeout(3 * 1000);
-			connection.setConnectTimeout(5 * 1000);
-			connection.setRequestMethod("GET");
-			connection.setDoInput(true);
-			connection.connect();
-			int code = connection.getResponseCode();
-			Log.d(TAG, "获取 InputStream ResponseCode " + code);
-			if (code == HttpURLConnection.HTTP_OK) {
-				inputStream = connection.getInputStream();
-			}
+    /**
+     * 获取XML数据流
+     * 
+     * @param path
+     * @return InputStream
+     */
+    public static InputStream getStream(String path) {
+        InputStream inputStream = null;
+        Log.i(TAG, "获取 InputStream " + path);
+        try {
+            URL url = new URL(path);
+            HttpURLConnection connection = (HttpURLConnection) url
+                    .openConnection();
+            connection.setDoInput(true);
+            connection.setReadTimeout(3 * 1000);
+            connection.setConnectTimeout(5 * 1000);
+            connection.setRequestMethod("GET");
+            connection.setDoInput(true);
+            connection.connect();
+            int code = connection.getResponseCode();
+            Log.d(TAG, "获取 InputStream ResponseCode " + code);
+            if (code == HttpURLConnection.HTTP_OK) {
+                inputStream = connection.getInputStream();
+            }
 
-			if (inputStream != null) {
-				Log.i(TAG, "获取 InputStream 成功");
-			}
+            if (inputStream != null) {
+                Log.i(TAG, "获取 InputStream 成功");
+            }
 
-		} catch (Exception e) {
-			Log.e(TAG, "获取 InputStream 失败");
-			e.printStackTrace();
-		}
-		return inputStream;
-	}
+        } catch (Exception e) {
+            Log.e(TAG, "获取 InputStream 失败");
+            e.printStackTrace();
+        }
+        return inputStream;
+    }
+
+    /**
+     * 获取XML数据流
+     * 
+     * @param path
+     * @return InputStream
+     */
+    public static InputStream postStream(String path) {
+        InputStream inputStream = null;
+        Log.i(TAG, "获取 InputStream " + path);
+        try {
+            URL url = new URL(path);
+            HttpURLConnection connection = (HttpURLConnection) url
+                    .openConnection();
+            connection.setDoInput(true);
+            connection.setReadTimeout(3 * 1000);
+            connection.setConnectTimeout(5 * 1000);
+            connection.setRequestMethod("POST");
+            connection.setDoInput(true);
+            connection.connect();
+            int code = connection.getResponseCode();
+            Log.d(TAG, "获取 InputStream ResponseCode " + code);
+            if (code == HttpURLConnection.HTTP_OK) {
+                inputStream = connection.getInputStream();
+            }
+
+            if (inputStream != null) {
+                Log.i(TAG, "获取 InputStream 成功");
+            }
+
+        } catch (Exception e) {
+            Log.e(TAG, "获取 InputStream 失败");
+            e.printStackTrace();
+        }
+        return inputStream;
+    }
 
 	/**
 	 * 获取博客列表 XML

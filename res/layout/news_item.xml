@@ -32,6 +32,7 @@
             android:id="@+id/textViewNewsItemSummary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
             android:layout_marginStart="5dp"
             android:text="@string/app_name" />
     </LinearLayout>
@@ -78,6 +79,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_toEndOf="@+id/textViewNewsItemPub"
+            android:layout_toRightOf="@+id/textViewNewsItemPub"
             android:text="@string/app_name"
             android:textColor="@color/splash_logo_en_color"
             android:textSize="12sp" />
@@ -87,6 +89,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:text="@string/app_name"
             android:textColor="@color/splash_logo_en_color"
@@ -97,6 +100,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/textViewNewsItemDiggs"
             android:layout_toStartOf="@+id/textViewNewsItemDiggs"
             android:text="@string/app_name"
             android:textColor="@color/splash_logo_en_color"
@@ -107,6 +111,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/textViewNewsItemView"
             android:layout_toStartOf="@+id/textViewNewsItemView"
             android:text="@string/app_name"
             android:textColor="@color/splash_logo_en_color"
