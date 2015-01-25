@@ -1,7 +1,7 @@
 package com.arlen.cnblogs.task;
 
 import com.arlen.cnblogs.bean.PersonInfo;
-import com.arlen.cnblogs.utils.AppMacros;
+import com.arlen.cnblogs.utils.AppConfig;
 import com.arlen.cnblogs.utils.HtmlUtils;
 
 import android.os.AsyncTask;
@@ -22,7 +22,7 @@ public class PersonInfoTask extends AsyncTask<Void, Void, Void> {
   @Override
   protected Void doInBackground(Void... params) {
     try {
-      personInfo = HtmlUtils.getPersonInfo(AppMacros.BLOG_APP);
+      personInfo = HtmlUtils.getPersonInfo(AppConfig.BLOG_APP);
     } catch (Exception e) {
       e.printStackTrace();
     }

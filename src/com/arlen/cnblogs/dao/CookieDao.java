@@ -9,15 +9,15 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.arlen.cnblogs.utils.AppMacros;
+import com.arlen.cnblogs.utils.AppConfig;
 
 public class CookieDao implements BaseDao {
 
 	private DbOpenHelper helper = null;
 
 	public CookieDao(Context context) {
-		helper = new DbOpenHelper(context, AppMacros.DATABASE_NAME, null,
-				AppMacros.DATABASE_VERSION);
+		helper = new DbOpenHelper(context, AppConfig.DATABASE_NAME, null,
+				AppConfig.DATABASE_VERSION);
 	}
 
 	@Override

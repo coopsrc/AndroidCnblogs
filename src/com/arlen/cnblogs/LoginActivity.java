@@ -26,7 +26,7 @@ import android.widget.ImageView;
 import com.arlen.cnblogs.dialog.LoginDialog;
 import com.arlen.cnblogs.dialog.LoginDialog.ProgressCallBack;
 import com.arlen.cnblogs.task.ImageLoadTask;
-import com.arlen.cnblogs.utils.AppMacros;
+import com.arlen.cnblogs.utils.AppConfig;
 import com.arlen.cnblogs.utils.HtmlUtils;
 import com.arlen.cnblogs.utils.LoginUtils;
 
@@ -137,7 +137,7 @@ public class LoginActivity extends Activity {
             if (vcid != null) {
               editTextCode.setVisibility(View.VISIBLE);
               imageViewCode.setVisibility(View.VISIBLE);
-              String path = AppMacros.BotDetectCaptcha + vcid;
+              String path = AppConfig.BotDetectCaptcha + vcid;
               new ImageLoadTask(imageViewCode).execute(path, "BotDetectCaptcha");
             } else {
               doLogin();
@@ -250,7 +250,7 @@ public class LoginActivity extends Activity {
 
         startActivity(intent);
         LoginActivity.this.finish();
-        AppMacros.FLAG_LOGIN = true;
+        AppConfig.FLAG_LOGIN = true;
       } else {
         editTextUserName.setVisibility(View.VISIBLE);
         editTextPassword.setVisibility(View.VISIBLE);

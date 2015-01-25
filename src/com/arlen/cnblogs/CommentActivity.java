@@ -24,7 +24,7 @@ import com.arlen.cnblogs.adapter.CommentListAdapter;
 import com.arlen.cnblogs.dialog.ItemDialog;
 import com.arlen.cnblogs.entity.Comment;
 import com.arlen.cnblogs.task.CommentListTask;
-import com.arlen.cnblogs.utils.AppMacros;
+import com.arlen.cnblogs.utils.AppConfig;
 
 public class CommentActivity extends Activity implements
 		OnItemLongClickListener, OnItemClickListener, OnRefreshListener,
@@ -113,14 +113,14 @@ public class CommentActivity extends Activity implements
 
 	private void initPath(int pageIndex) {
 		if (type.equals("blog")) {
-			path = AppMacros.BLOGS_COMMENTS;
+			path = AppConfig.BLOGS_COMMENTS;
 			path = path.replace("{POSTID}", "" + id);
 		} else if (type.equals("news")) {
-			path = AppMacros.NEWS_COMMENTS;
+			path = AppConfig.NEWS_COMMENTS;
 			path = path.replace("{CONTENTID}", "" + id);
 		}
 
-		pageSize = AppMacros.COMMENT_PAGE_SIZE;
+		pageSize = AppConfig.COMMENT_PAGE_SIZE;
 		path = path.replace("{PAGEINDEX}", "" + pageIndex);
 		path = path.replace("{PAGESIZE}", "" + pageSize);
 

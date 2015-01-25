@@ -24,7 +24,7 @@ import com.arlen.cnblogs.UserActivity;
 import com.arlen.cnblogs.adapter.UserListAdapter;
 import com.arlen.cnblogs.entity.User;
 import com.arlen.cnblogs.task.UserListTask;
-import com.arlen.cnblogs.utils.AppMacros;
+import com.arlen.cnblogs.utils.AppConfig;
 
 public class UserFragment extends Fragment
     implements
@@ -143,8 +143,8 @@ public class UserFragment extends Fragment
 
   private void initPath(int pageIndex) {
     // http://wcf.open.cnblogs.com/blog/bloggers/recommend/{PAGEINDEX}/{PAGESIZE};
-    path = AppMacros.RECOMMEND_BLOGS_PAGED;
-    pageSize = AppMacros.PAGE_SIZE;
+    path = AppConfig.RECOMMEND_BLOGS_PAGED;
+    pageSize = AppConfig.PAGE_SIZE;
     path = path.replace("{PAGEINDEX}", "" + pageIndex);
     path = path.replace("{PAGESIZE}", "" + pageSize);
 
@@ -153,9 +153,11 @@ public class UserFragment extends Fragment
 
   private void showUserItem(User user) {
     intent = new Intent(this.getActivity(), UserActivity.class);
-    intent.putExtra("avatar", user.getUserAvatar().toString());
+    if (user.getUserAvatar() != null) {
+      intent.putExtra("avatar", user.getUserAvatar().toString());
+    }
     intent.putExtra("blogapp", user.getBlogapp());
-    AppMacros.slelctedUserAvatar = user.getUserAvatar().toString();
+    AppConfig.slelctedUserAvatar = user.getUserAvatar().toString();
     startActivity(intent);
   }
 }

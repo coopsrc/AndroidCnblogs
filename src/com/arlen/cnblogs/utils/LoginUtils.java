@@ -31,7 +31,7 @@ public class LoginUtils {
   public static boolean login(String userName, String password, Map<String, String> map)
       throws Exception {
     httpContext.setAttribute(ClientContext.COOKIE_STORE, cookieStore);
-    HttpPost httpPost = new HttpPost(AppMacros.CNBLOGS_LOGIN);
+    HttpPost httpPost = new HttpPost(AppConfig.CNBLOGS_LOGIN);
 
     List<NameValuePair> params = new ArrayList<NameValuePair>();
     params.add(new BasicNameValuePair("__EVENTARGUMENT", ""));
@@ -62,7 +62,7 @@ public class LoginUtils {
       Header locationHeader = httpResponse.getFirstHeader("Location");
       if (locationHeader != null) {
         Log.i(TAG, "登陆成功：" + locationHeader.getValue());
-        AppMacros.isLogin = true;
+        AppConfig.isLogin = true;
 
         HttpGet httpGet = new HttpGet(locationHeader.getValue());
 
@@ -71,8 +71,8 @@ public class LoginUtils {
           // 输出登录成功后的页面
           String str = EntityUtils.toString(httpResponse.getEntity());
           System.out.println("$$$$$$$$$$$$$$$$$$$$");
-          AppMacros.BLOG_APP = HtmlUtils.getBlogApp(str);
-          System.out.println(AppMacros.BLOG_APP);
+          AppConfig.BLOG_APP = HtmlUtils.getBlogApp(str);
+          System.out.println(AppConfig.BLOG_APP);
           System.out.println("$$$$$$$$$$$$$$$$$$$$");
         } catch (Exception e) {
           e.printStackTrace();
@@ -91,7 +91,7 @@ public class LoginUtils {
   public static boolean login(String userName, String password, String code, Map<String, String> map)
       throws Exception {
     httpContext.setAttribute(ClientContext.COOKIE_STORE, cookieStore);
-    HttpPost httpPost = new HttpPost(AppMacros.CNBLOGS_LOGIN);
+    HttpPost httpPost = new HttpPost(AppConfig.CNBLOGS_LOGIN);
 
     List<NameValuePair> params = new ArrayList<NameValuePair>();
     params.add(new BasicNameValuePair("__EVENTARGUMENT", ""));
@@ -156,10 +156,10 @@ public class LoginUtils {
     return false;
   }
 
-  public static boolean Releasee(String title, String content) {
+  public static boolean ReleaseBlog(String title, String content) {
 
     httpContext.setAttribute(ClientContext.COOKIE_STORE, cookieStore);
-    HttpPost httpPost = new HttpPost("http://i.cnblogs.com/EditPosts.aspx?opt=1");
+    HttpPost httpPost = new HttpPost(AppConfig.RELEASE_BLOG);
 
     List<NameValuePair> params = new ArrayList<NameValuePair>();
     params.add(new BasicNameValuePair("__VIEWSTATE", ""));
@@ -196,4 +196,44 @@ public class LoginUtils {
     }
     return false;
   }
+
+  public static boolean ReleaseAsDraft(String title, String content) {
+
+    httpContext.setAttribute(ClientContext.COOKIE_STORE, cookieStore);
+    HttpPost httpPost = new HttpPost(AppConfig.RELEASE_BLOG);
+
+    List<NameValuePair> params = new ArrayList<NameValuePair>();
+    params.add(new BasicNameValuePair("__VIEWSTATE", ""));
+    params.add(new BasicNameValuePair("__VIEWSTATEGENERATOR", "FE27D343"));
+    params.add(new BasicNameValuePair("Editor$Edit$Advanced$chkComments", "on"));
+    params.add(new BasicNameValuePair("Editor$Edit$Advanced$chkDisplayHomePage", "on"));
+    params.add(new BasicNameValuePair("Editor$Edit$Advanced$chkMainSyndication", "on"));
+    params.add(new BasicNameValuePair("Editor$Edit$Advanced$ckbPublished", "on"));
+    params.add(new BasicNameValuePair("Editor$Edit$Advanced$tbEnryPassword", ""));
+    params.add(new BasicNameValuePair("Editor$Edit$Advanced$txbEntryName", ""));
+    params.add(new BasicNameValuePair("Editor$Edit$Advanced$txbExcerpt", ""));
+    params.add(new BasicNameValuePair("Editor$Edit$Advanced$txbTag", ""));
+    params.add(new BasicNameValuePair("Editor$Edit$EditorBody", content));
+    params.add(new BasicNameValuePair("Editor$Edit$lkbDraft", "存为草稿"));
+    params.add(new BasicNameValuePair("Editor$Edit$txbTitle", title));
+    try {
+
+      httpPost.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
+      HttpResponse httpResponse = httpClient.execute(httpPost, httpContext);
+      String result = EntityUtils.toString(httpResponse.getEntity());
+
+      System.out.println(result);
+
+      if (result.contains("PostDone.aspx")) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return false;
+  }
+
+
 }

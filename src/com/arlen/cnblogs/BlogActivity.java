@@ -20,7 +20,7 @@ import android.widget.TextView;
 
 import com.arlen.cnblogs.task.BlogContentTask;
 import com.arlen.cnblogs.task.ImageLoadTask;
-import com.arlen.cnblogs.utils.AppMacros;
+import com.arlen.cnblogs.utils.AppConfig;
 import com.arlen.cnblogs.utils.AppUtils;
 
 public class BlogActivity extends Activity {
@@ -102,7 +102,7 @@ public class BlogActivity extends Activity {
 
     blogLink = intent.getStringExtra("link");
 
-    path = AppMacros.BLOGS_CONTENTS;
+    path = AppConfig.BLOGS_CONTENTS;
     path = path.replace("{POSTID}", "" + blogId);
   }
 

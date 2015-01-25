@@ -24,7 +24,7 @@ import android.widget.ProgressBar;
 import com.arlen.cnblogs.adapter.UserListAdapter;
 import com.arlen.cnblogs.entity.User;
 import com.arlen.cnblogs.task.SearchTask;
-import com.arlen.cnblogs.utils.AppMacros;
+import com.arlen.cnblogs.utils.AppConfig;
 
 public class SearchActivity extends ListActivity implements OnClickListener {
 
@@ -59,7 +59,9 @@ public class SearchActivity extends ListActivity implements OnClickListener {
 
   private void showUserItem(User userEntry) {
     intent = new Intent(this, UserActivity.class);
-    intent.putExtra("avatar", userEntry.getUserAvatar().toString());
+    if (userEntry.getUserAvatar() != null) {
+      intent.putExtra("avatar", userEntry.getUserAvatar().toString());
+    }
     intent.putExtra("blogapp", userEntry.getBlogapp());
     startActivity(intent);
   }
@@ -104,7 +106,7 @@ public class SearchActivity extends ListActivity implements OnClickListener {
     progressBar.setVisibility(View.VISIBLE);
 
     authorName = textAuthor.getText().toString().trim();
-    path = AppMacros.SEARCH_AUTHOR_BY_NAME;
+    path = AppConfig.SEARCH_AUTHOR_BY_NAME;
     Log.i("SearchActivity", "textAuthor:" + authorName);
     if (textAuthor.getText() != null) {
       try {

@@ -3,7 +3,7 @@ package com.arlen.cnblogs;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import com.arlen.cnblogs.utils.AppMacros;
+import com.arlen.cnblogs.utils.AppConfig;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -33,7 +33,7 @@ public class SplashActivity extends Activity {
 	    }
 
 		final Intent intent;
-		if (AppMacros.isLogin) {
+		if (AppConfig.isLogin) {
 			intent = new Intent(SplashActivity.this, MainActivity.class);
 		} else {
 			intent = new Intent(SplashActivity.this, LoginActivity.class);

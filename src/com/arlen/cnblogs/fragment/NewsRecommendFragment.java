@@ -25,7 +25,7 @@ import com.arlen.cnblogs.adapter.NewsListAdapter;
 import com.arlen.cnblogs.dialog.ItemDialog;
 import com.arlen.cnblogs.entity.News;
 import com.arlen.cnblogs.task.NewsListTask;
-import com.arlen.cnblogs.utils.AppMacros;
+import com.arlen.cnblogs.utils.AppConfig;
 import com.arlen.cnblogs.utils.AppUtils;
 
 public class NewsRecommendFragment extends Fragment implements
@@ -160,8 +160,8 @@ public class NewsRecommendFragment extends Fragment implements
 
 	private void initPath(int pageIndex) {
 		// http://wcf.open.cnblogs.com/news/recommend/paged/{PAGEINDEX}/{PAGESIZE}
-		path = AppMacros.RECOMMEND_NEWS_PAGED;
-		pageSize = AppMacros.PAGE_SIZE;
+		path = AppConfig.RECOMMEND_NEWS_PAGED;
+		pageSize = AppConfig.PAGE_SIZE;
 		path = path.replace("{PAGEINDEX}", "" + pageIndex);
 		path = path.replace("{PAGESIZE}", "" + pageSize);
 

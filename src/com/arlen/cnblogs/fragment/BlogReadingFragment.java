@@ -25,7 +25,7 @@ import com.arlen.cnblogs.adapter.BlogListAdapter;
 import com.arlen.cnblogs.dialog.ItemDialog;
 import com.arlen.cnblogs.entity.Blog;
 import com.arlen.cnblogs.task.BlogListTask;
-import com.arlen.cnblogs.utils.AppMacros;
+import com.arlen.cnblogs.utils.AppConfig;
 import com.arlen.cnblogs.utils.AppUtils;
 
 public class BlogReadingFragment extends Fragment implements
@@ -159,8 +159,8 @@ public class BlogReadingFragment extends Fragment implements
 
 	private void initPath(int pageIndex) {
 		// http://wcf.open.cnblogs.com/blog/48HoursTopViewPosts/{ITEMCOUNT}"
-		path = AppMacros.TOP_VIEW_POSTS_48_HOUR;
-		pageSize = AppMacros.PAGE_SIZE;
+		path = AppConfig.TOP_VIEW_POSTS_48_HOUR;
+		pageSize = AppConfig.PAGE_SIZE;
 		path = path.replace("{ITEMCOUNT}", "" + pageIndex * pageSize);
 
 		Log.i(TAG, "pageIndex£º" + pageIndex);

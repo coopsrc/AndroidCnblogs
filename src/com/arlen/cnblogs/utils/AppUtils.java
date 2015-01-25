@@ -55,7 +55,7 @@ public class AppUtils {
    */
   @SuppressLint("SimpleDateFormat")
   public static Date parseStringToDate(String string) {
-    SimpleDateFormat dateFormat = new SimpleDateFormat(AppMacros.SIMPLE_DATA_FORMATE);
+    SimpleDateFormat dateFormat = new SimpleDateFormat(AppConfig.SIMPLE_DATA_FORMATE);
     Date date = null;
     try {
       date = dateFormat.parse(string);
@@ -75,7 +75,7 @@ public class AppUtils {
   @SuppressLint("SimpleDateFormat")
   public static String parseDateToString(Date date) {
     try {
-      SimpleDateFormat dateFormat = new SimpleDateFormat(AppMacros.SIMPLE_DATA_FORMATE);
+      SimpleDateFormat dateFormat = new SimpleDateFormat(AppConfig.SIMPLE_DATA_FORMATE);
       return dateFormat.format(date);
     } catch (Exception e) {
       Log.e("parseDateToString", "×ª»»Ê§°Ü");

@@ -25,7 +25,7 @@ import com.arlen.cnblogs.adapter.BlogListAdapter;
 import com.arlen.cnblogs.dialog.ItemDialog;
 import com.arlen.cnblogs.entity.Blog;
 import com.arlen.cnblogs.task.BlogListTask;
-import com.arlen.cnblogs.utils.AppMacros;
+import com.arlen.cnblogs.utils.AppConfig;
 import com.arlen.cnblogs.utils.AppUtils;
 
 public class BlogHomeFragment extends Fragment implements
@@ -159,8 +159,8 @@ public class BlogHomeFragment extends Fragment implements
 
 	private void initPath(int pageIndex) {
 		// http://wcf.open.cnblogs.com/blog/sitehome/paged/{PAGEINDEX}/{PAGESIZE}
-		path = AppMacros.RECENT_BLOGS_PAGED;
-		pageSize = AppMacros.PAGE_SIZE;
+		path = AppConfig.RECENT_BLOGS_PAGED;
+		pageSize = AppConfig.PAGE_SIZE;
 		path = path.replace("{PAGEINDEX}", "" + pageIndex);
 		path = path.replace("{PAGESIZE}", "" + pageSize);
 

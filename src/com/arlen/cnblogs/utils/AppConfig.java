@@ -1,6 +1,6 @@
 package com.arlen.cnblogs.utils;
 
-public class AppMacros {
+public class AppConfig {
 	// 软件作者
 	public final static String AUTHOR_NAME = "Zhang Tingkuo";
 	public final static String AUTHOR_EMAIL = "1757887521@qq.com";
@@ -82,6 +82,7 @@ public class AppMacros {
 	public static final String BotDetectCaptcha = "http://passport.cnblogs.com/BotDetectCaptcha.ashx?get=image&c=c_login_logincaptcha&t=";
 	public static final String PERSON_INFO = "http://www.cnblogs.com/mvc/blog/news.aspx?blogApp=";
 	public static final String CURRENT_USER_INFO = "http://home.cnblogs.com/user/CurrentIngUserInfo";
+	public static final String RELEASE_BLOG = "http://i.cnblogs.com/EditPosts.aspx?opt=1";
 
 	// 数据库
 	public static final int DATABASE_VERSION = 1;

@@ -15,7 +15,7 @@ public class HtmlUtils {
 
 	public static Map<String, String> getNameParam() throws Exception {
 
-		String path = AppMacros.CNBLOGS_LOGIN;
+		String path = AppConfig.CNBLOGS_LOGIN;
 		Map<String, String> map = new HashMap<String, String>();
 
 		Document document = Jsoup.connect(path).get();
@@ -36,7 +36,7 @@ public class HtmlUtils {
 
 	public static PersonInfo getPersonInfo(String blogApp) throws Exception {
 		PersonInfo personInfo = new PersonInfo();
-		String path = AppMacros.PERSON_INFO + blogApp;
+		String path = AppConfig.PERSON_INFO + blogApp;
 
 		Document bodyDocument = Jsoup.connect(path).get();
 		Element divElement = bodyDocument.getElementById("profile_block");
@@ -86,7 +86,7 @@ public class HtmlUtils {
 	
 	public static UserInfo getUserInfo() throws Exception {
 		UserInfo userInfo = new UserInfo();
-		String path = AppMacros.CURRENT_USER_INFO;
+		String path = AppConfig.CURRENT_USER_INFO;
 
 		Document document = Jsoup.connect(path).get();
 		Element divElement = document.getElementById("header_user_right");

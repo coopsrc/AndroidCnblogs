@@ -20,7 +20,7 @@ import android.widget.TextView;
 
 import com.arlen.cnblogs.task.ImageLoadTask;
 import com.arlen.cnblogs.task.NewsContentTask;
-import com.arlen.cnblogs.utils.AppMacros;
+import com.arlen.cnblogs.utils.AppConfig;
 import com.arlen.cnblogs.utils.AppUtils;
 
 public class NewsActivity extends Activity {
@@ -78,7 +78,7 @@ public class NewsActivity extends Activity {
 
 		newsLink = intent.getStringExtra("link");
 
-		path = AppMacros.NEWS_CONTENT;
+		path = AppConfig.NEWS_CONTENT;
 		path = path.replace("{CONTENTID}", "" + newsId);
 	}
 

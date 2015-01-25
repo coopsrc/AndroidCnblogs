@@ -28,7 +28,7 @@ import com.arlen.cnblogs.entity.Blog;
 import com.arlen.cnblogs.fragment.BlogHomeFragment;
 import com.arlen.cnblogs.task.ActionBarIconTask;
 import com.arlen.cnblogs.task.UserBlogListTask;
-import com.arlen.cnblogs.utils.AppMacros;
+import com.arlen.cnblogs.utils.AppConfig;
 import com.arlen.cnblogs.utils.AppUtils;
 
 public class UserActivity extends Activity
@@ -101,8 +101,8 @@ public class UserActivity extends Activity
   }
 
   public void initPath(int pageIndex) {
-    path = AppMacros.USER_BLOGS_LIST_PAGED;
-    pageSize = AppMacros.BLOG_PAGE_SIZE;
+    path = AppConfig.USER_BLOGS_LIST_PAGED;
+    pageSize = AppConfig.BLOG_PAGE_SIZE;
     path = path.replace("{BLOGAPP}", blogApp);
     path = path.replace("{PAGEINDEX}", "" + pageIndex);
     path = path.replace("{PAGESIZE}", "" + pageSize);

@@ -25,7 +25,7 @@ import com.arlen.cnblogs.adapter.NewsListAdapter;
 import com.arlen.cnblogs.dialog.ItemDialog;
 import com.arlen.cnblogs.entity.News;
 import com.arlen.cnblogs.task.NewsListTask;
-import com.arlen.cnblogs.utils.AppMacros;
+import com.arlen.cnblogs.utils.AppConfig;
 import com.arlen.cnblogs.utils.AppUtils;
 
 public class NewsHotFragment extends Fragment implements
@@ -159,8 +159,8 @@ public class NewsHotFragment extends Fragment implements
 
 	private void initPath(int pageIndex) {
 		// http://wcf.open.cnblogs.com/news/hot/{ITEMCOUNT}
-		path = AppMacros.HOT_NEWS_LIST;
-		pageSize = AppMacros.PAGE_SIZE;
+		path = AppConfig.HOT_NEWS_LIST;
+		pageSize = AppConfig.PAGE_SIZE;
 		path = path.replace("{ITEMCOUNT}", "" + pageIndex * pageSize);
 
 		Log.i(TAG, "pageIndex£º" + pageIndex);

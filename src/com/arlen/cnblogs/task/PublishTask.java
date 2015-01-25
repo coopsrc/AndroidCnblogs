@@ -22,7 +22,7 @@ public class PublishTask extends AsyncTask<Void, Void, Void> {
 
   @Override
   protected Void doInBackground(Void... params) {
-    publishResult = LoginUtils.Releasee(title, content);
+    publishResult = LoginUtils.ReleaseBlog(title, content);
     return null;
   }
 

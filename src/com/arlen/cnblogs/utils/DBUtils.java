@@ -14,7 +14,7 @@ import com.arlen.cnblogs.entity.Blog;
 public class DBUtils {
 	public static void createDB(Context context) {
 		DbOpenHelper helper = new DbOpenHelper(context,
-				AppMacros.DATABASE_NAME, null, AppMacros.DATABASE_VERSION);
+				AppConfig.DATABASE_NAME, null, AppConfig.DATABASE_VERSION);
 		helper.getWritableDatabase();
 	}
 

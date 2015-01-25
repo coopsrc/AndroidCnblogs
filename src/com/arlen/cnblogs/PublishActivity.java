@@ -3,6 +3,7 @@ package com.arlen.cnblogs;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
+import com.arlen.cnblogs.task.DraftTask;
 import com.arlen.cnblogs.task.PublishTask;
 
 import android.app.ActionBar;
@@ -97,9 +98,14 @@ public class PublishActivity extends Activity implements OnClickListener {
   public void onClick(View v) {
     String title = editTextTitle.getText().toString();
     String content = editTextContent.getText().toString();
-    if (v.getId() == buttonPublish.getId()) {
 
+    if (v.getId() == buttonPublish.getId()) {
       PublishTask task = new PublishTask(this);
+      task.setTitle(title);
+      task.setContent(content);
+      task.execute();
+    } else if (v.getId() == buttonDraft.getId()) {
+      DraftTask task = new DraftTask(this);
       task.setTitle(title);
       task.setContent(content);
       task.execute();
