@@ -26,7 +26,7 @@ import android.widget.ListView;
 import com.arlen.cnblogs.adapter.UserBlogListAdapter;
 import com.arlen.cnblogs.entity.Blog;
 import com.arlen.cnblogs.fragment.BlogHomeFragment;
-import com.arlen.cnblogs.task.ActionBarIconTask;
+// import com.arlen.cnblogs.task.ActionBarIconTask;
 import com.arlen.cnblogs.task.UserBlogListTask;
 import com.arlen.cnblogs.utils.AppConfig;
 import com.arlen.cnblogs.utils.AppUtils;
@@ -88,7 +88,7 @@ public class UserActivity extends Activity
     blogApp = intent.getStringExtra("blogapp");
     avatar = intent.getStringExtra("avatar");
     this.getActionBar().setTitle(blogApp);
-    new ActionBarIconTask(getActionBar()).execute(avatar, "avatar");
+    // new ActionBarIconTask(getActionBar()).execute(avatar, "avatar");
 
     blogList = new ArrayList<Blog>();
     adapter = new UserBlogListAdapter(this, blogList);
