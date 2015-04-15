@@ -44,8 +44,7 @@ public class HttpUtils {
         Log.i(TAG, "ªÒ»° InputStream " + path);
         try {
             URL url = new URL(path);
-            HttpURLConnection connection = (HttpURLConnection) url
-                    .openConnection();
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setDoInput(true);
             connection.setReadTimeout(3 * 1000);
             connection.setConnectTimeout(5 * 1000);
@@ -292,5 +291,15 @@ public class HttpUtils {
 		InputStream inputStream = getStream(path);
 		bitmap = BitmapFactory.decodeStream(inputStream);
 		return bitmap;
+	}
+	
+	public static String getLoginForm(){
+		String result = "";
+		
+		
+		
+		
+		
+		return result;
 	}
 }

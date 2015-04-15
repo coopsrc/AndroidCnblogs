@@ -158,7 +158,6 @@ public class MainActivity extends FragmentActivity {
 			getActionBar().setTitle(drawerTitle);
 			invalidateOptionsMenu();
 		}
-
 	}
 
 	private class DrawerItemClickListener implements
